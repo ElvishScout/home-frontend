@@ -1,11 +1,6 @@
 "use client";
 
-export interface HeadingTreeNode {
-  id: string;
-  level: number;
-  text: string;
-  children: HeadingTreeNode[];
-}
+import type { HeadingTreeNode } from "virtual:mdx-registry";
 
 interface TableOfContentsProps {
   tree: HeadingTreeNode;

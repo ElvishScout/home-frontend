@@ -1,62 +1,24 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import registry from "virtual:mdx-registry";
+import Breadcrumbs from "@/components/breadcrumbs";
+import { pathnameToRegistryKey } from "@/lib/articles";
 import TableOfContents from "../table-of-contents";
-
-function Breadcrumbs() {
-  const pathname = usePathname();
-  const segments = pathname.split("/").filter(Boolean);
-
-  const crumbs = segments.map((segment, i) => ({
-    text: decodeURIComponent(segment),
-    href: `/${segments.slice(0, i + 1).join("/")}`,
-    last: i === segments.length - 1,
-  }));
-
-  return (
-    <nav aria-label="面包屑" className="mx-auto mb-8 w-3xl max-w-full text-sm">
-      <ol className="flex flex-wrap items-center gap-1.5">
-        {crumbs.map((crumb) => (
-          <li key={crumb.href} className="flex items-center gap-1.5">
-            {crumb.last ? (
-              <span aria-current="page" className="font-medium text-gray-900">
-                {crumb.text}
-              </span>
-            ) : (
-              <>
-                <Link href={crumb.href} className="text-gray-500 hover:text-gray-900">
-                  {crumb.text}
-                </Link>
-                <span aria-hidden className="text-gray-300">
-                  /
-                </span>
-              </>
-            )}
-          </li>
-        ))}
-      </ol>
-    </nav>
-  );
-}
 
 export default function ArticlesTemplate({ children }: { children: ReactNode }) {
   const articleRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
   const [activeId, setActiveId] = useState<string | null>(null);
 
-  const entry = registry[`${pathname.slice(1)}.mdx`];
-  const headingTree = entry?.headingTree ?? null;
+  const headingTree = registry[pathnameToRegistryKey(pathname)]?.headingTree ?? null;
 
   useEffect(() => {
     if (!articleRef.current) return;
 
     // 标题的锚点 id 已由 rehype-heading-ids 在渲染时写入。
-    const headings = Array.from(
-      articleRef.current.querySelectorAll<HTMLHeadingElement>("h1,h2,h3,h4,h5,h6"),
-    );
+    const headings = Array.from(articleRef.current.querySelectorAll<HTMLHeadingElement>("h1,h2,h3,h4,h5,h6"));
 
     // Scroll-spy: 当前激活项 = 视口顶部参考线以上最后一个标题。
     const onScroll = () => {

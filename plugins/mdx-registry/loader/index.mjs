@@ -7,24 +7,10 @@ import { glob } from "glob";
 import serialize from "serialize-javascript";
 import { gitDates } from "./git-date.mjs";
 
+// 类型的唯一来源是 plugins/mdx-registry/mdx-registry.d.ts（TS 侧共用）。
 /**
- * One entry in the generated registry.
- *
- * @typedef {Object} ArticleRegistryEntry
- * @property {string} path  Project-relative source path (e.g. `"articles/guide/intro.mdx"`).
- * @property {string | undefined} title  Text of the first `# heading` in the file, if any.
- * @property {Date | null} lastModified Last commit date.
- * @property {HeadingTreeNode} headingTree  Nested heading tree for the table of contents.
- */
-
-/**
- * One heading in an article, nested under the nearest preceding higher-level heading.
- *
- * @typedef {Object} HeadingTreeNode
- * @property {string} id  Anchor id assigned in document order (`heading-0`, `heading-1`, ...).
- * @property {number} level  1–6 for h1–h6.
- * @property {string} text  Heading text with inline markdown markers stripped.
- * @property {HeadingTreeNode[]} children
+ * @typedef {import("virtual:mdx-registry").ArticleRegistryEntry} ArticleRegistryEntry
+ * @typedef {import("virtual:mdx-registry").HeadingTreeNode} HeadingTreeNode
  */
 
 /**
