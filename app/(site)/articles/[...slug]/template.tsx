@@ -20,9 +20,10 @@ export default function ArticlesTemplate({ children }: { children: ReactNode }) 
     // 标题的锚点 id 已由 rehype-heading-ids 在渲染时写入。
     const headings = Array.from(articleRef.current.querySelectorAll<HTMLHeadingElement>("h1,h2,h3,h4,h5,h6"));
 
-    // Scroll-spy: 当前激活项 = 视口顶部参考线以上最后一个标题。
+    // Scroll-spy: 当前激活项 = 视口顶部参考线以上最后一个标题；
+    // 还没有标题越过参考线（页面顶部）时，高亮第一个标题。
     const onScroll = () => {
-      let current: string | null = null;
+      let current: string | null = headings[0]?.id ?? null;
       for (const heading of headings) {
         if (heading.getBoundingClientRect().top <= 100) {
           current = heading.id;
