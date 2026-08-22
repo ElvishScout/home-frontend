@@ -40,9 +40,9 @@ export default function ArticlesTemplate({ children }: { children: ReactNode }) 
   }, []);
 
   return (
-    <div className="flex">
+    <div className="flex gap-10">
       <aside className="hidden w-64 shrink-0 lg:block">
-        <div className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto pr-4">
+        <div className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto pr-4 scrollbar-thin [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
           {headingTree && <TableOfContents tree={headingTree} activeId={activeId} />}
         </div>
       </aside>
