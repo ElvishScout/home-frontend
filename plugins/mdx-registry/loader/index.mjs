@@ -1,7 +1,7 @@
 // @ts-check
 
 import { readFileSync } from "node:fs";
-import { relative as _relative, sep } from "node:path";
+import { dirname, relative as _relative, resolve, sep } from "node:path";
 import { createProcessor } from "@mdx-js/mdx";
 import { glob } from "glob";
 import serialize from "serialize-javascript";
@@ -150,10 +150,12 @@ async function articleRegistryLoader(_source) {
   const entries = {};
 
   for (const [i, file] of files.entries()) {
-    this.addDependency(file);
+    const absoluteFile = resolve(this.rootContext, file);
+    this.addDependency(absoluteFile);
+    this.addContextDependency(dirname(absoluteFile));
 
     const filePosix = filePosixList[i];
-    const headingTree = readHeadingTree(file);
+    const headingTree = readHeadingTree(absoluteFile);
 
     entries[filePosix] = {
       path: filePosix,

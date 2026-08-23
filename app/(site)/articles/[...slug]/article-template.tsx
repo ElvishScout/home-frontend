@@ -2,17 +2,19 @@
 
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect, useRef, useState } from "react";
-import registry from "virtual:mdx-registry";
 import Breadcrumbs from "@/components/breadcrumbs";
-import { pathnameToRegistryKey } from "@/lib/articles";
+import type { ArticleRegistryEntry } from "virtual:mdx-registry";
 import TableOfContents from "../table-of-contents";
 
-export default function ArticlesTemplate({ children }: { children: ReactNode }) {
+interface ArticleTemplateProps {
+  children: ReactNode;
+  entry: ArticleRegistryEntry | undefined;
+}
+
+export default function ArticleTemplate({ children, entry }: ArticleTemplateProps) {
   const articleRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
   const [activeId, setActiveId] = useState<string | null>(null);
-
-  const headingTree = registry[pathnameToRegistryKey(pathname)]?.headingTree ?? null;
 
   useEffect(() => {
     if (!articleRef.current) return;
@@ -37,13 +39,13 @@ export default function ArticlesTemplate({ children }: { children: ReactNode }) 
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [pathname]);
 
   return (
     <div className="flex gap-10">
       <aside className="hidden w-64 shrink-0 lg:block">
         <div className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto pr-4 scrollbar-thin [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
-          {headingTree && <TableOfContents tree={headingTree} activeId={activeId} />}
+          {entry?.headingTree && <TableOfContents tree={entry.headingTree} activeId={activeId} />}
         </div>
       </aside>
       <main className="grow min-w-0">
