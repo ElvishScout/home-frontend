@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import Breadcrumbs from "@/components/breadcrumbs";
 import type { ArticleRegistryEntry } from "virtual:mdx-registry";
@@ -13,7 +12,6 @@ interface ArticleTemplateProps {
 
 export default function ArticleTemplate({ children, entry }: ArticleTemplateProps) {
   const articleRef = useRef<HTMLElement>(null);
-  const pathname = usePathname();
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -39,7 +37,7 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [pathname]);
+  }, []);
 
   return (
     <div className="flex gap-10">
