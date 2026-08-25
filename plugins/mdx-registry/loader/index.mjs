@@ -21,27 +21,6 @@ import { gitDates } from "./git-date.mjs";
  */
 
 /**
- * The subset of the webpack `LoaderContext` this loader relies on. Turbopack
- * runs loaders through `loader-runner`, which provides most of the standard
- * API; see the turbopack docs for the unsupported properties.
- *
- * @typedef {Object} ArticleRegistryLoaderContext
- * @property {string} rootContext  Absolute path of the project root.
- * @property {string} resourcePath  Path (or virtual specifier) being loaded.
- * @property {string | Buffer} [query]  Raw loader query when no options object
- *   was given.
- * @property {() => void} cacheable  Opt out of Turbopack's "uncacheable by
- *   default" is not needed — call to mark the result cacheable.
- * @property {() => ArticleRegistryLoaderOptions} [getOptions]  Webpack 5 style
- *   options accessor; may be absent, fall back to `query`.
- * @property {(file: string) => void} addDependency  Watch a file so the module
- *   rebuilds when it changes.
- * @property {(context: string) => void} addContextDependency  Watch a directory
- *   so the module rebuilds when entries are added or removed.
- * @property {(warning: Error) => void} emitWarning  Surface a non-fatal warning.
- */
-
-/**
  * Plain text of an mdast node: leaf nodes contribute their `value`, containers
  * the concatenation of their children (emphasis, links, inline code unwrap to
  * their inner text).
@@ -125,14 +104,14 @@ function findFirstH1(nodes) {
  * Loader entry point. The `source` of the virtual module is irrelevant — the
  * registry is derived entirely from the articles directory.
  *
- * @this {ArticleRegistryLoaderContext}
+ * @this {import("webpack").LoaderContext<ArticleRegistryLoaderOptions>}
  * @param {string | Buffer} _source  Unused virtual-module source.
  * @returns {Promise<string>} Generated module code.
  */
 async function articleRegistryLoader(_source) {
   this.cacheable();
 
-  const options = this.getOptions ? this.getOptions() : {};
+  const options = this.getOptions();
   const pattern = options.pattern;
 
   if (!pattern) {
