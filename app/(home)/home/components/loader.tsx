@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap, prefersReducedMotion } from "../lib/gsap";
-import { useIntro } from "./providers";
+import { useIntro, useLenis } from "./providers";
 
 const LINES = ["TRAIN", "× CREATE", "PLAY"];
 
@@ -10,7 +10,19 @@ export function Loader() {
   const rootRef = useRef<HTMLDivElement>(null);
   const pctRef = useRef<HTMLDivElement>(null);
   const lineRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const { complete } = useIntro();
+  const { done, complete } = useIntro();
+  const lenis = useLenis();
+
+  // loading 期间锁定页面滚动（原生 overflow + Lenis 双保险），完成后恢复
+  useEffect(() => {
+    if (done) {
+      document.documentElement.style.overflow = "";
+      lenis?.start();
+    } else {
+      document.documentElement.style.overflow = "hidden";
+      lenis?.stop();
+    }
+  }, [done, lenis]);
 
   useEffect(() => {
     const root = rootRef.current;
