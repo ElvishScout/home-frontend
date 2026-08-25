@@ -10,6 +10,44 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ---
 
+# 项目结构
+
+```
+app/
+├─ layout.tsx                根布局：next/font 字体变量（Anton / Noto Sans SC / Space Mono / Geist）+ globals.css
+├─ globals.css               全站设计 token（配色/字体/缓动/keyframes）+ prose 长文覆盖
+├─ (home)/                   首页组 —— 不经由 (sub) 外壳
+│  ├─ page.tsx               / → redirect /home
+│  └─ home/                  首页本体（海报模式）
+│     ├─ page.tsx            区块组装：Hero → About → Projects → Blog → Music → Skills → Contact → Footer
+│     ├─ components/         区块与机制组件（chrome=噪点+导航 / loader / scroll-rail / providers=Lenis+SmoothLink / reveal …）
+│     └─ lib/gsap.ts         GSAP + ScrollTrigger 封装
+└─ (sub)/                    子页面组 —— 共享统一外壳
+   ├─ layout.tsx             子页面外壳：墨底页眉页脚 + 纸底限宽内容区 + 噪点
+   ├─ nav-link.tsx           页眉导航项（当前栏目 acid 高亮）
+   ├─ components/            子页面共享件：PageHead（标题区）/ RowList（行式列表）
+   ├─ articles/              /articles 技术博客
+   │  ├─ page.tsx            文章列表（数据来自 virtual:mdx-registry）
+   │  ├─ table-of-contents.tsx
+   │  └─ [...slug]/          文章详情；layout.tsx 查 registry 并注入 ArticleTemplate（scroll-spy TOC + prose）
+   └─ music/                 /music 音乐创作（占位框架，曲目是 TRACKS 常量）
+
+articles/                    MDX 文章源，构建期被扫描注册
+lib/articles.ts              slug ↔ registry key ↔ href 换算
+lib/date.ts                  中文长日期格式化
+plugins/mdx-registry/        自写 webpack loader：扫描 articles/**/*.mdx 生成 virtual:mdx-registry（title / lastModified / headingTree）
+plugins/rehype-heading-ids.mjs  为 MDX 标题写入锚点 id
+public/grain.svg             全站噪点材质
+next.config.ts               @next/mdx（+rehype-heading-ids）与 mdx-registry 串联
+```
+
+关键机制：
+
+- **路由分组决定布局归属**：`(home)` 与 `(sub)` 平级，URL 不受影响；子页面外壳只写在 `(sub)/layout.tsx`，新增子页面放进 `(sub)` 组即自动获得外壳。
+- **virtual:mdx-registry**：文章元信息（标题、修改时间、标题树）在构建期生成，列表页与详情页都从这里取数；写新文章只需在 `articles/` 放 `.mdx`。
+
+---
+
 # 设计规范
 
 ## 全局规范
@@ -120,7 +158,7 @@ STREET POP · 街头波普设计语言。气质锚点：街头的、漫画的、
 
 ## 子页面
 
-> **适用范围：首页以外的所有路由**（`/articles`、`/projects`、`/contact`、`/music` 等，含今后新增的子页面）。定位：装帧精良的杂志内页——内容优先，风格是装帧；任何与阅读竞争注意力的元素都算违规。
+> **适用范围：首页以外的所有路由**（`/articles`、`/music` 等，含今后新增的子页面）。定位：装帧精良的杂志内页——内容优先，风格是装帧；任何与阅读竞争注意力的元素都算违规。
 
 ### 1. 统一外壳（所有子页面共享同一布局）
 
