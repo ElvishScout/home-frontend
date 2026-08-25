@@ -30,7 +30,7 @@ export function About() {
         <div className="grid grid-cols-2 gap-0.75 p-0.75 bg-paper">
           {STATS.map((stat) => (
             <div key={stat.label} className="overflow-hidden">
-              <Reveal className="relative bg-ink px-5.5 py-6.5">
+              <Reveal className="relative h-full bg-ink px-5.5 py-6.5">
                 {stat.count !== undefined ? (
                   <StatNum
                     count={stat.count}

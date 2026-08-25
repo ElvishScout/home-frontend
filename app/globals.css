@@ -1,2 +1,143 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+/* ---------- 全局设计 token（设计规范 · 全局规范） ---------- */
+
+@theme inline {
+  --font-disp: var(--font-anton), var(--font-noto-sans-sc), sans-serif;
+  --font-zh: var(--font-noto-sans-sc), sans-serif;
+  --font-spacemono: var(--font-space-mono), var(--font-noto-sans-sc), monospace;
+}
+
+@theme {
+  --color-paper: #f2f0e9;
+  --color-ink: #111110;
+  --color-acid: #ffe306;
+  --color-scarlet: #e60012;
+  --color-aqua: #00ffe2;
+
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+  --animate-grain: grain 8s steps(10) infinite;
+  --animate-spin-slow: spin-slow 6s linear infinite;
+  --animate-bob: bob 1.2s cubic-bezier(0.19, 1, 0.22, 1) infinite alternate;
+  --animate-mq: mq 22s linear infinite;
+  --animate-eq: eq 1s ease-in-out infinite alternate;
+
+  @keyframes grain {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    10% {
+      transform: translate(-5%, -8%);
+    }
+    30% {
+      transform: translate(3%, -12%);
+    }
+    50% {
+      transform: translate(8%, 4%);
+    }
+    70% {
+      transform: translate(-8%, 8%);
+    }
+    90% {
+      transform: translate(4%, 3%);
+    }
+  }
+  @keyframes spin-slow {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes bob {
+    to {
+      transform: translateY(6px);
+    }
+  }
+  @keyframes mq {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes eq {
+    from {
+      transform: scaleY(0.25);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink) var(--color-paper);
+}
+
+/* ---------- 长文排版（设计规范 · 子页面 §3：只覆盖颜色、边框与标题字重） ---------- */
+
+.prose {
+  --tw-prose-body: var(--color-ink);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-lead: var(--color-ink);
+  --tw-prose-links: var(--color-ink);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-counters: var(--color-ink);
+  --tw-prose-bullets: var(--color-scarlet);
+  --tw-prose-hr: var(--color-ink);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: var(--color-acid);
+  --tw-prose-captions: var(--color-ink);
+  --tw-prose-code: var(--color-ink);
+  --tw-prose-pre-code: var(--color-paper);
+  --tw-prose-pre-bg: var(--color-ink);
+  --tw-prose-th-borders: var(--color-ink);
+  --tw-prose-td-borders: var(--color-ink);
+
+  font-size: 1rem;
+  line-height: 1.9;
+  max-width: 70ch;
+}
+
+.prose :where(h1, h2, h3, h4, h5, h6) {
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.prose a {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.prose a:hover {
+  background-color: var(--color-acid);
+}
+
+.prose pre {
+  border: 3px solid var(--color-ink);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 0 var(--color-ink);
+}
+
+.prose :where(code):not(:where(pre code)) {
+  border-radius: 0;
+  background-color: var(--color-acid);
+  padding: 0.1em 0.3em;
+  font-weight: 700;
+}
+.prose :where(code):not(:where(pre code))::before,
+.prose :where(code):not(:where(pre code))::after {
+  content: none;
+}
+
+.prose blockquote {
+  font-style: normal;
+}
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+  content: none;
+}
+
+.prose hr {
+  border-top-width: 3px;
+}

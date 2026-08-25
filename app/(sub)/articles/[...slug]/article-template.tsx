@@ -1,8 +1,10 @@
 "use client";
 
 import { ReactNode, useEffect, useRef, useState } from "react";
-import Breadcrumbs from "@/components/breadcrumbs";
+import Link from "next/link";
 import type { ArticleRegistryEntry } from "virtual:mdx-registry";
+import { formatDate } from "@/lib/date";
+import { PageHead } from "../../components/page-head";
 import TableOfContents from "../table-of-contents";
 
 interface ArticleTemplateProps {
@@ -40,18 +42,37 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
   }, []);
 
   return (
-    <div className="flex gap-10">
-      <aside className="hidden w-64 shrink-0 lg:block">
-        <div className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto pr-4 scrollbar-thin [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
-          {entry?.headingTree && <TableOfContents tree={entry.headingTree} activeId={activeId} />}
+    <div className="flex gap-12">
+      <aside className="hidden w-52 shrink-0 lg:block">
+        <div className="sticky top-10 max-h-[calc(100vh-5rem)] overflow-y-auto pr-2">
+          {entry?.headingTree ? <TableOfContents tree={entry.headingTree} activeId={activeId} /> : null}
         </div>
       </aside>
-      <main className="grow min-w-0">
-        <Breadcrumbs />
-        <article ref={articleRef} className="mx-auto w-3xl max-w-full prose">
+      <div className="min-w-0 grow">
+        <PageHead
+          tag="ARTICLE"
+          title={entry?.title ?? "未命名文章"}
+          meta={entry?.lastModified ? `UPDATED ${formatDate(entry.lastModified)}` : undefined}
+        />
+        <article ref={articleRef} className="prose">
           {children}
         </article>
-      </main>
+        <div className="mt-16 border-t-[3px] border-ink pt-6">
+          <Link
+            href="/articles"
+            className="group/link relative isolate inline-flex items-center gap-3 overflow-hidden py-2 font-spacemono text-xs font-bold tracking-[0.16em]"
+          >
+            <span
+              aria-hidden
+              className="absolute inset-0 -z-10 bg-acid [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-expo group-hover/link:[clip-path:inset(0_0_0_0)]"
+            />
+            <span aria-hidden className="inline-block transition-transform duration-500 ease-expo group-hover/link:-translate-x-1.5">
+              ←
+            </span>
+            <span>全部文章 · ALL POSTS</span>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

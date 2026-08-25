@@ -1,10 +1,11 @@
-import Link from "next/link";
 import registry from "virtual:mdx-registry";
 import { registryKeyToHref } from "@/lib/articles";
 import { formatDate } from "@/lib/date";
+import { PageHead } from "../components/page-head";
+import { RowList } from "../components/row-list";
 
 export const metadata = {
-  title: "文章",
+  title: "技术博客",
 };
 
 export default function ArticlesPage() {
@@ -16,21 +17,19 @@ export default function ArticlesPage() {
 
   return (
     <>
-      <h1 className="text-2xl font-bold">文章</h1>
-      <ul className="mt-6 space-y-4">
-        {entries.map((entry) => (
-          <li key={entry.path}>
-            <Link href={registryKeyToHref(entry.path)} className="font-medium text-gray-900 hover:text-blue-700">
-              {entry.title ?? entry.path}
-            </Link>
-            {entry.lastModified && (
-              <p className="mt-1 text-sm text-gray-500">
-                <time dateTime={entry.lastModified.toISOString()}>{formatDate(entry.lastModified)}</time>
-              </p>
-            )}
-          </li>
-        ))}
-      </ul>
+      <PageHead
+        tag="TECH BLOG"
+        title="技术博客"
+        meta={`POSTS ${String(entries.length).padStart(2, "0")}`}
+      />
+      <RowList
+        rows={entries.map((entry, i) => ({
+          num: `EP.${String(entries.length - i).padStart(2, "0")}`,
+          title: entry.title ?? entry.path,
+          meta: entry.lastModified ? formatDate(entry.lastModified) : undefined,
+          href: registryKeyToHref(entry.path),
+        }))}
+      />
     </>
   );
 }

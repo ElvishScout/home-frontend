@@ -43,7 +43,7 @@ export function Blog() {
             <br />
             UPDATED 2026.08
             <br />
-            NO SEO, ONLY NOTES
+            TECH NOTES
           </Reveal>
           <Reveal className="mt-auto pt-4">
             <MoreLink href="/articles" label="查看更多 · ALL POSTS" dark />
