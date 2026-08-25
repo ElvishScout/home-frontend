@@ -12,9 +12,9 @@ export function Footer() {
       />
       <div className="flex flex-wrap items-center justify-between gap-3.5 px-12 pt-7 font-spacemono text-[11px] tracking-[0.14em] opacity-70 max-md:px-6">
         <span>
-          © 2026 <b className="text-acid">LIN YI</b> — 在梯度与音符之间
+          © 2026 <b className="text-acid">ELVISH SCOUT</b> — 在梯度与音符之间
         </span>
-        <span>DESIGNED &amp; CODED BY HAND ✦ NO TEMPLATE</span>
+        <span>DESIGNED &amp; CO-AUTHORED BY KIMI K3</span>
       </div>
     </footer>
   );

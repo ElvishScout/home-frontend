@@ -13,7 +13,7 @@ import { Contact } from "./components/contact";
 import { Footer } from "./components/footer";
 
 export const metadata: Metadata = {
-  title: "林一 LIN YI — 大模型训练 × 创意前端",
+  title: "ELVISH SCOUT",
 };
 
 export default function HomePage() {

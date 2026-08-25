@@ -5,19 +5,17 @@ import { gsap, prefersReducedMotion } from "../lib/gsap";
 import { useIntro } from "./providers";
 import { MarqueeRow } from "./marquee-row";
 
-const TITLE_ZH = "林一";
-
 function HeroMeta({ className = "", refProp }: { className?: string; refProp?: React.Ref<HTMLDivElement> }) {
   return (
-    <div ref={refProp} className={`font-spacemono text-base leading-loose tracking-[0.08em] max-md:text-sm ${className}`}>
-      <b className="bg-ink px-1.5 py-px text-acid">DAY</b>
-      {" "}训练大模型
+    <div
+      ref={refProp}
+      className={`font-spacemono text-base leading-loose tracking-[0.08em] max-md:text-sm ${className}`}
+    >
+      <b className="bg-ink px-1.5 py-px text-acid">DAY</b> 训练大模型
       <br />
-      <b className="bg-ink px-1.5 py-px text-acid">NIGHT</b>
-      {" "}前端 · 设计自学 · 当季新番
+      <b className="bg-ink px-1.5 py-px text-acid">NIGHT</b> 前端 · 设计自学 · 当季新番
       <br />
-      <b className="bg-ink px-1.5 py-px text-acid">STATUS</b>
-      {" "}音乐练习中{" "}
+      <b className="bg-ink px-1.5 py-px text-acid">STATUS</b> 音乐练习中{" "}
       <span className="inline-flex h-3.5 items-end gap-0.75 align-[-2px]">
         <i className="h-[40%] w-1 origin-bottom animate-eq border border-ink bg-acid motion-reduce:animate-none [animation-duration:0.9s]" />
         <i className="h-[92%] w-1 origin-bottom animate-eq border border-ink bg-acid motion-reduce:animate-none [animation-delay:150ms] [animation-duration:0.9s]" />
@@ -45,10 +43,13 @@ export function Hero() {
     const ctx = gsap.context(() => {
       gsap
         .timeline()
-        .from(
-          charRefs.current.filter(Boolean),
-          { yPercent: 115, rotate: 6, duration: 0.9, stagger: 0.06, ease: "power4.out" },
-        )
+        .from(charRefs.current.filter(Boolean), {
+          yPercent: 115,
+          rotate: 6,
+          duration: 0.9,
+          stagger: 0.06,
+          ease: "power4.out",
+        })
         .from(enRef.current, { xPercent: -12, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.7")
         .from(eyebrowRef.current, { opacity: 0, x: -30, duration: 0.6 }, "-=0.6")
         .from(roleRef.current, { scale: 0, rotate: -14, duration: 0.7, ease: "back.out(2.2)" }, "-=0.4")
@@ -79,8 +80,8 @@ export function Hero() {
           </p>
           <h1 className="leading-[0.92] select-none">
             <div className="overflow-hidden py-[0.04em]">
-              <span className="inline-block font-zh text-[clamp(4rem,15vw,13rem)] font-black tracking-[0.02em] will-change-transform">
-                {TITLE_ZH.split("").map((ch, i) => (
+              <span className="inline-block font-disp text-[clamp(4rem,12vw,10rem)] font-black tracking-[0.02em] will-change-transform">
+                {"ELVISH".split("").map((ch, i) => (
                   <span key={ch} className="inline-block overflow-hidden align-bottom">
                     <span
                       ref={(el) => {
@@ -97,9 +98,9 @@ export function Hero() {
             <div className="overflow-hidden py-[0.04em]">
               <span
                 ref={enRef}
-                className="ml-[8vw] inline-block font-disp text-[clamp(2.8rem,10.5vw,9rem)] tracking-[0.01em] text-transparent [-webkit-text-stroke:2.5px_var(--color-ink)] will-change-transform max-md:ml-[4vw]"
+                className="ml-[4vw] inline-block font-disp text-[clamp(3.3rem,10vw,8.3rem)] tracking-[0.01em] text-transparent [-webkit-text-stroke:2.5px_var(--color-ink)] will-change-transform max-md:ml-[4vw]"
               >
-                LIN&nbsp;YI
+                SCOUT
               </span>
             </div>
           </h1>
@@ -113,12 +114,15 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="absolute top-[20%] right-[15vw] z-3 flex flex-col items-start gap-20 max-md:top-[16%] max-md:right-16">
+        <div className="absolute top-[20%] right-16 z-3 flex flex-col items-start gap-20 max-md:top-[16%] max-md:right-10">
           <div
             ref={stickerRef}
             className="relative flex aspect-square w-[clamp(110px,13vw,180px)] rotate-[2.5deg] items-center justify-center border-[3px] border-ink bg-scarlet shadow-[10px_10px_0_0_var(--color-ink)]"
           >
-            <div aria-hidden className="absolute inset-0 -z-10 translate-x-4.5 translate-y-4.5 border-[3px] border-ink" />
+            <div
+              aria-hidden
+              className="absolute inset-0 -z-10 translate-x-4.5 translate-y-4.5 border-[3px] border-ink"
+            />
             <span className="relative text-center font-spacemono text-[clamp(11px,1.2vw,14px)] leading-normal font-bold text-paper">
               KEEP
               <br />
@@ -130,16 +134,12 @@ export function Hero() {
           <HeroMeta refProp={metaRef} className="max-md:hidden" />
         </div>
 
-        <aside
-          ref={sideRef}
-          className="absolute top-1/2 right-12 z-2 -translate-y-1/2 border-l-2 border-ink pl-3.5 text-[clamp(1rem,2vw,1.4rem)] font-black tracking-[0.5em] [writing-mode:vertical-rl] max-md:hidden"
-        >
-          练习即正义
-        </aside>
-
         <div className="relative z-2 mt-auto flex flex-col justify-between gap-12 pt-[6vh] md:justify-end">
           <HeroMeta className="md:hidden" />
-          <div ref={hintRef} className="flex items-center justify-end gap-2.5 font-spacemono text-[11px] font-bold tracking-[0.3em]">
+          <div
+            ref={hintRef}
+            className="flex items-center justify-end gap-2.5 font-spacemono text-[11px] font-bold tracking-[0.3em]"
+          >
             SCROLL <span className="inline-block animate-bob">↓</span>
           </div>
         </div>

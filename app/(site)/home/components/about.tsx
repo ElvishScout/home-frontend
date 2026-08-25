@@ -27,21 +27,25 @@ export function About() {
             业余时间在学音乐，乐理、和声、编曲，目标很朴素：写出一首自己愿意单曲循环的曲子。剩下的余量，留给当季新番。
           </p>
         </Reveal>
-        <div className="grid grid-cols-2 gap-0.5 bg-paper">
+        <div className="grid grid-cols-2 gap-0.75 p-0.75 bg-paper">
           {STATS.map((stat) => (
-            <Reveal key={stat.label} className="relative border-2 border-paper bg-ink px-5.5 py-6.5">
-              {stat.count !== undefined ? (
-                <StatNum
-                  count={stat.count}
-                  className={`block font-disp text-[clamp(2.4rem,5vw,4rem)] leading-none ${stat.color}`}
-                />
-              ) : (
-                <span className={`block font-disp text-[clamp(2.4rem,5vw,4rem)] leading-none ${stat.color}`}>
-                  {stat.value}
+            <div key={stat.label} className="overflow-hidden">
+              <Reveal className="relative bg-ink px-5.5 py-6.5">
+                {stat.count !== undefined ? (
+                  <StatNum
+                    count={stat.count}
+                    className={`block font-disp text-[clamp(2.4rem,5vw,4rem)] leading-none ${stat.color}`}
+                  />
+                ) : (
+                  <span className={`block font-disp text-[clamp(2.4rem,5vw,4rem)] leading-none ${stat.color}`}>
+                    {stat.value}
+                  </span>
+                )}
+                <span className="mt-2.5 block font-spacemono text-[11px] tracking-[0.18em] opacity-70">
+                  {stat.label}
                 </span>
-              )}
-              <span className="mt-2.5 block font-spacemono text-[11px] tracking-[0.18em] opacity-70">{stat.label}</span>
-            </Reveal>
+              </Reveal>
+            </div>
           ))}
         </div>
       </div>

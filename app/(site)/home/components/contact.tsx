@@ -78,14 +78,16 @@ export function Contact() {
         </span>
       </h2>
       <a
-        href="mailto:hello@linyi.design"
+        href="mailto:elvishscoutustc@gmail.com"
         className="group/mail relative isolate mt-[6vh] inline-block overflow-hidden border-[3px] border-ink bg-paper px-10 py-4 font-spacemono text-[clamp(1rem,2.6vw,1.6rem)] font-bold tracking-[0.06em] shadow-[8px_8px_0_0_var(--color-ink)] transition-all duration-500 ease-expo hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_0_var(--color-ink)]"
       >
         <span
           aria-hidden
           className="absolute inset-0 -z-10 bg-ink [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-expo group-hover/mail:[clip-path:inset(0_0_0_0)]"
         />
-        <span className="relative transition-colors duration-500 group-hover/mail:text-acid">hello@linyi.design</span>
+        <span className="relative transition-colors duration-500 group-hover/mail:text-acid">
+          elvishscoutustc@gmail.com
+        </span>
       </a>
       <div ref={socialsRef} className="mt-[7vh] flex flex-wrap justify-center gap-2">
         {SOCIALS.map((social) => (
