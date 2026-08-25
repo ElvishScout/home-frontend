@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } from "react";
 import Lenis from "lenis";
-import { gsap, ScrollTrigger } from "../lib/gsap";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "../lib/gsap";
 
 /* ---------- Lenis 平滑滚动 ---------- */
 
@@ -26,10 +26,7 @@ export function useLenis(): Lenis | null {
 
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      document.body.classList.add("reduced");
-      return () => document.body.classList.remove("reduced");
-    }
+    if (prefersReducedMotion()) return;
     const instance = new Lenis({ lerp: 0.1 });
     instance.on("scroll", ScrollTrigger.update);
     const raf = (time: number) => instance.raf(time * 1000);

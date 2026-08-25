@@ -1,3 +1,5 @@
+import "./home.css";
+
 import type { Metadata } from "next";
 import { SmoothScrollProvider, IntroProvider } from "./components/providers";
 import { Grain, Nav } from "./components/chrome";

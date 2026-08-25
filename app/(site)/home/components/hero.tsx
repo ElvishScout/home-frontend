@@ -19,10 +19,10 @@ function HeroMeta({ className = "", refProp }: { className?: string; refProp?: R
       <b className="bg-ink px-1.5 py-px text-acid">STATUS</b>
       {" "}音乐练习中{" "}
       <span className="inline-flex h-3.5 items-end gap-0.75 align-[-2px]">
-        <i className="eq-bar h-[40%] w-1 origin-bottom animate-eq border border-ink bg-acid [animation-duration:0.9s]" />
-        <i className="eq-bar h-[92%] w-1 origin-bottom animate-eq border border-ink bg-acid [animation-delay:150ms] [animation-duration:0.9s]" />
-        <i className="eq-bar h-[58%] w-1 origin-bottom animate-eq border border-ink bg-acid [animation-delay:300ms] [animation-duration:0.9s]" />
-        <i className="eq-bar h-full w-1 origin-bottom animate-eq border border-ink bg-acid [animation-delay:450ms] [animation-duration:0.9s]" />
+        <i className="h-[40%] w-1 origin-bottom animate-eq border border-ink bg-acid motion-reduce:animate-none [animation-duration:0.9s]" />
+        <i className="h-[92%] w-1 origin-bottom animate-eq border border-ink bg-acid motion-reduce:animate-none [animation-delay:150ms] [animation-duration:0.9s]" />
+        <i className="h-[58%] w-1 origin-bottom animate-eq border border-ink bg-acid motion-reduce:animate-none [animation-delay:300ms] [animation-duration:0.9s]" />
+        <i className="h-full w-1 origin-bottom animate-eq border border-ink bg-acid motion-reduce:animate-none [animation-delay:450ms] [animation-duration:0.9s]" />
       </span>
     </div>
   );

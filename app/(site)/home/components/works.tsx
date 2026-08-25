@@ -106,7 +106,7 @@ export function Works() {
                 BPM 128 ♪
               </span>
               {EQ_BARS.map((bar, i) => (
-                <i key={i} className={`eq-bar flex-1 origin-bottom animate-eq ${bar.h} ${bar.bg} ${bar.delay}`} />
+                <i key={i} className={`flex-1 origin-bottom animate-eq motion-reduce:animate-none ${bar.h} ${bar.bg} ${bar.delay}`} />
               ))}
             </>
           }

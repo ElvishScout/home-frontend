@@ -4,7 +4,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { gsap, prefersReducedMotion } from "../lib/gsap";
 
 function W({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <span className={`w inline-block opacity-[0.12] ${className}`}>{children}</span>;
+  return <span className={`inline-block opacity-[0.12] motion-reduce:opacity-100 ${className}`}>{children}</span>;
 }
 
 /** 关于页宣言：滚动 scrub 逐段点亮。 */
@@ -28,7 +28,7 @@ export function Statement() {
   return (
     <p
       ref={ref}
-      className="about-statement max-w-[20em] text-[clamp(1.8rem,4.6vw,3.6rem)] leading-[1.6] font-black tracking-[0.02em]"
+      className="max-w-[20em] text-[clamp(1.8rem,4.6vw,3.6rem)] leading-[1.6] font-black tracking-[0.02em]"
     >
       <W>白天训练</W>
       <W className="bg-acid px-[0.15em] text-ink box-decoration-clone">模型</W>

@@ -11,7 +11,7 @@ export function Grain() {
   return (
     <div
       aria-hidden
-      className="grain-bg pointer-events-none fixed -inset-1/2 z-9000 h-[200%] w-[200%] animate-grain opacity-5"
+      className="pointer-events-none fixed -inset-1/2 z-9000 h-[200%] w-[200%] animate-grain bg-[url(/home/grain.svg)] opacity-5"
     />
   );
 }

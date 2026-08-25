@@ -34,7 +34,7 @@ export function LossArt() {
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 400 300" preserveAspectRatio="none">
         <polyline
           ref={polyRef}
-          className="loss-poly"
+          className="motion-reduce:[stroke-dashoffset:0]"
           pathLength={1}
           points="0,50 30,78 60,92 90,126 120,138 150,168 180,178 210,58 240,196 270,208 300,220 330,230 360,236 400,242"
           fill="none"
@@ -49,7 +49,7 @@ export function LossArt() {
           ref={(el) => {
             spikeRefs.current[0] = el;
           }}
-          className="loss-spike opacity-0"
+          className="opacity-0 motion-reduce:opacity-100"
           cx={210}
           cy={58}
           r={11}
@@ -61,7 +61,7 @@ export function LossArt() {
           ref={(el) => {
             spikeRefs.current[1] = el;
           }}
-          className="loss-spike opacity-0"
+          className="opacity-0 motion-reduce:opacity-100"
           x={226}
           y={48}
           fill="#e60012"
