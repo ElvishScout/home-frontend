@@ -20,7 +20,7 @@ export function Nav() {
   return (
     <nav className="fixed top-0 right-0 left-0 z-7000 flex items-center justify-between px-12 py-4.5 text-white mix-blend-difference max-md:px-6 max-md:py-3.5">
       <SmoothLink href="#top" className="flex items-center gap-2 font-disp text-xl tracking-wider">
-        <span className="inline-block animate-spin-slow text-lg">✦</span>LIN&nbsp;YI
+        <span className="inline-block animate-spin-slow text-lg">✦</span>ELVISH&nbsp;SCOUT
       </SmoothLink>
       <ul className="flex gap-7 max-md:gap-3">
         {NAV.map((item) => (

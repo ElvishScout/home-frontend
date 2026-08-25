@@ -34,7 +34,6 @@ export function Hero() {
   const roleRef = useRef<HTMLSpanElement>(null);
   const stickerRef = useRef<HTMLDivElement>(null);
   const metaRef = useRef<HTMLDivElement>(null);
-  const sideRef = useRef<HTMLElement>(null);
   const hintRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +54,7 @@ export function Hero() {
         .from(roleRef.current, { scale: 0, rotate: -14, duration: 0.7, ease: "back.out(2.2)" }, "-=0.4")
         .from(stickerRef.current, { scale: 0, rotate: 90, duration: 0.8, ease: "back.out(2.5)" }, "-=0.5")
         .from(
-          [metaRef.current, sideRef.current, hintRef.current],
+          [metaRef.current, hintRef.current],
           { opacity: 0, y: 20, stagger: 0.1, duration: 0.5 },
           "-=0.8",
         )
