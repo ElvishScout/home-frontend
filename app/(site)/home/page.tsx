@@ -7,7 +7,9 @@ import { Loader } from "./components/loader";
 import { ScrollRail } from "./components/scroll-rail";
 import { Hero } from "./components/hero";
 import { About } from "./components/about";
-import { Works } from "./components/works";
+import { Projects } from "./components/projects";
+import { Blog } from "./components/blog";
+import { Music } from "./components/music";
 import { Skills } from "./components/skills";
 import { Contact } from "./components/contact";
 import { Footer } from "./components/footer";
@@ -33,7 +35,9 @@ export default function HomePage() {
             <div className="h-6.5 w-full border-y-[3px] border-ink bg-acid" />
           </div>
 
-          <Works />
+          <Projects />
+          <Blog />
+          <Music />
           <Skills />
 
           <div className="relative z-4">

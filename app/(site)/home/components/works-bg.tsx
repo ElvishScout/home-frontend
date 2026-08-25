@@ -28,7 +28,7 @@ export function WorksBg() {
       ref={ref}
       className="pointer-events-none absolute top-[6vh] right-0 left-0 z-0 overflow-hidden font-disp text-[clamp(5rem,16vw,14rem)] leading-none tracking-[0.02em] whitespace-nowrap text-transparent [-webkit-text-stroke:1.5px_rgba(17,17,16,0.14)]"
     >
-      SIDE PROJECTS ✦ 实验记录 ✦ SIDE PROJECTS
+      OPEN SOURCE ✦ 代码即态度 ✦ OPEN SOURCE
     </div>
   );
 }

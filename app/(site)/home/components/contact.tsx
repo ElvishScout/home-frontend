@@ -61,7 +61,7 @@ export function Contact() {
         ref={eyebrowRef}
         className="mb-[4vh] inline-block -rotate-2 bg-scarlet px-4.5 py-1.5 font-spacemono text-[13px] font-bold tracking-[0.3em] text-paper"
       >
-        04 / CONTACT — 聊模型、页面，还是新番？
+        06 / CONTACT — 聊模型、页面，还是新番？
       </span>
       <h2
         ref={bigRef}

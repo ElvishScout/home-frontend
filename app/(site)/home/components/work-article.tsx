@@ -13,6 +13,9 @@ export function WorkArticle({
   title,
   desc,
   tags,
+  linkHref = "#contact",
+  linkLabel = "查看详情",
+  linkExternal = false,
 }: {
   index: string;
   even: boolean;
@@ -22,6 +25,9 @@ export function WorkArticle({
   title: string;
   desc: string;
   tags: string[];
+  linkHref?: string;
+  linkLabel?: string;
+  linkExternal?: boolean;
 }) {
   const rootRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
@@ -101,19 +107,31 @@ export function WorkArticle({
             </li>
           ))}
         </ul>
-        <SmoothLink
-          href="#contact"
-          className="group/link relative isolate mt-6.5 inline-flex items-center gap-3 overflow-hidden py-2.5 font-spacemono text-[13px] font-bold tracking-[0.16em]"
-        >
-          <span
-            aria-hidden
-            className="absolute inset-0 -z-10 bg-acid [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-expo group-hover/link:[clip-path:inset(0_0_0_0)]"
-          />
-          <span>查看详情</span>
-          <span className="inline-block text-lg transition-transform duration-500 ease-expo group-hover/link:translate-x-2.5">
-            →
-          </span>
-        </SmoothLink>
+        {(() => {
+          const linkClass =
+            "group/link relative isolate mt-6.5 inline-flex items-center gap-3 overflow-hidden py-2.5 font-spacemono text-[13px] font-bold tracking-[0.16em]";
+          const inner = (
+            <>
+              <span
+                aria-hidden
+                className="absolute inset-0 -z-10 bg-acid [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-expo group-hover/link:[clip-path:inset(0_0_0_0)]"
+              />
+              <span>{linkLabel}</span>
+              <span className="inline-block text-lg transition-transform duration-500 ease-expo group-hover/link:translate-x-2.5">
+                {linkExternal ? "↗" : "→"}
+              </span>
+            </>
+          );
+          return linkExternal ? (
+            <a href={linkHref} target="_blank" rel="noreferrer" className={linkClass}>
+              {inner}
+            </a>
+          ) : (
+            <SmoothLink href={linkHref} className={linkClass}>
+              {inner}
+            </SmoothLink>
+          );
+        })()}
       </div>
     </article>
   );

@@ -6,7 +6,7 @@ export function Skills() {
   return (
     <section id="skills" className="relative bg-ink py-[16vh] pb-[14vh] text-paper">
       <div className="px-12 max-md:px-6">
-        <SecHead idx="03" zh="技能" en="SKILLS & TOOLS" dark />
+        <SecHead idx="05" zh="技能" en="SKILLS & TOOLS" dark />
       </div>
 
       <div className="mt-[2vh] flex flex-col gap-5.5">

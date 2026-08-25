@@ -6,9 +6,11 @@ import { useLenis } from "./providers";
 
 const SECTIONS = [
   { id: "about", num: "01" },
-  { id: "works", num: "02" },
-  { id: "skills", num: "03" },
-  { id: "contact", num: "04" },
+  { id: "projects", num: "02" },
+  { id: "blog", num: "03" },
+  { id: "music", num: "04" },
+  { id: "skills", num: "05" },
+  { id: "contact", num: "06" },
 ];
 
 export function ScrollRail() {
