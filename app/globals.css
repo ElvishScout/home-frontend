@@ -4,7 +4,7 @@
 @theme inline {
   --font-disp: var(--font-anton), var(--font-noto-sans-sc), sans-serif;
   --font-zh: var(--font-noto-sans-sc), sans-serif;
-  --font-spacemono: var(--font-space-mono), monospace;
+  --font-spacemono: var(--font-space-mono), var(--font-noto-sans-sc), monospace;
 }
 
 @theme {
