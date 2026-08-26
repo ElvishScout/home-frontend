@@ -134,7 +134,7 @@ export function Hero() {
         <div className="absolute top-[20%] right-16 z-3 flex flex-col items-start gap-20 max-md:top-[16%] max-md:right-10">
           <div
             ref={stickerRef}
-            className="border-ink bg-scarlet shadow-ink-10 relative flex aspect-square w-[clamp(110px,13vw,180px)] rotate-[2.5deg] items-center justify-center border-3"
+            className="border-ink bg-scarlet shadow-ink-10 relative flex aspect-square w-[clamp(7rem,14vw,10.5rem)] rotate-[2.5deg] items-center justify-center border-3"
           >
             <div
               aria-hidden
