@@ -115,7 +115,7 @@ export function Hero() {
             <div className="overflow-hidden py-1.5">
               <span
                 ref={enRef}
-                className="font-disp text-fluid-15 ml-[4vw] inline-block text-transparent will-change-transform [-webkit-text-stroke:2.5px_var(--color-ink)] max-md:ml-[4vw]"
+                className="font-disp text-fluid-15 text-stroke-ink text-stroke-2.5 ml-[4vw] inline-block text-transparent will-change-transform max-md:ml-[4vw]"
               >
                 SCOUT
               </span>
@@ -124,7 +124,7 @@ export function Hero() {
           <div>
             <span
               ref={roleRef}
-              className="border-ink bg-acid text-fluid-5 tracking-14 mt-[4vh] inline-block -rotate-2 border-3 px-6 py-2.5 font-black shadow-[6px_6px_0_0_var(--color-ink)]"
+              className="border-ink bg-acid text-fluid-5 tracking-14 shadow-ink-6 mt-[4vh] inline-block -rotate-2 border-3 px-6 py-2.5 font-black"
             >
               大模型训练 × 创意前端
             </span>
@@ -134,7 +134,7 @@ export function Hero() {
         <div className="absolute top-[20%] right-16 z-3 flex flex-col items-start gap-20 max-md:top-[16%] max-md:right-10">
           <div
             ref={stickerRef}
-            className="border-ink bg-scarlet relative flex aspect-square w-[clamp(110px,13vw,180px)] rotate-[2.5deg] items-center justify-center border-3 shadow-[10px_10px_0_0_var(--color-ink)]"
+            className="border-ink bg-scarlet shadow-ink-10 relative flex aspect-square w-[clamp(110px,13vw,180px)] rotate-[2.5deg] items-center justify-center border-3"
           >
             <div
               aria-hidden

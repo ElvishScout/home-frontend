@@ -69,14 +69,14 @@ export function Contact() {
         </span>
         <span
           ref={l2Ref}
-          className="ease-expo group-hover:text-acid block text-transparent transition-colors duration-500 [-webkit-text-stroke:2.5px_var(--color-ink)]"
+          className="ease-expo group-hover:text-acid text-stroke-ink text-stroke-2.5 block text-transparent transition-colors duration-500"
         >
           TALK
         </span>
       </h2>
       <a
         href="mailto:elvishscoutustc@gmail.com"
-        className="group/mail border-ink bg-paper font-spacemono text-fluid-5 ease-expo relative isolate mt-[6vh] inline-block overflow-hidden border-3 px-10 py-4 font-bold tracking-wider shadow-[8px_8px_0_0_var(--color-ink)] transition-all duration-500 hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_0_var(--color-ink)]"
+        className="group/mail border-ink bg-paper font-spacemono text-fluid-5 ease-expo shadow-ink-8 hover:shadow-ink-2 relative isolate mt-[6vh] inline-block overflow-hidden border-3 px-10 py-4 font-bold tracking-wider transition-all duration-500 hover:translate-x-1 hover:translate-y-1"
       >
         <span
           aria-hidden

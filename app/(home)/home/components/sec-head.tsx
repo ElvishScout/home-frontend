@@ -43,7 +43,7 @@ export function SecHead({
       </span>
       <h2 className="font-zh text-fluid-13 leading-none font-black tracking-wider">
         {zh}
-        <span className="font-disp tracking-14 mt-4 block text-4xl text-transparent [-webkit-text-stroke:1.5px_currentColor]">
+        <span className="font-disp tracking-14 text-stroke-current text-stroke-1.5 mt-4 block text-4xl text-transparent">
           {en}
         </span>
       </h2>

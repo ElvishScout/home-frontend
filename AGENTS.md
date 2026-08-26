@@ -45,7 +45,7 @@ next.config.ts               @next/mdx（+rehype-heading-ids）与 mdx-registry 
 
 - **路由分组决定布局归属**：`(home)` 与 `(sub)` 平级，URL 不受影响；子页面外壳只写在 `(sub)/layout.tsx`，新增子页面放进 `(sub)` 组即自动获得外壳。
 - **virtual:mdx-registry**：文章元信息（标题、修改时间、标题树）在构建期生成，列表页与详情页都从这里取数；写新文章只需在 `articles/` 放 `.mdx`。
-- **样式取值先查 theme token**：`globals.css` 的 `@theme` 已收编流式字号（`text-fluid-1..18` + `w-stamp`）、超宽字距（`tracking-12..30`）、负收紧行距（`leading-92/95`）、超小字号（`text-2xs/3xs/4xs`）。新增样式时优先复用这些 token；确需新值就更新/新增 token，不要在组件里新写 arbitrary 值。边框宽度用 v4 裸数值（`border-3` = 3px）。只有标准刻度和 token 都表达不了的（硬阴影、描边字、vh 节奏间距）才允许写任意值。
+- **样式取值先查 theme token**：`globals.css` 的 `@theme` 已收编流式字号（`text-fluid-1..18` + `w-stamp`）、超宽字距（`tracking-12..30`）、负收紧行距（`leading-92/95`）、超小字号（`text-2xs/3xs/4xs`）、硬阴影（`shadow-ink-2/4/6/8/10`、`shadow-paper-2/6`，数值 = 偏移 px）；`@utility` 已收编空心描边字（`text-stroke-{ink,paper,aqua,current}` 支持 `/透明度` 修饰符如 `text-stroke-ink/14`，与宽度 `text-stroke-{0,1.5,2.5,3}` 两个维度自由组合）。新增样式时优先复用这些 token；确需新值就更新/新增 token，不要在组件里新写 arbitrary 值。边框宽度用 v4 裸数值（`border-3` = 3px）。只有标准刻度和 token 都表达不了的（vh 节奏间距）才允许写任意值。
 
 ---
 

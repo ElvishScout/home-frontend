@@ -70,7 +70,7 @@ export function WorkArticle({
     >
       <div className={`relative col-span-6 ${even ? "order-2" : ""}`}>
         <span
-          className={`font-disp text-fluid-14 absolute -top-17.5 z-3 leading-none text-transparent [-webkit-text-stroke:2.5px_var(--color-ink)] ${
+          className={`font-disp text-fluid-14 text-stroke-ink text-stroke-2.5 absolute -top-17.5 z-3 leading-none text-transparent ${
             even ? "-right-5" : "-left-5"
           }`}
         >
@@ -78,7 +78,7 @@ export function WorkArticle({
         </span>
         <div
           ref={frameRef}
-          className={`border-ink bg-ink relative aspect-4/3 overflow-hidden border-4 shadow-[10px_10px_0_0_var(--color-ink)] ${
+          className={`border-ink bg-ink shadow-ink-10 relative aspect-4/3 overflow-hidden border-4 ${
             even ? "rotate-[1.4deg]" : "rotate-[-1.6deg]"
           }`}
         >

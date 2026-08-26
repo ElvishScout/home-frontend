@@ -21,8 +21,8 @@ export function Skills() {
           items={["HTML / CSS", "JAVASCRIPT", "REACT", "GSAP", "WEB AUDIO"]}
           rowClassName="overflow-hidden border-y-3 border-paper py-4 whitespace-nowrap"
           trackClassName="[animation-direction:reverse] [animation-duration:32s]"
-          itemClassName="inline-flex items-center gap-9 px-9 font-disp text-fluid-9 tracking-wider text-transparent [-webkit-text-stroke:1.5px_var(--color-paper)]"
-          starClassName="text-3xl text-aqua [-webkit-text-stroke:0]"
+          itemClassName="inline-flex items-center gap-9 px-9 font-disp text-fluid-9 tracking-wider text-transparent text-stroke-paper text-stroke-1.5"
+          starClassName="text-3xl text-aqua text-stroke-0"
         />
         <MarqueeRow
           items={["乐理", "和声", "编曲", "视唱练耳", "追番", "游戏"]}
