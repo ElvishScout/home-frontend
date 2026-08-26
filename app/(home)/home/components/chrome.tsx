@@ -32,7 +32,7 @@ export function Nav() {
               href={item.href}
               className="group font-spacemono tracking-12 max-md:text-3xs relative block py-1 text-xs font-bold max-md:tracking-wider"
             >
-              <sup className="text-4xs mr-0.5 opacity-60 max-md:hidden">{item.sup}</sup>
+              <sup className="text-3xs mr-0.5 opacity-60 max-md:hidden">{item.sup}</sup>
               {item.label}
               <span
                 aria-hidden
