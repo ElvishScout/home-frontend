@@ -55,37 +55,34 @@ export function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative overflow-hidden bg-paper px-12 py-[16vh] text-center max-md:px-6 max-md:py-[12vh]"
+      className="bg-paper relative overflow-hidden px-12 py-[16vh] text-center max-md:px-6 max-md:py-[12vh]"
     >
       <span
         ref={eyebrowRef}
-        className="mb-[4vh] inline-block -rotate-2 bg-scarlet px-4.5 py-1.5 font-spacemono text-sm font-bold tracking-30 text-paper"
+        className="bg-scarlet font-spacemono tracking-30 text-paper mb-[4vh] inline-block -rotate-2 px-4.5 py-1.5 text-sm font-bold"
       >
         06 / CONTACT — 聊模型、页面，还是新番？
       </span>
-      <h2
-        ref={bigRef}
-        className="group font-disp text-fluid-17 leading-95 select-none"
-      >
-        <span ref={l1Ref} className="block text-ink">
+      <h2 ref={bigRef} className="group font-disp text-fluid-17 leading-95 select-none">
+        <span ref={l1Ref} className="text-ink block">
           LET&apos;S
         </span>
         <span
           ref={l2Ref}
-          className="block text-transparent transition-colors duration-500 ease-expo [-webkit-text-stroke:2.5px_var(--color-ink)] group-hover:text-acid"
+          className="ease-expo group-hover:text-acid block text-transparent transition-colors duration-500 [-webkit-text-stroke:2.5px_var(--color-ink)]"
         >
           TALK
         </span>
       </h2>
       <a
         href="mailto:elvishscoutustc@gmail.com"
-        className="group/mail relative isolate mt-[6vh] inline-block overflow-hidden border-3 border-ink bg-paper px-10 py-4 font-spacemono text-fluid-5 font-bold tracking-wider shadow-[8px_8px_0_0_var(--color-ink)] transition-all duration-500 ease-expo hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_0_var(--color-ink)]"
+        className="group/mail border-ink bg-paper font-spacemono text-fluid-5 ease-expo relative isolate mt-[6vh] inline-block overflow-hidden border-3 px-10 py-4 font-bold tracking-wider shadow-[8px_8px_0_0_var(--color-ink)] transition-all duration-500 hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_0_var(--color-ink)]"
       >
         <span
           aria-hidden
-          className="absolute inset-0 -z-10 bg-ink [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-expo group-hover/mail:[clip-path:inset(0_0_0_0)]"
+          className="bg-ink ease-expo absolute inset-0 -z-10 transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/mail:[clip-path:inset(0_0_0_0)]"
         />
-        <span className="relative transition-colors duration-500 group-hover/mail:text-acid">
+        <span className="group-hover/mail:text-acid relative transition-colors duration-500">
           elvishscoutustc@gmail.com
         </span>
       </a>
@@ -94,7 +91,7 @@ export function Contact() {
           <a
             key={social}
             href="#"
-            className="border-2 border-ink px-5.5 py-3 font-spacemono text-xs font-bold tracking-14 transition-colors duration-300 ease-expo hover:bg-ink hover:text-aqua"
+            className="border-ink font-spacemono tracking-14 ease-expo hover:bg-ink hover:text-aqua border-2 px-5.5 py-3 text-xs font-bold transition-colors duration-300"
           >
             {social}
           </a>

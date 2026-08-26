@@ -12,7 +12,10 @@ const STATS: { count?: number; value?: string; color: string; label: string }[] 
 
 export function About() {
   return (
-    <section id="about" className="relative bg-ink px-12 py-[16vh] text-paper max-md:px-6 max-md:py-[12vh]">
+    <section
+      id="about"
+      className="bg-ink text-paper relative px-12 py-[16vh] max-md:px-6 max-md:py-[12vh]"
+    >
       <SecHead idx="01" zh="关于我" en="ABOUT ME" dark />
 
       <Statement />
@@ -27,21 +30,21 @@ export function About() {
             业余时间在学音乐，乐理、和声、编曲，目标很朴素：写出一首自己愿意单曲循环的曲子。剩下的余量，留给当季新番。
           </p>
         </Reveal>
-        <div className="grid grid-cols-2 gap-0.75 p-0.75 bg-paper">
+        <div className="bg-paper grid grid-cols-2 gap-0.75 p-0.75">
           {STATS.map((stat) => (
             <div key={stat.label} className="overflow-hidden">
-              <Reveal className="relative h-full bg-ink px-5.5 py-6.5">
+              <Reveal className="bg-ink relative h-full px-5.5 py-6.5">
                 {stat.count !== undefined ? (
                   <StatNum
                     count={stat.count}
-                    className={`block font-disp text-fluid-11 leading-none ${stat.color}`}
+                    className={`font-disp text-fluid-11 block leading-none ${stat.color}`}
                   />
                 ) : (
-                  <span className={`block font-disp text-fluid-11 leading-none ${stat.color}`}>
+                  <span className={`font-disp text-fluid-11 block leading-none ${stat.color}`}>
                     {stat.value}
                   </span>
                 )}
-                <span className="mt-2.5 block font-spacemono text-xs tracking-18 opacity-70">
+                <span className="font-spacemono tracking-18 mt-2.5 block text-xs opacity-70">
                   {stat.label}
                 </span>
               </Reveal>

@@ -70,7 +70,7 @@ export function WorkArticle({
     >
       <div className={`relative col-span-6 ${even ? "order-2" : ""}`}>
         <span
-          className={`absolute -top-17.5 z-3 font-disp text-fluid-14 leading-none text-transparent [-webkit-text-stroke:2.5px_var(--color-ink)] ${
+          className={`font-disp text-fluid-14 absolute -top-17.5 z-3 leading-none text-transparent [-webkit-text-stroke:2.5px_var(--color-ink)] ${
             even ? "-right-5" : "-left-5"
           }`}
         >
@@ -78,30 +78,36 @@ export function WorkArticle({
         </span>
         <div
           ref={frameRef}
-          className={`relative aspect-4/3 overflow-hidden border-4 border-ink bg-ink shadow-[10px_10px_0_0_var(--color-ink)] ${
+          className={`border-ink bg-ink relative aspect-4/3 overflow-hidden border-4 shadow-[10px_10px_0_0_var(--color-ink)] ${
             even ? "rotate-[1.4deg]" : "rotate-[-1.6deg]"
           }`}
         >
           <div
-            className={`absolute inset-0 transition-transform duration-900 ease-expo group-hover:scale-110 group-hover:rotate-1 ${artClass ?? ""}`}
+            className={`ease-expo absolute inset-0 transition-transform duration-900 group-hover:scale-110 group-hover:rotate-1 ${artClass ?? ""}`}
           >
             {art}
           </div>
         </div>
       </div>
-      <div className={`relative z-2 col-span-6 ${even ? "order-1 text-right max-lg:order-2 max-lg:text-left" : ""}`}>
+      <div
+        className={`relative z-2 col-span-6 ${even ? "order-1 text-right max-lg:order-2 max-lg:text-left" : ""}`}
+      >
         <h3 className="text-fluid-8 leading-tight font-black tracking-wide">
-          <span className="mb-2 block font-disp text-2xl tracking-widest">{en}</span>
+          <span className="font-disp mb-2 block text-2xl tracking-widest">{en}</span>
           {title}
         </h3>
-        <p className={`mt-3.5 max-w-sm text-sm leading-loose opacity-75 ${even ? "ml-auto max-lg:ml-0" : ""}`}>
+        <p
+          className={`mt-3.5 max-w-sm text-sm leading-loose opacity-75 ${even ? "ml-auto max-lg:ml-0" : ""}`}
+        >
           {desc}
         </p>
-        <ul className={`mt-4.5 flex flex-wrap gap-2.5 ${even ? "justify-end max-lg:justify-start" : ""}`}>
+        <ul
+          className={`mt-4.5 flex flex-wrap gap-2.5 ${even ? "justify-end max-lg:justify-start" : ""}`}
+        >
           {tags.map((tag) => (
             <li
               key={tag}
-              className="border-2 border-ink bg-paper px-3 py-1 font-spacemono text-xs font-bold tracking-widest transition-colors duration-300 group-hover:bg-ink group-hover:text-acid"
+              className="border-ink bg-paper font-spacemono group-hover:bg-ink group-hover:text-acid border-2 px-3 py-1 text-xs font-bold tracking-widest transition-colors duration-300"
             >
               {tag}
             </li>
@@ -114,10 +120,10 @@ export function WorkArticle({
             <>
               <span
                 aria-hidden
-                className="absolute inset-0 -z-10 bg-acid [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-expo group-hover/link:[clip-path:inset(0_0_0_0)]"
+                className="bg-acid ease-expo absolute inset-0 -z-10 transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/link:[clip-path:inset(0_0_0_0)]"
               />
               <span>{linkLabel}</span>
-              <span className="inline-block text-lg transition-transform duration-500 ease-expo group-hover/link:translate-x-2.5">
+              <span className="ease-expo inline-block text-lg transition-transform duration-500 group-hover/link:translate-x-2.5">
                 {linkExternal ? "↗" : "→"}
               </span>
             </>

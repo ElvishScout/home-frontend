@@ -3,7 +3,17 @@
 import { useEffect, useRef } from "react";
 import { gsap, prefersReducedMotion } from "../lib/gsap";
 
-export function SecHead({ idx, zh, en, dark = false }: { idx: string; zh: string; en: string; dark?: boolean }) {
+export function SecHead({
+  idx,
+  zh,
+  en,
+  dark = false,
+}: {
+  idx: string;
+  zh: string;
+  en: string;
+  dark?: boolean;
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,7 +35,7 @@ export function SecHead({ idx, zh, en, dark = false }: { idx: string; zh: string
   return (
     <div ref={ref} className="mb-[9vh] flex flex-wrap items-baseline gap-5">
       <span
-        className={`inline-block -rotate-3 px-2.5 py-1 font-spacemono text-sm font-bold tracking-widest ${
+        className={`font-spacemono inline-block -rotate-3 px-2.5 py-1 text-sm font-bold tracking-widest ${
           dark ? "bg-acid text-ink" : "bg-ink text-acid"
         }`}
       >
@@ -33,7 +43,7 @@ export function SecHead({ idx, zh, en, dark = false }: { idx: string; zh: string
       </span>
       <h2 className="font-zh text-fluid-13 leading-none font-black tracking-wider">
         {zh}
-        <span className="mt-4 block font-disp text-4xl tracking-14 text-transparent [-webkit-text-stroke:1.5px_currentColor]">
+        <span className="font-disp tracking-14 mt-4 block text-4xl text-transparent [-webkit-text-stroke:1.5px_currentColor]">
           {en}
         </span>
       </h2>

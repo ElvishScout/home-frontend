@@ -28,17 +28,20 @@ const POSTS: Entry[] = [
 
 export function Blog() {
   return (
-    <section id="blog" className="relative bg-ink px-12 py-[16vh] text-paper max-md:px-6 max-md:py-[12vh]">
+    <section
+      id="blog"
+      className="bg-ink text-paper relative px-12 py-[16vh] max-md:px-6 max-md:py-[12vh]"
+    >
       <SecHead idx="03" zh="博客" en="TECH BLOG" dark />
 
       <div className="grid grid-cols-12 items-stretch gap-x-10 max-lg:flex max-lg:flex-col max-lg:gap-14">
         <div className="col-span-5 flex flex-col">
-          <Reveal className="max-w-xl text-fluid-7 leading-snug font-black">
-            好记性不如<em className="bg-acid px-2 text-ink not-italic">烂笔头</em>，
+          <Reveal className="text-fluid-7 max-w-xl leading-snug font-black">
+            好记性不如<em className="bg-acid text-ink px-2 not-italic">烂笔头</em>，
             <br />
             写下来，才算学会。
           </Reveal>
-          <Reveal className="mt-8 font-spacemono text-xs leading-loose tracking-14 opacity-70">
+          <Reveal className="font-spacemono tracking-14 mt-8 text-xs leading-loose opacity-70">
             POSTS 23 ✦ WORDS 86K
             <br />
             UPDATED 2026.08

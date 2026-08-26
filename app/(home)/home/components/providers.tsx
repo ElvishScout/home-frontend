@@ -1,6 +1,15 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  useSyncExternalStore,
+  type ReactNode,
+} from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "../lib/gsap";
 
@@ -21,7 +30,11 @@ function emitLenis() {
 }
 
 export function useLenis(): Lenis | null {
-  return useSyncExternalStore(subscribeLenis, () => lenis, () => null);
+  return useSyncExternalStore(
+    subscribeLenis,
+    () => lenis,
+    () => null,
+  );
 }
 
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {

@@ -13,7 +13,7 @@ export function MarqueeRow({
 }) {
   return (
     <div className={rowClassName}>
-      <div className={`inline-flex animate-mq will-change-transform ${trackClassName}`}>
+      <div className={`animate-mq inline-flex will-change-transform ${trackClassName}`}>
         {[...items, ...items].map((item, i) => (
           <span key={i} className={itemClassName}>
             {item}

@@ -18,7 +18,15 @@ export function gitDates(paths) {
   return new Promise((resolve, reject) => {
     // core.quotePath=false: print non-ASCII file names as raw UTF-8 instead
     // of octal-escaped quoted strings, so they match `paths` exactly.
-    const args = ["-c", "core.quotePath=false", "log", `--format=${RECORD_SEP}%aI`, "--name-only", "--", ...paths];
+    const args = [
+      "-c",
+      "core.quotePath=false",
+      "log",
+      `--format=${RECORD_SEP}%aI`,
+      "--name-only",
+      "--",
+      ...paths,
+    ];
 
     cp.execFile("git", args, { maxBuffer: 64 * 1024 * 1024 }, (error, stdout) => {
       if (error) {

@@ -4,7 +4,7 @@ import { Reveal } from "./reveal";
 
 export function Skills() {
   return (
-    <section id="skills" className="relative bg-ink py-[16vh] pb-[14vh] text-paper">
+    <section id="skills" className="bg-ink text-paper relative py-[16vh] pb-[14vh]">
       <div className="px-12 max-md:px-6">
         <SecHead idx="05" zh="技能" en="SKILLS & TOOLS" dark />
       </div>
@@ -35,10 +35,10 @@ export function Skills() {
 
       <div className="flex flex-wrap items-end justify-between gap-7.5 px-12 pt-[8vh] max-md:px-6">
         <Reveal className="text-fluid-6 leading-normal font-black">
-          没上过设计课，<em className="bg-acid px-2 text-ink not-italic">审美是野路子</em>；<br />
+          没上过设计课，<em className="bg-acid text-ink px-2 not-italic">审美是野路子</em>；<br />
           音乐还在学，但曲子一定会有的。
         </Reveal>
-        <Reveal className="max-w-lg font-spacemono text-sm leading-loose tracking-wider opacity-75">
+        <Reveal className="font-spacemono max-w-lg text-sm leading-loose tracking-wider opacity-75">
           TRAIN MODELS BY DAY
           <br />
           PIXELS &amp; MELODIES BY NIGHT

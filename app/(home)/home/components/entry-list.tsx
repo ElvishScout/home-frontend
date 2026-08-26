@@ -50,33 +50,33 @@ export function EntryList({ items, dark = false }: { items: Entry[]; dark?: bool
           >
             <span
               aria-hidden
-              className={`absolute inset-0 -z-10 ${wipe} [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-expo group-hover:[clip-path:inset(0_0_0_0)]`}
+              className={`absolute inset-0 -z-10 ${wipe} ease-expo transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover:[clip-path:inset(0_0_0_0)]`}
             />
             <span
-              className={`pt-1 font-spacemono text-xs font-bold tracking-18 opacity-60 transition-colors duration-300 ${onWipe}`}
+              className={`font-spacemono tracking-18 pt-1 text-xs font-bold opacity-60 transition-colors duration-300 ${onWipe}`}
             >
               {item.num}
             </span>
             <span className="min-w-0">
               <span
                 title={item.title}
-                className={`block truncate text-fluid-3 leading-snug font-black tracking-wide transition-colors duration-300 ${onWipe}`}
+                className={`text-fluid-3 block truncate leading-snug font-black tracking-wide transition-colors duration-300 ${onWipe}`}
               >
                 {item.title}
               </span>
               <span
-                className={`mt-1 block font-spacemono text-xs font-bold tracking-20 opacity-60 transition-colors duration-300 ${onWipe}`}
+                className={`font-spacemono tracking-20 mt-1 block text-xs font-bold opacity-60 transition-colors duration-300 ${onWipe}`}
               >
                 {item.note}
               </span>
             </span>
             <span
-              className={`flex items-baseline gap-4 font-spacemono text-xs font-bold tracking-14 transition-colors duration-300 max-md:hidden ${onWipe}`}
+              className={`font-spacemono tracking-14 flex items-baseline gap-4 text-xs font-bold transition-colors duration-300 max-md:hidden ${onWipe}`}
             >
               {item.meta}
               <span
                 aria-hidden
-                className="inline-block text-lg transition-transform duration-500 ease-expo group-hover:translate-x-2"
+                className="ease-expo inline-block text-lg transition-transform duration-500 group-hover:translate-x-2"
               >
                 →
               </span>
@@ -89,7 +89,15 @@ export function EntryList({ items, dark = false }: { items: Entry[]; dark?: bool
 }
 
 /** 「查看更多」按钮：直角边框 + 硬阴影，悬停擦入反色并下沉。 */
-export function MoreLink({ href, label, dark = false }: { href: string; label: string; dark?: boolean }) {
+export function MoreLink({
+  href,
+  label,
+  dark = false,
+}: {
+  href: string;
+  label: string;
+  dark?: boolean;
+}) {
   const wipe = dark ? "bg-acid" : "bg-ink";
   const onWipe = dark ? "group-hover/link:text-ink" : "group-hover/link:text-paper";
   const shadow = dark
@@ -99,16 +107,16 @@ export function MoreLink({ href, label, dark = false }: { href: string; label: s
   return (
     <Link
       href={href}
-      className={`group/link relative isolate inline-flex items-center gap-3 overflow-hidden border-3 border-current px-6 py-3 font-spacemono text-sm font-bold tracking-16 transition-all duration-500 ease-expo hover:translate-x-1 hover:translate-y-1 ${shadow}`}
+      className={`group/link font-spacemono tracking-16 ease-expo relative isolate inline-flex items-center gap-3 overflow-hidden border-3 border-current px-6 py-3 text-sm font-bold transition-all duration-500 hover:translate-x-1 hover:translate-y-1 ${shadow}`}
     >
       <span
         aria-hidden
-        className={`absolute inset-0 -z-10 ${wipe} [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-expo group-hover/link:[clip-path:inset(0_0_0_0)]`}
+        className={`absolute inset-0 -z-10 ${wipe} ease-expo transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/link:[clip-path:inset(0_0_0_0)]`}
       />
       <span className={`transition-colors duration-300 ${onWipe}`}>{label}</span>
       <span
         aria-hidden
-        className={`inline-block text-lg transition-all duration-500 ease-expo group-hover/link:translate-x-2 ${onWipe}`}
+        className={`ease-expo inline-block text-lg transition-all duration-500 group-hover/link:translate-x-2 ${onWipe}`}
       >
         →
       </span>

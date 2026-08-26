@@ -14,9 +14,13 @@ const TRACKS: Row[] = [
 export default function MusicPage() {
   return (
     <>
-      <PageHead tag="MUSIC WORKS" title="音乐创作" meta="LOOPS 12 ✦ DEMOS 3 · TARGET: ONE FULL TRACK" />
+      <PageHead
+        tag="MUSIC WORKS"
+        title="音乐创作"
+        meta="LOOPS 12 ✦ DEMOS 3 · TARGET: ONE FULL TRACK"
+      />
       <RowList rows={TRACKS} />
-      <p className="mt-8 font-spacemono text-xs tracking-16 opacity-60">
+      <p className="font-spacemono tracking-16 mt-8 text-xs opacity-60">
         更多 DEMO 在硬盘里排队。MORE DEMOS IN THE VAULT.
       </p>
     </>

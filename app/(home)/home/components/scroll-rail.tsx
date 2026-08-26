@@ -41,8 +41,7 @@ export function ScrollRail() {
           trigger: sec,
           start: "top 55%",
           end: "bottom 55%",
-          onToggle: (self) =>
-            setActive((prev) => (self.isActive ? id : prev === id ? null : prev)),
+          onToggle: (self) => setActive((prev) => (self.isActive ? id : prev === id ? null : prev)),
         });
       });
     });
@@ -56,15 +55,15 @@ export function ScrollRail() {
   return (
     <aside
       aria-hidden
-      className={`pointer-events-none fixed top-1/2 right-1.75 z-6000 flex h-50 -translate-y-1/2 items-stretch gap-2.5 text-white mix-blend-difference transition-opacity duration-500 ease-expo max-lg:hidden ${
+      className={`ease-expo pointer-events-none fixed top-1/2 right-1.75 z-6000 flex h-50 -translate-y-1/2 items-stretch gap-2.5 text-white mix-blend-difference transition-opacity duration-500 max-lg:hidden ${
         shown ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="flex flex-col justify-between font-spacemono text-2xs font-bold tracking-widest">
+      <div className="font-spacemono text-2xs flex flex-col justify-between font-bold tracking-widest">
         {SECTIONS.map((s) => (
           <span
             key={s.id}
-            className={`transition-[opacity,transform] duration-300 ease-expo ${
+            className={`ease-expo transition-[opacity,transform] duration-300 ${
               active === s.id ? "-translate-x-1 opacity-100" : "opacity-35"
             }`}
           >
@@ -73,7 +72,10 @@ export function ScrollRail() {
         ))}
       </div>
       <div className="relative w-0.5 bg-white/30">
-        <i ref={markerRef} className="absolute top-0 left-1/2 size-2.25 -translate-x-1/2 bg-white" />
+        <i
+          ref={markerRef}
+          className="absolute top-0 left-1/2 size-2.25 -translate-x-1/2 bg-white"
+        />
       </div>
     </aside>
   );

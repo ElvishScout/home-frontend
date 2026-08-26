@@ -17,21 +17,21 @@ export function Projects() {
             <>
               <div
                 aria-hidden
-                className="absolute top-[8%] right-[7%] aspect-square w-[40%] rounded-full bg-scarlet bg-[radial-gradient(circle,var(--color-acid)_2.6px,transparent_3.2px)] bg-size-[14px_14px]"
+                className="bg-scarlet absolute top-[8%] right-[7%] aspect-square w-[40%] rounded-full bg-[radial-gradient(circle,var(--color-acid)_2.6px,transparent_3.2px)] bg-size-[14px_14px]"
               />
               <div
                 aria-hidden
-                className="absolute bottom-[4%] left-[3%] font-disp text-fluid-17 leading-none text-transparent [-webkit-text-stroke:3px_var(--color-aqua)]"
+                className="font-disp text-fluid-17 absolute bottom-[4%] left-[3%] leading-none text-transparent [-webkit-text-stroke:3px_var(--color-aqua)]"
               >
                 &lt;/&gt;
               </div>
               <span
                 aria-hidden
-                className="absolute top-[34%] left-[12%] -rotate-3 border-3 border-ink bg-acid px-4 py-2.5 font-zh text-fluid-4 font-black text-ink shadow-[6px_6px_0_0_var(--color-paper)]"
+                className="border-ink bg-acid font-zh text-fluid-4 text-ink absolute top-[34%] left-[12%] -rotate-3 border-3 px-4 py-2.5 font-black shadow-[6px_6px_0_0_var(--color-paper)]"
               >
                 开源中 · STAR ME
               </span>
-              <span className="absolute top-[8%] left-[6%] font-spacemono text-xs font-bold tracking-30 text-paper">
+              <span className="font-spacemono tracking-30 text-paper absolute top-[8%] left-[6%] text-xs font-bold">
                 STREET POP / VOL.1
               </span>
             </>

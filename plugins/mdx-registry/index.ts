@@ -4,7 +4,9 @@ import { TurbopackRuleConfigItem } from "next/dist/server/config-shared";
 const VIRTUAL_SPECIFIER = "virtual:mdx-registry";
 const STUB_FILE = "mdx-registry.stub.ts";
 
-export function createMdxRegistry(options: { pattern: string | string[] }): (config: NextConfig) => NextConfig {
+export function createMdxRegistry(options: {
+  pattern: string | string[];
+}): (config: NextConfig) => NextConfig {
   const loaderPath = require.resolve("./loader/index.mjs");
   const stubPath = `./plugins/mdx-registry/${STUB_FILE}`;
 
