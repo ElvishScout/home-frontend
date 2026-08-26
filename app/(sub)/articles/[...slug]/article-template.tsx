@@ -54,7 +54,7 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
           title={entry?.title ?? "未命名文章"}
           meta={entry?.lastModified ? `UPDATED ${formatDate(entry.lastModified)}` : undefined}
         />
-        <article ref={articleRef} className="prose">
+        <article ref={articleRef} className="prose [&>h1:first-child]:hidden">
           {children}
         </article>
         <div className="mt-16 border-t-[3px] border-ink pt-6">
@@ -66,7 +66,10 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
               aria-hidden
               className="absolute inset-0 -z-10 bg-acid [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-expo group-hover/link:[clip-path:inset(0_0_0_0)]"
             />
-            <span aria-hidden className="inline-block transition-transform duration-500 ease-expo group-hover/link:-translate-x-1.5">
+            <span
+              aria-hidden
+              className="inline-block transition-transform duration-500 ease-expo group-hover/link:-translate-x-1.5"
+            >
               ←
             </span>
             <span>全部文章 · ALL POSTS</span>
