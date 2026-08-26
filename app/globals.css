@@ -119,6 +119,23 @@
   );
 }
 
+@utility text-stroke-current {
+  -webkit-text-stroke-color: currentColor;
+}
+
+@utility text-fill-* {
+  -webkit-text-fill-color: --value(--color-*);
+  -webkit-text-fill-color: color-mix(
+    in srgb,
+    --value(--color-*) calc(--modifier(number) * 1%),
+    transparent
+  );
+}
+
+@utility text-fill-transparent {
+  -webkit-text-fill-color: transparent;
+}
+
 /* ---------- 页面滚动条 ---------- */
 
 html {
