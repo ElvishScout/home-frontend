@@ -15,7 +15,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ```
 app/
 ├─ layout.tsx                根布局：next/font 字体变量（Anton / Noto Sans SC / Space Mono / Geist）+ globals.css
-├─ globals.css               全站设计 token（配色/字体/流式字号/字距/行距/缓动/keyframes）+ prose 长文覆盖
+├─ globals.css               全站设计 token + prose 长文覆盖
 ├─ (home)/                   首页组 —— 不经由 (sub) 外壳
 │  ├─ page.tsx               / → redirect /home
 │  └─ home/                  首页本体（海报模式）
@@ -138,7 +138,7 @@ STREET POP · 街头波普设计语言。气质锚点：街头的、漫画的、
 4. **全宽条带**：一律水平，全宽贯通，不旋转。
 5. **旋转**：小型元素（贴纸、卡片、标签）可以旋转 ±1.5°~3° 制造手工感，但同一屏内旋转角度不超过两种；全宽条带不在此列。
 
-硬阴影尺度：`6px 6px 0 墨色`。
+硬阴影用 token：`shadow-ink-6`（贴纸/标签）、`shadow-ink-8`（按钮）、`shadow-ink-10`（画框）。
 
 ### 5. 构图与布局
 
@@ -185,7 +185,7 @@ STREET POP · 街头波普设计语言。气质锚点：街头的、漫画的、
 ### 4. 形状
 
 - 图形一律承担内容职能：编号方块、标签、虚线选中框。
-- 硬阴影取 `4px 4px 0`。
+- 硬阴影取 `shadow-ink-4`。
 - 区块分隔用 2–3px 水平实线或留白。
 
 ### 5. 动效
