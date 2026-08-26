@@ -10,6 +10,7 @@ declare module "virtual:mdx-registry" {
     path: string;
     title: string | undefined;
     lastModified: Date | null;
+    frontmatter: Record<string, unknown>;
     headingTree: HeadingTreeNode;
   }
 

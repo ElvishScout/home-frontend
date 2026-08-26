@@ -4,7 +4,9 @@ import { readFileSync } from "node:fs";
 import { dirname, relative as _relative, resolve, sep } from "node:path";
 import { createProcessor } from "@mdx-js/mdx";
 import { glob } from "glob";
+import remarkFrontmatter from "remark-frontmatter";
 import serialize from "serialize-javascript";
+import { parse as parseYaml } from "yaml";
 import { gitDates } from "./git-date.mjs";
 
 // 类型的唯一来源是 plugins/mdx-registry/mdx-registry.d.ts（TS 侧共用）。
@@ -34,25 +36,39 @@ function textOf(node) {
 }
 
 /**
- * Parse headings from an MDX file with remark (the same parser MDX itself uses,
- * so code fences, JSX blocks, and inline markup are all handled correctly) and
- * nest them into a tree. Ids are assigned in document order so the client can
- * re-attach them to the rendered DOM headings by index.
+ * Parse an MDX file with remark (the same parser MDX itself uses, so code
+ * fences, JSX blocks, and inline markup are all handled correctly) and extract:
+ *
+ * - the heading tree: headings nested by level, with ids assigned in document
+ *   order so the client can re-attach them to the rendered DOM headings by
+ *   index;
+ * - the frontmatter: the first `---` YAML block parsed into a plain object
+ *   (remark-frontmatter is registered so the block is a `yaml` node, not
+ *   thematic breaks).
  *
  * @param {string} file  Absolute file path.
- * @returns {HeadingTreeNode} Virtual root with `level: 0`.
+ * @returns {{ headingTree: HeadingTreeNode, frontmatter: Record<string, unknown> }}
  */
-function readHeadingTree(file) {
+function readArticle(file) {
   const content = readFileSync(file, "utf8");
-  const mdast = createProcessor().parse({ value: content, path: file });
+  const mdast = createProcessor().use(remarkFrontmatter).parse({ value: content, path: file });
 
   /** @type {Array<{ id: string, level: number, text: string }>} */
   const items = [];
+  /** @type {Record<string, unknown>} */
+  let frontmatter = {};
 
   /**
    * @param {any} node
    */
   function collect(node) {
+    if (node.type === "yaml" && node.value) {
+      try {
+        frontmatter = /** @type {Record<string, unknown>} */ (parseYaml(node.value) ?? {});
+      } catch (error) {
+        throw new Error(`Invalid frontmatter in ${file}: ${error}`);
+      }
+    }
     if (node.type === "heading") {
       items.push({
         id: `heading-${items.length}`,
@@ -82,7 +98,7 @@ function readHeadingTree(file) {
     stack.push(node);
   }
 
-  return root;
+  return { headingTree: root, frontmatter };
 }
 
 /**
@@ -134,12 +150,16 @@ async function articleRegistryLoader(_source) {
     this.addContextDependency(dirname(absoluteFile));
 
     const filePosix = filePosixList[i];
-    const headingTree = readHeadingTree(absoluteFile);
+    const { headingTree, frontmatter } = readArticle(absoluteFile);
 
     entries[filePosix] = {
       path: filePosix,
-      title: findFirstH1(headingTree.children)?.text,
+      title:
+        typeof frontmatter.title === "string" && frontmatter.title
+          ? frontmatter.title
+          : findFirstH1(headingTree.children)?.text,
       lastModified: dates.get(filePosix) ?? null,
+      frontmatter,
       headingTree,
     };
   }
