@@ -37,10 +37,10 @@ export function About() {
                 {stat.count !== undefined ? (
                   <StatNum
                     count={stat.count}
-                    className={`font-disp text-fluid-11 block leading-none ${stat.color}`}
+                    className={`font-disp text-fluid-5 block leading-none ${stat.color}`}
                   />
                 ) : (
-                  <span className={`font-disp text-fluid-11 block leading-none ${stat.color}`}>
+                  <span className={`font-disp text-fluid-5 block leading-none ${stat.color}`}>
                     {stat.value}
                   </span>
                 )}

@@ -18,26 +18,6 @@
 
   --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
 
-  /* 流式字号：clamp(min, vw, max)，同一 vw 一份，min/max 随编号递增 */
-  --text-fluid-1: clamp(0.7rem, 1.2vw, 0.9rem); /* 印章小字 */
-  --text-fluid-2: clamp(1.1rem, 2vw, 1.5rem); /* 子页面列表标题 */
-  --text-fluid-3: clamp(1.2rem, 2.2vw, 1.7rem); /* 首页列表标题 */
-  --text-fluid-4: clamp(1.2rem, 2.4vw, 1.8rem); /* 浮贴标签 */
-  --text-fluid-5: clamp(1.3rem, 2.6vw, 2rem); /* 贴纸 / 按钮 / 小跑马灯 */
-  --text-fluid-6: clamp(1.4rem, 3vw, 2.2rem); /* 强调短句 / 加载计数 */
-  --text-fluid-7: clamp(1.6rem, 3.4vw, 2.6rem); /* 区块导语 */
-  --text-fluid-8: clamp(1.7rem, 3.6vw, 2.8rem); /* 作品卡标题 */
-  --text-fluid-9: clamp(1.8rem, 4vw, 3.2rem); /* 中跑马灯 */
-  --text-fluid-10: clamp(2rem, 4.6vw, 3.6rem); /* 宣言长句 */
-  --text-fluid-11: clamp(2.2rem, 5vw, 4rem); /* 关键数字 */
-  --text-fluid-12: clamp(2.4rem, 6vw, 4.2rem); /* 子页面标题 */
-  --text-fluid-13: clamp(2.6rem, 7vw, 5.5rem); /* 区块标题 / 大跑马灯 */
-  --text-fluid-14: clamp(3rem, 9vw, 8rem); /* 描边编号 */
-  --text-fluid-15: clamp(3.3rem, 10vw, 8.3rem); /* 主标题描边行 / 加载标题 */
-  --text-fluid-16: clamp(4rem, 12vw, 10rem); /* 主标题 */
-  --text-fluid-17: clamp(4.5rem, 13vw, 12rem); /* 巨幕展示 */
-  --text-fluid-18: clamp(5rem, 16vw, 14rem); /* 背景描边大字 */
-
   /* 超宽字距：mono 标签签名，标准刻度到 widest(0.1em) 为止；数值 = em×100 */
   --tracking-12: 0.12em;
   --tracking-14: 0.14em;
@@ -117,31 +97,26 @@
   }
 }
 
+/* ---------- 流式字号 ---------- */
+
+@utility text-fluid-* {
+  font-size: clamp(
+    calc(--value(number) * 0.5rem),
+    calc(--value(number) * 1vw),
+    calc(--value(number) * 0.75rem)
+  );
+}
+
 /* ---------- 空心描边字（-webkit-text-stroke 收编：颜色与宽度两个维度自由组合；颜色支持 /透明度 修饰符，宽度 = px 直书） ---------- */
 
 @utility text-stroke-* {
+  -webkit-text-stroke-width: calc(--value(number) * 1px);
   -webkit-text-stroke-color: --value(--color-*);
   -webkit-text-stroke-color: color-mix(
     in srgb,
     --value(--color-*) calc(--modifier(number) * 1%),
     transparent
   );
-}
-@utility text-stroke-current {
-  -webkit-text-stroke-color: currentColor;
-}
-
-@utility text-stroke-0 {
-  -webkit-text-stroke-width: 0;
-}
-@utility text-stroke-1.5 {
-  -webkit-text-stroke-width: 1.5px;
-}
-@utility text-stroke-2.5 {
-  -webkit-text-stroke-width: 2.5px;
-}
-@utility text-stroke-3 {
-  -webkit-text-stroke-width: 3px;
 }
 
 /* ---------- 页面滚动条 ---------- */

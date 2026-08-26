@@ -36,7 +36,7 @@ export function Blog() {
 
       <div className="grid grid-cols-12 items-stretch gap-x-10 max-lg:flex max-lg:flex-col max-lg:gap-14">
         <div className="col-span-5 flex flex-col">
-          <Reveal className="text-fluid-7 max-w-xl leading-snug font-black">
+          <Reveal className="text-fluid-3.5 max-w-xl leading-snug font-black">
             好记性不如<em className="bg-acid text-ink px-2 not-italic">烂笔头</em>，
             <br />
             写下来，才算学会。

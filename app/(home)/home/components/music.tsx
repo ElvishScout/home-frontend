@@ -41,7 +41,7 @@ export function Music() {
 
       <div className="grid grid-cols-12 items-stretch gap-x-10 max-lg:flex max-lg:flex-col max-lg:gap-14">
         <div className="order-2 col-span-5 flex flex-col max-lg:order-1">
-          <Reveal className="text-fluid-7 max-w-xl leading-snug font-black">
+          <Reveal className="text-fluid-3.5 max-w-xl leading-snug font-black">
             在代码与旋律之间，
             <br />找<em className="bg-aqua text-ink px-2 not-italic">同一种节奏</em>。
           </Reveal>

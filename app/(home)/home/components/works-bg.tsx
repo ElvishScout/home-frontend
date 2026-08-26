@@ -26,7 +26,7 @@ export function WorksBg() {
     <div
       aria-hidden
       ref={ref}
-      className="font-disp text-fluid-18 text-stroke-ink/14 text-stroke-1.5 pointer-events-none absolute top-[6vh] right-0 left-0 z-0 overflow-hidden leading-none tracking-wide whitespace-nowrap text-transparent"
+      className="font-disp text-fluid-16 text-stroke-ink/14 text-stroke-1.5 pointer-events-none absolute top-[6vh] right-0 left-0 z-0 overflow-hidden leading-none tracking-wide whitespace-nowrap text-transparent"
     >
       OPEN SOURCE ✦ 代码即态度 ✦ OPEN SOURCE
     </div>

@@ -97,7 +97,7 @@ export function Hero() {
           </p>
           <h1 className="leading-92 select-none">
             <div className="overflow-hidden py-1.5">
-              <span className="font-disp text-fluid-16 inline-block font-black tracking-wide will-change-transform">
+              <span className="font-disp text-fluid-12 inline-block font-black tracking-wide will-change-transform">
                 {"ELVISH".split("").map((ch, i) => (
                   <span key={ch} className="inline-block overflow-hidden align-bottom">
                     <span
@@ -115,7 +115,7 @@ export function Hero() {
             <div className="overflow-hidden py-1.5">
               <span
                 ref={enRef}
-                className="font-disp text-fluid-15 text-stroke-ink text-stroke-2.5 ml-[4vw] inline-block text-transparent will-change-transform max-md:ml-[4vw]"
+                className="font-disp text-fluid-10 text-stroke-ink text-stroke-2.5 ml-[4vw] inline-block text-transparent will-change-transform max-md:ml-[4vw]"
               >
                 SCOUT
               </span>
@@ -124,7 +124,7 @@ export function Hero() {
           <div>
             <span
               ref={roleRef}
-              className="border-ink bg-acid text-fluid-5 tracking-14 shadow-ink-6 mt-[4vh] inline-block -rotate-2 border-3 px-6 py-2.5 font-black"
+              className="border-ink bg-acid text-fluid-2.5 tracking-14 shadow-ink-6 mt-[4vh] inline-block -rotate-2 border-3 px-6 py-2.5 font-black"
             >
               大模型训练 × 创意前端
             </span>
@@ -166,7 +166,7 @@ export function Hero() {
         <MarqueeRow
           items={["TRAIN", "CREATE", "PLAY", "模型", "页面", "音符"]}
           rowClassName="relative z-3 overflow-hidden border-y-3 border-ink bg-acid py-3.5 whitespace-nowrap"
-          itemClassName="inline-flex items-center gap-6.5 px-6.5 font-disp text-fluid-5 tracking-wider"
+          itemClassName="inline-flex items-center gap-6.5 px-6.5 font-disp text-fluid-2.5 tracking-wider"
           starClassName="text-2xl"
         />
       </div>

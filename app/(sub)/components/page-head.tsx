@@ -7,7 +7,7 @@ export function PageHead({ tag, title, meta }: { tag: string; title: string; met
       <span className="bg-ink font-spacemono tracking-20 text-acid inline-block px-2.5 py-1 text-xs font-bold">
         {tag}
       </span>
-      <h1 className="font-zh text-fluid-12 mt-5 leading-none font-black tracking-wide">{title}</h1>
+      <h1 className="font-zh text-fluid-6 mt-5 leading-none font-black tracking-wide">{title}</h1>
       {meta ? <p className="font-spacemono tracking-16 mt-4 text-xs opacity-70">{meta}</p> : null}
     </header>
   );
