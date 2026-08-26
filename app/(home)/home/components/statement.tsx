@@ -28,14 +28,14 @@ export function Statement() {
   return (
     <p
       ref={ref}
-      className="max-w-[20em] text-[clamp(1.8rem,4.6vw,3.6rem)] leading-[1.6] font-black tracking-[0.02em]"
+      className="max-w-6xl text-fluid-10 leading-relaxed font-black tracking-wide"
     >
       <W>白天训练</W>
-      <W className="bg-acid px-[0.15em] text-ink box-decoration-clone">模型</W>
+      <W className="bg-acid px-2 text-ink box-decoration-clone">模型</W>
       <W>理解世界，晚上训练自己</W>
-      <W className="bg-aqua px-[0.15em] text-ink">感受</W>
+      <W className="bg-aqua px-2 text-ink">感受</W>
       <W>世界——用代码、用版式、用</W>
-      <W className="bg-scarlet px-[0.15em] text-paper">音符</W>
+      <W className="bg-scarlet px-2 text-paper">音符</W>
       <W>。</W>
     </p>
   );

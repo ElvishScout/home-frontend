@@ -18,6 +18,47 @@
 
   --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
 
+  /* 流式字号：clamp(min, vw, max)，同一 vw 一份，min/max 随编号递增 */
+  --text-fluid-1: clamp(11px, 1.2vw, 14px); /* 印章小字 */
+  --text-fluid-2: clamp(1.1rem, 2vw, 1.5rem); /* 子页面列表标题 */
+  --text-fluid-3: clamp(1.2rem, 2.2vw, 1.7rem); /* 首页列表标题 */
+  --text-fluid-4: clamp(1.2rem, 2.4vw, 1.8rem); /* 浮贴标签 */
+  --text-fluid-5: clamp(1.3rem, 2.6vw, 2rem); /* 贴纸 / 按钮 / 小跑马灯 */
+  --text-fluid-6: clamp(1.4rem, 3vw, 2.2rem); /* 强调短句 / 加载计数 */
+  --text-fluid-7: clamp(1.6rem, 3.4vw, 2.6rem); /* 区块导语 */
+  --text-fluid-8: clamp(1.7rem, 3.6vw, 2.8rem); /* 作品卡标题 */
+  --text-fluid-9: clamp(1.8rem, 4vw, 3.2rem); /* 中跑马灯 */
+  --text-fluid-10: clamp(2rem, 4.6vw, 3.6rem); /* 宣言长句 */
+  --text-fluid-11: clamp(2.2rem, 5vw, 4rem); /* 关键数字 */
+  --text-fluid-12: clamp(2.4rem, 6vw, 4.2rem); /* 子页面标题 */
+  --text-fluid-13: clamp(2.6rem, 7vw, 5.5rem); /* 区块标题 / 大跑马灯 */
+  --text-fluid-14: clamp(3rem, 9vw, 8rem); /* 描边编号 */
+  --text-fluid-15: clamp(3.3rem, 10vw, 8.3rem); /* 主标题描边行 / 加载标题 */
+  --text-fluid-16: clamp(4rem, 12vw, 10rem); /* 主标题 */
+  --text-fluid-17: clamp(4.5rem, 13vw, 12rem); /* 巨幕展示 */
+  --text-fluid-18: clamp(5rem, 16vw, 14rem); /* 背景描边大字 */
+
+  --spacing-stamp: clamp(110px, 13vw, 180px); /* 印章边长 */
+
+  /* 超宽字距：mono 标签签名，标准刻度到 widest(0.1em) 为止；数值 = em×100 */
+  --tracking-12: 0.12em;
+  --tracking-14: 0.14em;
+  --tracking-16: 0.16em;
+  --tracking-18: 0.18em;
+  --tracking-20: 0.2em;
+  --tracking-22: 0.22em;
+  --tracking-24: 0.24em;
+  --tracking-30: 0.3em;
+
+  /* 超小字号：标准最小 xs(12px) 之下 */
+  --text-2xs: 10px; /* 侧轨编号 */
+  --text-3xs: 9px; /* 移动端导航 */
+  --text-4xs: 8px; /* 上标数字 */
+
+  /* 负收紧行距：巨型标题叠排，标准最小是 none(1)；数值 = 倍数×100 */
+  --leading-92: 0.92;
+  --leading-95: 0.95;
+
   --animate-grain: grain 8s steps(10) infinite;
   --animate-spin-slow: spin-slow 6s linear infinite;
   --animate-bob: bob 1.2s cubic-bezier(0.19, 1, 0.22, 1) infinite alternate;

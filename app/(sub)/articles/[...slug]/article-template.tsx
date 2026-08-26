@@ -57,10 +57,10 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
         <article ref={articleRef} className="prose [&>h1:first-child]:hidden">
           {children}
         </article>
-        <div className="mt-16 border-t-[3px] border-ink pt-6">
+        <div className="mt-16 border-t-3 border-ink pt-6">
           <Link
             href="/articles"
-            className="group/link relative isolate inline-flex items-center gap-3 overflow-hidden py-2 font-spacemono text-xs font-bold tracking-[0.16em]"
+            className="group/link relative isolate inline-flex items-center gap-3 overflow-hidden py-2 font-spacemono text-xs font-bold tracking-16"
           >
             <span
               aria-hidden

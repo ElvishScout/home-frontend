@@ -60,7 +60,7 @@ export function ScrollRail() {
         shown ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="flex flex-col justify-between font-spacemono text-[10px] font-bold tracking-[0.08em]">
+      <div className="flex flex-col justify-between font-spacemono text-2xs font-bold tracking-widest">
         {SECTIONS.map((s) => (
           <span
             key={s.id}

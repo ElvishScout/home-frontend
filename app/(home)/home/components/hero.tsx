@@ -9,7 +9,7 @@ function HeroMeta({ className = "", refProp }: { className?: string; refProp?: R
   return (
     <div
       ref={refProp}
-      className={`font-spacemono text-base leading-loose tracking-[0.08em] max-md:text-sm ${className}`}
+      className={`font-spacemono text-base leading-loose tracking-widest max-md:text-sm ${className}`}
     >
       <b className="bg-ink px-1.5 py-px text-acid">DAY</b> 训练大模型
       <br />
@@ -72,14 +72,14 @@ export function Hero() {
         <div className="relative z-2">
           <p
             ref={eyebrowRef}
-            className="mb-[6vh] flex items-center gap-3.5 font-spacemono text-xs font-bold tracking-[0.24em]"
+            className="mb-[6vh] flex items-center gap-3.5 font-spacemono text-xs font-bold tracking-24"
           >
             <span aria-hidden className="h-0.5 w-12 bg-ink" />
             个人主页 / PORTFOLIO — 2026
           </p>
-          <h1 className="leading-[0.92] select-none">
-            <div className="overflow-hidden py-[0.04em]">
-              <span className="inline-block font-disp text-[clamp(4rem,12vw,10rem)] font-black tracking-[0.02em] will-change-transform">
+          <h1 className="leading-92 select-none">
+            <div className="overflow-hidden py-1.5">
+              <span className="inline-block font-disp text-fluid-16 font-black tracking-wide will-change-transform">
                 {"ELVISH".split("").map((ch, i) => (
                   <span key={ch} className="inline-block overflow-hidden align-bottom">
                     <span
@@ -94,10 +94,10 @@ export function Hero() {
                 ))}
               </span>
             </div>
-            <div className="overflow-hidden py-[0.04em]">
+            <div className="overflow-hidden py-1.5">
               <span
                 ref={enRef}
-                className="ml-[4vw] inline-block font-disp text-[clamp(3.3rem,10vw,8.3rem)] tracking-[0.01em] text-transparent [-webkit-text-stroke:2.5px_var(--color-ink)] will-change-transform max-md:ml-[4vw]"
+                className="ml-[4vw] inline-block font-disp text-fluid-15 text-transparent [-webkit-text-stroke:2.5px_var(--color-ink)] will-change-transform max-md:ml-[4vw]"
               >
                 SCOUT
               </span>
@@ -106,7 +106,7 @@ export function Hero() {
           <div>
             <span
               ref={roleRef}
-              className="mt-[4vh] inline-block -rotate-2 border-[3px] border-ink bg-acid px-6 py-2.5 text-[clamp(1rem,2.6vw,1.7rem)] font-black tracking-[0.14em] shadow-[6px_6px_0_0_var(--color-ink)]"
+              className="mt-[4vh] inline-block -rotate-2 border-3 border-ink bg-acid px-6 py-2.5 text-fluid-5 font-black tracking-14 shadow-[6px_6px_0_0_var(--color-ink)]"
             >
               大模型训练 × 创意前端
             </span>
@@ -116,13 +116,13 @@ export function Hero() {
         <div className="absolute top-[20%] right-16 z-3 flex flex-col items-start gap-20 max-md:top-[16%] max-md:right-10">
           <div
             ref={stickerRef}
-            className="relative flex aspect-square w-[clamp(110px,13vw,180px)] rotate-[2.5deg] items-center justify-center border-[3px] border-ink bg-scarlet shadow-[10px_10px_0_0_var(--color-ink)]"
+            className="relative flex aspect-square w-stamp rotate-[2.5deg] items-center justify-center border-3 border-ink bg-scarlet shadow-[10px_10px_0_0_var(--color-ink)]"
           >
             <div
               aria-hidden
-              className="absolute inset-0 -z-10 translate-x-4.5 translate-y-4.5 border-[3px] border-ink"
+              className="absolute inset-0 -z-10 translate-x-4.5 translate-y-4.5 border-3 border-ink"
             />
-            <span className="relative text-center font-spacemono text-[clamp(11px,1.2vw,14px)] leading-normal font-bold text-paper">
+            <span className="relative text-center font-spacemono text-fluid-1 leading-normal font-bold text-paper">
               KEEP
               <br />
               TRAIN-
@@ -137,7 +137,7 @@ export function Hero() {
           <HeroMeta className="md:hidden" />
           <div
             ref={hintRef}
-            className="flex items-center justify-end gap-2.5 font-spacemono text-[11px] font-bold tracking-[0.3em]"
+            className="flex items-center justify-end gap-2.5 font-spacemono text-xs font-bold tracking-30"
           >
             SCROLL <span className="inline-block animate-bob">↓</span>
           </div>
@@ -147,9 +147,9 @@ export function Hero() {
       <div ref={marqueeRef}>
         <MarqueeRow
           items={["TRAIN", "CREATE", "PLAY", "模型", "页面", "音符"]}
-          rowClassName="relative z-3 overflow-hidden border-y-[3px] border-ink bg-acid py-3.5 whitespace-nowrap"
-          itemClassName="inline-flex items-center gap-[0.8em] px-[0.8em] font-disp text-[clamp(1.2rem,2.6vw,2rem)] tracking-[0.06em]"
-          starClassName="text-[0.7em]"
+          rowClassName="relative z-3 overflow-hidden border-y-3 border-ink bg-acid py-3.5 whitespace-nowrap"
+          itemClassName="inline-flex items-center gap-6.5 px-6.5 font-disp text-fluid-5 tracking-wider"
+          starClassName="text-2xl"
         />
       </div>
     </>

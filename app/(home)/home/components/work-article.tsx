@@ -70,8 +70,8 @@ export function WorkArticle({
     >
       <div className={`relative col-span-6 ${even ? "order-2" : ""}`}>
         <span
-          className={`absolute top-[-0.55em] z-3 font-disp text-[clamp(4rem,9vw,8rem)] leading-none text-transparent [-webkit-text-stroke:2.5px_var(--color-ink)] ${
-            even ? "right-[-0.15em]" : "left-[-0.15em]"
+          className={`absolute -top-17.5 z-3 font-disp text-fluid-14 leading-none text-transparent [-webkit-text-stroke:2.5px_var(--color-ink)] ${
+            even ? "-right-5" : "-left-5"
           }`}
         >
           {index}
@@ -83,25 +83,25 @@ export function WorkArticle({
           }`}
         >
           <div
-            className={`absolute inset-0 transition-transform duration-900 ease-expo group-hover:scale-[1.12] group-hover:rotate-1 ${artClass ?? ""}`}
+            className={`absolute inset-0 transition-transform duration-900 ease-expo group-hover:scale-110 group-hover:rotate-1 ${artClass ?? ""}`}
           >
             {art}
           </div>
         </div>
       </div>
       <div className={`relative z-2 col-span-6 ${even ? "order-1 text-right max-lg:order-2 max-lg:text-left" : ""}`}>
-        <h3 className="text-[clamp(1.7rem,3.6vw,2.8rem)] leading-[1.2] font-black tracking-[0.03em]">
-          <span className="mb-[0.3em] block font-disp text-[0.55em] tracking-[0.08em]">{en}</span>
+        <h3 className="text-fluid-8 leading-tight font-black tracking-wide">
+          <span className="mb-2 block font-disp text-2xl tracking-widest">{en}</span>
           {title}
         </h3>
-        <p className={`mt-3.5 max-w-[26em] text-sm leading-loose opacity-75 ${even ? "ml-auto max-lg:ml-0" : ""}`}>
+        <p className={`mt-3.5 max-w-sm text-sm leading-loose opacity-75 ${even ? "ml-auto max-lg:ml-0" : ""}`}>
           {desc}
         </p>
         <ul className={`mt-4.5 flex flex-wrap gap-2.5 ${even ? "justify-end max-lg:justify-start" : ""}`}>
           {tags.map((tag) => (
             <li
               key={tag}
-              className="border-2 border-ink bg-paper px-3 py-1 font-spacemono text-[11px] font-bold tracking-widest transition-colors duration-300 group-hover:bg-ink group-hover:text-acid"
+              className="border-2 border-ink bg-paper px-3 py-1 font-spacemono text-xs font-bold tracking-widest transition-colors duration-300 group-hover:bg-ink group-hover:text-acid"
             >
               {tag}
             </li>
@@ -109,7 +109,7 @@ export function WorkArticle({
         </ul>
         {(() => {
           const linkClass =
-            "group/link relative isolate mt-6.5 inline-flex items-center gap-3 overflow-hidden py-2.5 font-spacemono text-[13px] font-bold tracking-[0.16em]";
+            "group/link relative isolate mt-6.5 inline-flex items-center gap-3 overflow-hidden py-2.5 font-spacemono text-sm font-bold tracking-16";
           const inner = (
             <>
               <span

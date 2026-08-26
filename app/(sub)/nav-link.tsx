@@ -12,7 +12,7 @@ export function NavLink({ href, label }: { href: string; label: string }) {
     <Link
       href={href}
       aria-current={active ? "page" : undefined}
-      className={`font-spacemono text-xs font-bold tracking-[0.14em] transition-colors duration-300 hover:text-acid ${
+      className={`font-spacemono text-xs font-bold tracking-14 transition-colors duration-300 hover:text-acid ${
         active ? "text-acid" : ""
       }`}
     >

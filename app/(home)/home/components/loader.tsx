@@ -60,17 +60,17 @@ export function Loader() {
 
   return (
     <div ref={rootRef} className="fixed inset-0 z-8000 flex items-center justify-center bg-ink">
-      <div ref={pctRef} className="absolute top-6 right-8 font-spacemono text-[clamp(1.2rem,3vw,2rem)] font-bold text-acid">
+      <div ref={pctRef} className="absolute top-6 right-8 font-spacemono text-fluid-6 font-bold text-acid">
         000%
       </div>
       <div className="text-paper">
         {LINES.map((line, i) => (
-          <div key={line} className="overflow-hidden leading-[0.95]">
+          <div key={line} className="overflow-hidden leading-95">
             <span
               ref={(el) => {
                 lineRefs.current[i] = el;
               }}
-              className={`block translate-y-[110%] font-disp text-[clamp(3rem,10vw,8rem)] tracking-[0.02em] ${
+              className={`block translate-y-[110%] font-disp text-fluid-15 tracking-wide ${
                 i === 1 ? "text-acid" : ""
               }`}
             >
@@ -79,7 +79,7 @@ export function Loader() {
           </div>
         ))}
       </div>
-      <div className="absolute bottom-6 left-8 font-spacemono text-xs tracking-[0.2em] text-paper/60">
+      <div className="absolute bottom-6 left-8 font-spacemono text-xs tracking-20 text-paper/60">
         PORTFOLIO — 2026
       </div>
     </div>

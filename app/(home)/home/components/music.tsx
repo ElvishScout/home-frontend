@@ -41,10 +41,10 @@ export function Music() {
 
       <div className="grid grid-cols-12 items-stretch gap-x-10 max-lg:flex max-lg:flex-col max-lg:gap-14">
         <div className="order-2 col-span-5 flex flex-col max-lg:order-1">
-          <Reveal className="max-w-[15em] text-[clamp(1.6rem,3.4vw,2.6rem)] leading-snug font-black">
+          <Reveal className="max-w-xl text-fluid-7 leading-snug font-black">
             在代码与旋律之间，
             <br />
-            找<em className="bg-aqua px-[0.2em] text-ink not-italic">同一种节奏</em>。
+            找<em className="bg-aqua px-2 text-ink not-italic">同一种节奏</em>。
           </Reveal>
           <Reveal className="mt-8 flex items-end gap-3">
             <span aria-hidden className="flex h-9 items-end gap-1">
@@ -55,7 +55,7 @@ export function Music() {
                 />
               ))}
             </span>
-            <span className="font-spacemono text-[12px] leading-loose tracking-[0.14em] opacity-70">
+            <span className="font-spacemono text-xs leading-loose tracking-14 opacity-70">
               LOOPS 12 ✦ DEMOS 3
               <br />
               BPM 76 — 128 · TARGET: ONE FULL TRACK

@@ -31,9 +31,9 @@ export function SecHead({ idx, zh, en, dark = false }: { idx: string; zh: string
       >
         {idx}
       </span>
-      <h2 className="font-zh text-[clamp(2.4rem,7vw,5.5rem)] leading-none font-black tracking-[0.04em]">
+      <h2 className="font-zh text-fluid-13 leading-none font-black tracking-wider">
         {zh}
-        <span className="mt-[0.4em] block font-disp text-[0.42em] tracking-[0.14em] text-transparent [-webkit-text-stroke:1.5px_currentColor]">
+        <span className="mt-4 block font-disp text-4xl tracking-14 text-transparent [-webkit-text-stroke:1.5px_currentColor]">
           {en}
         </span>
       </h2>

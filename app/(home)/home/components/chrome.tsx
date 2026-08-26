@@ -29,9 +29,9 @@ export function Nav() {
           <li key={item.href}>
             <SmoothLink
               href={item.href}
-              className="group relative block py-1 font-spacemono text-xs font-bold tracking-[0.12em] max-md:text-[9px] max-md:tracking-[0.04em]"
+              className="group relative block py-1 font-spacemono text-xs font-bold tracking-12 max-md:text-3xs max-md:tracking-wider"
             >
-              <sup className="mr-0.5 text-[8px] opacity-60 max-md:hidden">{item.sup}</sup>
+              <sup className="mr-0.5 text-4xs opacity-60 max-md:hidden">{item.sup}</sup>
               {item.label}
               <span
                 aria-hidden

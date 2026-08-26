@@ -21,17 +21,17 @@ export function Projects() {
               />
               <div
                 aria-hidden
-                className="absolute bottom-[4%] left-[3%] font-disp text-[clamp(6rem,13vw,11rem)] leading-none text-transparent [-webkit-text-stroke:3px_var(--color-aqua)]"
+                className="absolute bottom-[4%] left-[3%] font-disp text-fluid-17 leading-none text-transparent [-webkit-text-stroke:3px_var(--color-aqua)]"
               >
                 &lt;/&gt;
               </div>
               <span
                 aria-hidden
-                className="absolute top-[34%] left-[12%] -rotate-3 border-[3px] border-ink bg-acid px-4 py-2.5 font-zh text-[clamp(1.1rem,2.4vw,1.8rem)] font-black text-ink shadow-[6px_6px_0_0_var(--color-paper)]"
+                className="absolute top-[34%] left-[12%] -rotate-3 border-3 border-ink bg-acid px-4 py-2.5 font-zh text-fluid-4 font-black text-ink shadow-[6px_6px_0_0_var(--color-paper)]"
               >
                 开源中 · STAR ME
               </span>
-              <span className="absolute top-[8%] left-[6%] font-spacemono text-xs font-bold tracking-[0.3em] text-paper">
+              <span className="absolute top-[8%] left-[6%] font-spacemono text-xs font-bold tracking-30 text-paper">
                 STREET POP / VOL.1
               </span>
             </>

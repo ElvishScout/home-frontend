@@ -41,9 +41,9 @@ export function EntryList({ items, dark = false }: { items: Entry[]; dark?: bool
   const onWipe = dark ? "group-hover:text-ink" : "group-hover:text-paper";
 
   return (
-    <ul ref={ref} className={`relative z-2 border-b-[3px] ${line}`}>
+    <ul ref={ref} className={`relative z-2 border-b-3 ${line}`}>
       {items.map((item) => (
-        <li key={item.num} className={`border-t-[3px] ${line}`}>
+        <li key={item.num} className={`border-t-3 ${line}`}>
           <Link
             href={item.href}
             className="group relative isolate grid grid-cols-[auto_1fr_auto] items-baseline gap-x-7 overflow-hidden px-4 py-5 max-md:gap-x-4 max-md:px-3"
@@ -53,25 +53,25 @@ export function EntryList({ items, dark = false }: { items: Entry[]; dark?: bool
               className={`absolute inset-0 -z-10 ${wipe} [clip-path:inset(0_100%_0_0)] transition-[clip-path] duration-500 ease-expo group-hover:[clip-path:inset(0_0_0_0)]`}
             />
             <span
-              className={`pt-[0.3em] font-spacemono text-xs font-bold tracking-[0.18em] opacity-60 transition-colors duration-300 ${onWipe}`}
+              className={`pt-1 font-spacemono text-xs font-bold tracking-18 opacity-60 transition-colors duration-300 ${onWipe}`}
             >
               {item.num}
             </span>
             <span className="min-w-0">
               <span
                 title={item.title}
-                className={`block truncate text-[clamp(1.15rem,2.2vw,1.7rem)] leading-snug font-black tracking-[0.02em] transition-colors duration-300 ${onWipe}`}
+                className={`block truncate text-fluid-3 leading-snug font-black tracking-wide transition-colors duration-300 ${onWipe}`}
               >
                 {item.title}
               </span>
               <span
-                className={`mt-1 block font-spacemono text-[11px] font-bold tracking-[0.2em] opacity-60 transition-colors duration-300 ${onWipe}`}
+                className={`mt-1 block font-spacemono text-xs font-bold tracking-20 opacity-60 transition-colors duration-300 ${onWipe}`}
               >
                 {item.note}
               </span>
             </span>
             <span
-              className={`flex items-baseline gap-4 font-spacemono text-xs font-bold tracking-[0.14em] transition-colors duration-300 max-md:hidden ${onWipe}`}
+              className={`flex items-baseline gap-4 font-spacemono text-xs font-bold tracking-14 transition-colors duration-300 max-md:hidden ${onWipe}`}
             >
               {item.meta}
               <span
@@ -99,7 +99,7 @@ export function MoreLink({ href, label, dark = false }: { href: string; label: s
   return (
     <Link
       href={href}
-      className={`group/link relative isolate inline-flex items-center gap-3 overflow-hidden border-[3px] border-current px-6 py-3 font-spacemono text-[13px] font-bold tracking-[0.16em] transition-all duration-500 ease-expo hover:translate-x-1 hover:translate-y-1 ${shadow}`}
+      className={`group/link relative isolate inline-flex items-center gap-3 overflow-hidden border-3 border-current px-6 py-3 font-spacemono text-sm font-bold tracking-16 transition-all duration-500 ease-expo hover:translate-x-1 hover:translate-y-1 ${shadow}`}
     >
       <span
         aria-hidden

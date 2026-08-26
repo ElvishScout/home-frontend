@@ -33,12 +33,12 @@ export function Blog() {
 
       <div className="grid grid-cols-12 items-stretch gap-x-10 max-lg:flex max-lg:flex-col max-lg:gap-14">
         <div className="col-span-5 flex flex-col">
-          <Reveal className="max-w-[15em] text-[clamp(1.6rem,3.4vw,2.6rem)] leading-snug font-black">
-            好记性不如<em className="bg-acid px-[0.2em] text-ink not-italic">烂笔头</em>，
+          <Reveal className="max-w-xl text-fluid-7 leading-snug font-black">
+            好记性不如<em className="bg-acid px-2 text-ink not-italic">烂笔头</em>，
             <br />
             写下来，才算学会。
           </Reveal>
-          <Reveal className="mt-8 font-spacemono text-[12px] leading-loose tracking-[0.14em] opacity-70">
+          <Reveal className="mt-8 font-spacemono text-xs leading-loose tracking-14 opacity-70">
             POSTS 23 ✦ WORDS 86K
             <br />
             UPDATED 2026.08

@@ -15,7 +15,7 @@ function TocItem({ node, activeId }: { node: HeadingTreeNode; activeId: string |
       <a
         href={`#${node.id}`}
         aria-current={active ? "location" : undefined}
-        className={`inline-block px-1.5 py-0.5 text-[13px] leading-snug transition-colors duration-300 ${
+        className={`inline-block px-1.5 py-0.5 text-sm leading-snug transition-colors duration-300 ${
           active ? "bg-acid font-bold text-ink" : "text-ink/60 hover:text-ink"
         }`}
       >
@@ -39,7 +39,7 @@ export default function TableOfContents({ tree, activeId }: TableOfContentsProps
 
   return (
     <nav aria-label="目录">
-      <p className="mb-4 font-spacemono text-xs font-bold tracking-[0.22em] opacity-60">INDEX</p>
+      <p className="mb-4 font-spacemono text-xs font-bold tracking-22 opacity-60">INDEX</p>
       <ul className="space-y-1.5">
         {tree.children.map((node) => (
           <TocItem key={node.id} node={node} activeId={activeId} />

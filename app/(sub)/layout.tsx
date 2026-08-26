@@ -35,10 +35,10 @@ export default function SubLayout({ children }: { children: ReactNode }) {
       <footer className="bg-ink text-paper">
         <div className="mx-auto flex w-full max-w-4xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-6 py-5">
           <span className="font-disp text-sm tracking-wider">ELVISH&nbsp;SCOUT</span>
-          <span className="font-spacemono text-[11px] tracking-[0.18em] opacity-60">CODE ✦ MUSIC ✦ ANIME</span>
+          <span className="font-spacemono text-xs tracking-18 opacity-60">CODE ✦ MUSIC ✦ ANIME</span>
           <a
             href="mailto:elvishscoutustc@gmail.com"
-            className="font-spacemono text-[11px] tracking-[0.14em] transition-colors duration-300 hover:text-acid"
+            className="font-spacemono text-xs tracking-14 transition-colors duration-300 hover:text-acid"
           >
             elvishscoutustc@gmail.com
           </a>

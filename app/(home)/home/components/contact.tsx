@@ -59,13 +59,13 @@ export function Contact() {
     >
       <span
         ref={eyebrowRef}
-        className="mb-[4vh] inline-block -rotate-2 bg-scarlet px-4.5 py-1.5 font-spacemono text-[13px] font-bold tracking-[0.3em] text-paper"
+        className="mb-[4vh] inline-block -rotate-2 bg-scarlet px-4.5 py-1.5 font-spacemono text-sm font-bold tracking-30 text-paper"
       >
         06 / CONTACT — 聊模型、页面，还是新番？
       </span>
       <h2
         ref={bigRef}
-        className="group font-disp text-[clamp(3.4rem,13vw,12rem)] leading-[0.95] tracking-[0.01em] select-none"
+        className="group font-disp text-fluid-17 leading-95 select-none"
       >
         <span ref={l1Ref} className="block text-ink">
           LET&apos;S
@@ -79,7 +79,7 @@ export function Contact() {
       </h2>
       <a
         href="mailto:elvishscoutustc@gmail.com"
-        className="group/mail relative isolate mt-[6vh] inline-block overflow-hidden border-[3px] border-ink bg-paper px-10 py-4 font-spacemono text-[clamp(1rem,2.6vw,1.6rem)] font-bold tracking-[0.06em] shadow-[8px_8px_0_0_var(--color-ink)] transition-all duration-500 ease-expo hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_0_var(--color-ink)]"
+        className="group/mail relative isolate mt-[6vh] inline-block overflow-hidden border-3 border-ink bg-paper px-10 py-4 font-spacemono text-fluid-5 font-bold tracking-wider shadow-[8px_8px_0_0_var(--color-ink)] transition-all duration-500 ease-expo hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_0_var(--color-ink)]"
       >
         <span
           aria-hidden
@@ -94,7 +94,7 @@ export function Contact() {
           <a
             key={social}
             href="#"
-            className="border-2 border-ink px-5.5 py-3 font-spacemono text-xs font-bold tracking-[0.14em] transition-colors duration-300 ease-expo hover:bg-ink hover:text-aqua"
+            className="border-2 border-ink px-5.5 py-3 font-spacemono text-xs font-bold tracking-14 transition-colors duration-300 ease-expo hover:bg-ink hover:text-aqua"
           >
             {social}
           </a>
