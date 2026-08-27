@@ -36,36 +36,38 @@ const EQ_BARS = [
 
 export function Music() {
   return (
-    <section id="music" className="relative px-12 py-[16vh] max-md:px-6 max-md:py-[12vh]">
-      <SecHead idx="04" zh="音乐" en="MUSIC WORKS" />
+    <section id="music" className="px-12 py-[16vh] max-md:px-6 max-md:py-[12vh]">
+      <div className="relative mx-auto max-w-7xl">
+        <SecHead idx="04" zh="音乐" en="MUSIC WORKS" />
 
-      <div className="grid grid-cols-12 items-stretch gap-x-10 max-lg:flex max-lg:flex-col max-lg:gap-14">
-        <div className="order-2 col-span-5 flex flex-col max-lg:order-1">
-          <Reveal className="text-fluid-3.5 max-w-xl leading-snug font-black">
-            在代码与旋律之间，
-            <br />找<em className="bg-aqua text-ink px-2 not-italic">同一种节奏</em>。
-          </Reveal>
-          <Reveal className="mt-8 flex items-end gap-3">
-            <span aria-hidden className="flex h-9 items-end gap-1">
-              {EQ_BARS.map((bar, i) => (
-                <i
-                  key={i}
-                  className={`animate-eq w-2 origin-bottom motion-reduce:animate-none ${bar.h} ${bar.bg} ${bar.delay}`}
-                />
-              ))}
-            </span>
-            <span className="font-spacemono tracking-14 text-xs leading-loose opacity-70">
-              LOOPS 12 ✦ DEMOS 3
-              <br />
-              BPM 76 — 128 · TARGET: ONE FULL TRACK
-            </span>
-          </Reveal>
-          <Reveal className="mt-auto pt-4">
-            <MoreLink href="/music" label="查看更多 · ALL TRACKS" />
-          </Reveal>
-        </div>
-        <div className="order-1 col-span-7 max-lg:order-2">
-          <EntryList items={TRACKS} />
+        <div className="grid grid-cols-12 items-stretch gap-x-12 max-lg:flex max-lg:flex-col max-lg:gap-14">
+          <div className="order-2 col-span-5 flex flex-col max-lg:order-1">
+            <Reveal className="text-fluid-3.5 max-w-xl leading-snug font-black">
+              在代码与旋律之间，
+              <br />找<em className="bg-aqua text-ink px-2 not-italic">同一种节奏</em>。
+            </Reveal>
+            <Reveal className="mt-8 flex items-end gap-3">
+              <span aria-hidden className="flex h-9 items-end gap-1">
+                {EQ_BARS.map((bar, i) => (
+                  <i
+                    key={i}
+                    className={`animate-eq w-2 origin-bottom motion-reduce:animate-none ${bar.h} ${bar.bg} ${bar.delay}`}
+                  />
+                ))}
+              </span>
+              <span className="font-spacemono tracking-14 text-xs leading-loose opacity-70">
+                LOOPS 12 ✦ DEMOS 3
+                <br />
+                BPM 76 — 128 · TARGET: ONE FULL TRACK
+              </span>
+            </Reveal>
+            <Reveal className="mt-auto pt-8">
+              <MoreLink href="/music" label="查看更多 · ALL TRACKS" />
+            </Reveal>
+          </div>
+          <div className="order-1 col-span-7 max-lg:order-2">
+            <EntryList items={TRACKS} />
+          </div>
         </div>
       </div>
     </section>

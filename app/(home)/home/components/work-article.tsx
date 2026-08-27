@@ -66,7 +66,7 @@ export function WorkArticle({
   return (
     <article
       ref={rootRef}
-      className="group grid grid-cols-12 items-center gap-x-6 max-lg:flex max-lg:flex-col max-lg:items-stretch max-lg:gap-8"
+      className="group grid grid-cols-12 items-center gap-x-24 max-lg:flex max-lg:flex-col max-lg:items-stretch max-lg:gap-8"
     >
       <div className={`relative col-span-6 ${even ? "order-2" : ""}`}>
         <span
@@ -90,7 +90,7 @@ export function WorkArticle({
         </div>
       </div>
       <div
-        className={`relative z-2 col-span-6 ${even ? "order-1 text-right max-lg:order-2 max-lg:text-left" : ""}`}
+        className={`relative z-2 col-span-6 max-lg:pt-12 ${even ? "order-1 text-right max-lg:order-2 max-lg:text-left" : ""}`}
       >
         <h3 className="text-fluid-3.5 leading-tight font-black tracking-wide">
           <span className="font-disp mb-2 block text-2xl tracking-widest">{en}</span>

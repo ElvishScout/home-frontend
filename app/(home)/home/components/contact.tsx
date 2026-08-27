@@ -76,7 +76,7 @@ export function Contact() {
       </h2>
       <a
         href="mailto:elvishscoutustc@gmail.com"
-        className="group/mail border-ink bg-paper font-spacemono text-fluid-2.5 ease-expo shadow-ink-8 hover:shadow-ink-2 relative isolate mt-[6vh] inline-block overflow-hidden border-3 px-10 py-4 font-bold tracking-wider transition-all duration-500 hover:translate-x-1 hover:translate-y-1"
+        className="group/mail border-ink bg-paper font-spacemono text-fluid-2 ease-expo shadow-ink-8 hover:shadow-ink-2 relative isolate mt-[6vh] inline-block overflow-hidden border-3 px-8 py-3 font-bold tracking-wider transition-all duration-500 hover:translate-x-1 hover:translate-y-1"
       >
         <span
           aria-hidden

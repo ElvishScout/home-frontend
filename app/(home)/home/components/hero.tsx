@@ -15,7 +15,7 @@ function HeroMeta({
   return (
     <div
       ref={refProp}
-      className={`font-spacemono text-base leading-loose tracking-widest max-md:text-sm ${className}`}
+      className={`font-spacemono text-lg leading-loose tracking-widest max-md:text-base ${className}`}
     >
       <b className="bg-ink text-acid px-1.5 py-px">DAY</b> 训练大模型
       <br />
@@ -83,81 +83,78 @@ export function Hero() {
 
   return (
     <>
-      <header
-        id="top"
-        className="bg-paper relative flex min-h-screen flex-col justify-center overflow-hidden px-12 pt-28 pb-24 max-md:px-6 max-md:pt-25 max-md:pb-22.5"
-      >
-        <div className="relative z-2">
-          <p
-            ref={eyebrowRef}
-            className="font-spacemono tracking-24 mb-[6vh] flex items-center gap-3.5 text-xs font-bold"
-          >
-            <span aria-hidden className="bg-ink h-0.5 w-12" />
-            个人主页 / PORTFOLIO — 2026
-          </p>
-          <h1 className="leading-92 select-none">
-            <div className="overflow-hidden py-1.5">
-              <span className="font-disp text-fluid-12 inline-block font-black tracking-wide will-change-transform">
-                {"ELVISH".split("").map((ch, i) => (
-                  <span key={ch} className="inline-block overflow-hidden align-bottom">
-                    <span
-                      ref={(el) => {
-                        charRefs.current[i] = el;
-                      }}
-                      className="inline-block"
-                    >
-                      {ch}
+      <header id="top" className="bg-paper overflow-hidden px-12 max-md:px-6">
+        <div className="mx-auto flex min-h-screen max-w-7xl flex-col justify-center pt-28 pb-24 max-md:pt-25 max-md:pb-22.5">
+          <div className="relative z-2">
+            <p
+              ref={eyebrowRef}
+              className="font-spacemono tracking-24 mb-[6vh] flex items-center gap-3.5 text-xs font-bold"
+            >
+              <span aria-hidden className="bg-ink h-0.5 w-12" />
+              个人主页 / PORTFOLIO — 2026
+            </p>
+          </div>
+          <div className="relative my-auto">
+            <h1 className="leading-92 select-none">
+              <div className="overflow-hidden py-1.5">
+                <span className="font-disp text-fluid-12 inline-block font-black tracking-wide will-change-transform">
+                  {"ELVISH".split("").map((ch, i) => (
+                    <span key={ch} className="inline-block overflow-hidden align-bottom">
+                      <span
+                        ref={(el) => {
+                          charRefs.current[i] = el;
+                        }}
+                        className="inline-block"
+                      >
+                        {ch}
+                      </span>
                     </span>
-                  </span>
-                ))}
-              </span>
-            </div>
-            <div className="overflow-hidden py-1.5">
-              <span
-                ref={enRef}
-                className="font-disp text-fluid-10 text-stroke-ink text-stroke-2.5 ml-[4vw] inline-block text-transparent will-change-transform max-md:ml-[4vw]"
-              >
-                SCOUT
-              </span>
-            </div>
-          </h1>
-          <div>
+                  ))}
+                </span>
+              </div>
+              <div className="overflow-hidden py-1.5">
+                <span
+                  ref={enRef}
+                  className="font-disp text-fluid-10 text-stroke-ink text-stroke-2.5 ml-[4vw] inline-block text-transparent will-change-transform max-md:ml-[4vw]"
+                >
+                  SCOUT
+                </span>
+              </div>
+            </h1>
             <span
               ref={roleRef}
               className="border-ink bg-acid text-fluid-2.5 tracking-14 shadow-ink-6 mt-[4vh] inline-block -rotate-2 border-3 px-6 py-2.5 font-black"
             >
               大模型训练 × 创意前端
             </span>
+            <div className="absolute top-0 right-4 z-3 flex flex-col items-start gap-28 max-md:top-[16%]">
+              <div
+                ref={stickerRef}
+                className="border-ink bg-scarlet shadow-ink-10 relative flex aspect-square w-[clamp(8rem,16vw,12rem)] rotate-[2.5deg] items-center justify-center border-3"
+              >
+                <div
+                  aria-hidden
+                  className="border-ink absolute inset-0 -z-10 translate-x-4.5 translate-y-4.5 border-3"
+                />
+                <span className="font-spacemono text-fluid-1 text-paper relative text-center leading-normal font-bold">
+                  KEEP
+                  <br />
+                  TRAIN-
+                  <br />
+                  ING
+                </span>
+              </div>
+              <HeroMeta refProp={metaRef} className="max-md:hidden" />
+            </div>
           </div>
-        </div>
-
-        <div className="absolute top-[20%] right-16 z-3 flex flex-col items-start gap-20 max-md:top-[16%] max-md:right-10">
-          <div
-            ref={stickerRef}
-            className="border-ink bg-scarlet shadow-ink-10 relative flex aspect-square w-[clamp(7rem,14vw,10.5rem)] rotate-[2.5deg] items-center justify-center border-3"
-          >
-            <div
-              aria-hidden
-              className="border-ink absolute inset-0 -z-10 translate-x-4.5 translate-y-4.5 border-3"
-            />
-            <span className="font-spacemono text-fluid-1 text-paper relative text-center leading-normal font-bold">
-              KEEP
-              <br />
-              TRAIN-
-              <br />
-              ING
-            </span>
-          </div>
-          <HeroMeta refProp={metaRef} className="max-md:hidden" />
-        </div>
-
-        <div className="relative z-2 mt-auto flex flex-col justify-between gap-12 pt-[6vh] md:justify-end">
-          <HeroMeta className="md:hidden" />
           <div
             ref={hintRef}
-            className="font-spacemono tracking-30 flex items-center justify-end gap-2.5 text-xs font-bold"
+            className="relative z-2 flex flex-col justify-between gap-16 pt-[6vh] md:justify-end"
           >
-            SCROLL <span className="animate-bob inline-block">↓</span>
+            <HeroMeta className="md:hidden" />
+            <div className="font-spacemono tracking-30 flex items-center justify-end gap-2.5 text-xs font-bold">
+              SCROLL <span className="animate-bob inline-block">↓</span>
+            </div>
           </div>
         </div>
       </header>

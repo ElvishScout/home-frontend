@@ -33,7 +33,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "个人主页",
+  title: "ELVISH SCOUT",
   description: "",
 };
 

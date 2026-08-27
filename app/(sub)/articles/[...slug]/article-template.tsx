@@ -45,7 +45,7 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
 
   return (
     <div className="flex gap-12">
-      <aside className="hidden w-52 shrink-0 lg:block">
+      <aside className="w-52 shrink-0 max-lg:hidden">
         <div className="sticky top-10 max-h-[calc(100vh-5rem)] overflow-y-auto pr-2">
           {entry?.headingTree ? (
             <TableOfContents tree={entry.headingTree} activeId={activeId} />

@@ -12,44 +12,43 @@ const STATS: { count?: number; value?: string; color: string; label: string }[] 
 
 export function About() {
   return (
-    <section
-      id="about"
-      className="bg-ink text-paper relative px-12 py-[16vh] max-md:px-6 max-md:py-[12vh]"
-    >
-      <SecHead idx="01" zh="关于我" en="ABOUT ME" dark />
+    <section id="about" className="bg-ink text-paper px-12 py-[16vh] max-md:px-6 max-md:py-[12vh]">
+      <div className="relative mx-auto max-w-7xl">
+        <SecHead idx="01" zh="关于我" en="ABOUT ME" dark />
 
-      <Statement />
+        <Statement />
 
-      <div className="mt-[10vh] grid grid-cols-[1.2fr_0.8fr] items-start gap-15 max-lg:grid-cols-1 max-lg:gap-10">
-        <Reveal className="max-w-xl text-base leading-loose opacity-85">
-          <p>
-            我是一名程序员，主业是训练大模型——在数据和算力之间追求稳定与效率。但这个主页不走那条路。没系统学过设计，就把它当成一次公开练习：先把版式推到极限，再亲手用代码一比一还原。
-            <strong className="text-acid">写得动模型，也写得动页面。</strong>
-          </p>
-          <p className="mt-5">
-            业余时间在学音乐，乐理、和声、编曲，目标很朴素：写出一首自己愿意单曲循环的曲子。剩下的余量，留给当季新番。
-          </p>
-        </Reveal>
-        <div className="bg-paper grid grid-cols-2 gap-0.75 p-0.75">
-          {STATS.map((stat) => (
-            <div key={stat.label} className="overflow-hidden">
-              <Reveal className="bg-ink relative h-full px-5.5 py-6.5">
-                {stat.count !== undefined ? (
-                  <StatNum
-                    count={stat.count}
-                    className={`font-disp text-fluid-5 block leading-none ${stat.color}`}
-                  />
-                ) : (
-                  <span className={`font-disp text-fluid-5 block leading-none ${stat.color}`}>
-                    {stat.value}
+        <div className="mt-[10vh] grid grid-cols-[1.2fr_0.8fr] items-start gap-15 max-lg:grid-cols-1 max-lg:gap-10">
+          <Reveal className="max-w-xl text-base leading-loose opacity-85">
+            <p>
+              我是一名程序员，主业是训练大模型——在数据和算力之间追求稳定与效率。但这个主页不走那条路。没系统学过设计，就把它当成一次公开练习：先把版式推到极限，再亲手用代码一比一还原。
+              <strong className="text-acid">写得动模型，也写得动页面。</strong>
+            </p>
+            <p className="mt-5">
+              业余时间在学音乐，乐理、和声、编曲，目标很朴素：写出一首自己愿意单曲循环的曲子。剩下的余量，留给当季新番。
+            </p>
+          </Reveal>
+          <div className="bg-paper grid grid-cols-2 gap-0.75 p-0.75">
+            {STATS.map((stat) => (
+              <div key={stat.label} className="overflow-hidden">
+                <Reveal className="bg-ink relative h-full px-5.5 py-6.5">
+                  {stat.count !== undefined ? (
+                    <StatNum
+                      count={stat.count}
+                      className={`font-disp text-fluid-5 block leading-none ${stat.color}`}
+                    />
+                  ) : (
+                    <span className={`font-disp text-fluid-5 block leading-none ${stat.color}`}>
+                      {stat.value}
+                    </span>
+                  )}
+                  <span className="font-spacemono tracking-18 mt-2.5 block text-xs opacity-70">
+                    {stat.label}
                   </span>
-                )}
-                <span className="font-spacemono tracking-18 mt-2.5 block text-xs opacity-70">
-                  {stat.label}
-                </span>
-              </Reveal>
-            </div>
-          ))}
+                </Reveal>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
