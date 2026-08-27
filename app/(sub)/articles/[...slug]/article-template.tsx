@@ -53,7 +53,7 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
         </div>
       </aside>
       <div className="min-w-0 grow">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-3xl">
           <PageHead
             id={entry?.headingTree.children[0]?.id}
             tag="ARTICLE"
