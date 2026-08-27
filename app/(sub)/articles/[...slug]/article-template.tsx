@@ -53,31 +53,33 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
         </div>
       </aside>
       <div className="min-w-0 grow">
-        <PageHead
-          tag="ARTICLE"
-          title={entry?.title ?? "未命名文章"}
-          meta={entry?.lastModified ? `UPDATED ${formatDate(entry.lastModified)}` : undefined}
-        />
-        <article ref={articleRef} className="prose [&>h1:first-child]:hidden">
-          {children}
-        </article>
-        <div className="border-ink mt-16 border-t-3 pt-6">
-          <Link
-            href="/articles"
-            className="group/link font-spacemono tracking-16 relative isolate inline-flex items-center gap-3 overflow-hidden py-2 text-xs font-bold"
-          >
-            <span
-              aria-hidden
-              className="bg-acid ease-expo absolute inset-0 -z-10 transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/link:[clip-path:inset(0_0_0_0)]"
-            />
-            <span
-              aria-hidden
-              className="ease-expo inline-block transition-transform duration-500 group-hover/link:-translate-x-1.5"
+        <div className="mx-auto max-w-4xl">
+          <PageHead
+            tag="ARTICLE"
+            title={entry?.title ?? "未命名文章"}
+            meta={entry?.lastModified ? `UPDATED ${formatDate(entry.lastModified)}` : undefined}
+          />
+          <article ref={articleRef} className="prose max-w-full! [&>h1:first-child]:hidden">
+            {children}
+          </article>
+          <div className="border-ink mt-16 border-t-3 pt-6">
+            <Link
+              href="/articles"
+              className="group/link font-spacemono tracking-16 relative isolate inline-flex items-center gap-3 overflow-hidden py-2 text-xs font-bold"
             >
-              ←
-            </span>
-            <span>全部文章 · ALL POSTS</span>
-          </Link>
+              <span
+                aria-hidden
+                className="bg-acid ease-expo absolute inset-0 -z-10 transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/link:[clip-path:inset(0_0_0_0)]"
+              />
+              <span
+                aria-hidden
+                className="ease-expo inline-block transition-transform duration-500 group-hover/link:-translate-x-1.5"
+              >
+                ←
+              </span>
+              <span>全部文章 · ALL POSTS</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ export default function SubLayout({ children }: { children: ReactNode }) {
   return (
     <div className="bg-paper font-zh text-ink selection:bg-acid selection:text-ink flex min-h-svh flex-col">
       <header className="bg-ink text-paper">
-        <div className="mx-auto flex w-full max-w-4xl items-center justify-between px-6 py-4">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
           <Link href="/home" className="font-disp flex items-center gap-2 text-lg tracking-wider">
             <span aria-hidden className="animate-spin-slow inline-block text-base">
               ✦
@@ -24,10 +24,10 @@ export default function SubLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-4xl flex-1 px-6 py-16 max-md:py-10">{children}</main>
+      <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-16 max-md:py-10">{children}</main>
 
       <footer className="bg-ink text-paper">
-        <div className="mx-auto flex w-full max-w-4xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-6 py-5">
+        <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-6 py-5">
           <span className="font-disp text-sm tracking-wider">ELVISH&nbsp;SCOUT</span>
           <span className="font-spacemono tracking-18 text-xs opacity-60">
             CODE ✦ MUSIC ✦ ANIME
