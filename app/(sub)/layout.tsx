@@ -9,12 +9,6 @@ import { NavLink } from "./nav-link";
 export default function SubLayout({ children }: { children: ReactNode }) {
   return (
     <div className="bg-paper font-zh text-ink selection:bg-acid selection:text-ink flex min-h-svh flex-col">
-      {/* 全局材质签名：动态噪点 */}
-      <div
-        aria-hidden
-        className="animate-grain pointer-events-none fixed -inset-1/2 z-9000 h-[200%] w-[200%] bg-[url(/grain.svg)] opacity-5"
-      />
-
       <header className="bg-ink text-paper">
         <div className="mx-auto flex w-full max-w-4xl items-center justify-between px-6 py-4">
           <Link href="/home" className="font-disp flex items-center gap-2 text-lg tracking-wider">

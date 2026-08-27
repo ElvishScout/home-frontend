@@ -2,6 +2,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Anton, Geist, Geist_Mono, Noto_Sans_SC, Space_Mono } from "next/font/google";
+import { Grain } from "./components/grain";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,7 +43,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="zh-CN"
       className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} ${notoSansSC.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <Grain />
+        {children}
+      </body>
     </html>
   );
 }

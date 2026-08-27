@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SmoothScrollProvider, IntroProvider } from "./components/providers";
-import { Grain, Nav } from "./components/chrome";
+import { Nav } from "./components/nav";
 import { Loader } from "./components/loader";
 import { ScrollRail } from "./components/scroll-rail";
 import { Hero } from "./components/hero";
@@ -21,7 +21,6 @@ export default function HomePage() {
     <div className="bg-paper font-zh text-ink selection:bg-acid selection:text-ink overflow-x-clip">
       <SmoothScrollProvider>
         <IntroProvider>
-          <Grain />
           <Loader />
           <Nav />
           <ScrollRail />
