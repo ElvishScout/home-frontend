@@ -35,7 +35,7 @@ export function MdxWrapper({ children }: { children: ReactNode }) {
         node.replaceWith(diagram);
       });
     });
-  }, [articleRef.current]);
+  }, []);
 
   return <article ref={articleRef}>{children}</article>;
 }
