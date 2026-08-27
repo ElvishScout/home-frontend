@@ -214,6 +214,9 @@ html {
   border-top-width: 3px;
 }
 
-.prose .diagram svg {
-  margin: 0 auto;
+.prose .diagram {
+  padding: 1.5rem 1.5rem;
+  border: 3px solid var(--color-ink);
+  box-shadow: var(--shadow-ink-4);
+  font-size: 0.875rem;
 }

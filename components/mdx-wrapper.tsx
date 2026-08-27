@@ -30,15 +30,26 @@ export function MdxWrapper({ children }: { children: ReactNode }) {
         .then((rendered) => {
           if (cancelled) return;
 
-          const diagram = document.createElement("p");
+          const paragraph = document.createElement("p");
+
+          const diagram = document.createElement("div");
           diagram.classList.add("diagram");
-          diagram.innerHTML = rendered.svg;
 
-          const svg = diagram.firstChild as SVGSVGElement;
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = rendered.svg;
+
+          const svg = wrapper.firstChild as SVGSVGElement;
           const rect = svg.viewBox.baseVal;
-          svg.style.maxWidth = `calc(${rect.width / 16} * 1em)`;
+          svg.style.maxWidth = "";
 
-          node.replaceWith(diagram);
+          wrapper.style.margin = "0 auto";
+          wrapper.style.width = `calc(${rect.width / 16} * 1em)`;
+          wrapper.style.maxWidth = "100%";
+
+          diagram.appendChild(wrapper);
+          paragraph.appendChild(diagram);
+
+          node.replaceWith(paragraph);
         })
         .catch((error: unknown) => {
           node.classList.add("diagram-error");
