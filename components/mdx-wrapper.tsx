@@ -18,23 +18,37 @@ export function MdxWrapper({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!articleRef.current) return;
 
+    let cancelled = false;
+
     const nodes = articleRef.current.querySelectorAll<HTMLPreElement>(
       "pre:has(code.language-mermaid)",
     );
 
     nodes.forEach((node) => {
-      mermaid.render(generateDiagramId(), node.textContent).then((rendered) => {
-        const diagram = document.createElement("p");
-        diagram.classList.add("diagram");
-        diagram.innerHTML = rendered.svg;
+      mermaid
+        .render(generateDiagramId(), node.textContent)
+        .then((rendered) => {
+          if (cancelled) return;
 
-        const svg = diagram.firstChild as SVGSVGElement;
-        const rect = svg.viewBox.baseVal;
-        svg.style.maxWidth = `calc(${rect.width / 16} * 1em)`;
+          const diagram = document.createElement("p");
+          diagram.classList.add("diagram");
+          diagram.innerHTML = rendered.svg;
 
-        node.replaceWith(diagram);
-      });
+          const svg = diagram.firstChild as SVGSVGElement;
+          const rect = svg.viewBox.baseVal;
+          svg.style.maxWidth = `calc(${rect.width / 16} * 1em)`;
+
+          node.replaceWith(diagram);
+        })
+        .catch((error: unknown) => {
+          node.classList.add("diagram-error");
+          console.error(error);
+        });
     });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return <article ref={articleRef}>{children}</article>;
