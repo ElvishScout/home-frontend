@@ -9,7 +9,7 @@ const plugins = [
     extension: /\.(md|mdx)$/,
     options: {
       rehypePlugins: [require.resolve("./plugins/rehype-heading-ids.mjs")],
-      remarkPlugins: [require.resolve("remark-frontmatter")],
+      remarkPlugins: [require.resolve("remark-frontmatter"), require.resolve("remark-gfm")],
     },
   }),
   createMdxRegistry({ pattern: ["./articles/**/*.mdx"] }),

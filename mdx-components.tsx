@@ -1,7 +1,8 @@
 import type { MDXComponents } from "mdx/types";
-
-const components: MDXComponents = {};
+import { MdxWrapper } from "./components/mdx-wrapper";
 
 export function useMDXComponents(): MDXComponents {
-  return components;
+  return {
+    wrapper: MdxWrapper,
+  };
 }

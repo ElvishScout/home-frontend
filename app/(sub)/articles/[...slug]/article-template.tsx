@@ -13,15 +13,15 @@ interface ArticleTemplateProps {
 }
 
 export default function ArticleTemplate({ children, entry }: ArticleTemplateProps) {
-  const articleRef = useRef<HTMLElement>(null);
+  const mainRef = useRef<HTMLElement>(null);
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!articleRef.current) return;
+    if (!mainRef.current) return;
 
     // 标题的锚点 id 已由 rehype-heading-ids 在渲染时写入。
     const headings = Array.from(
-      articleRef.current.querySelectorAll<HTMLHeadingElement>("h1,h2,h3,h4,h5,h6"),
+      mainRef.current.querySelectorAll<HTMLHeadingElement>("h1,h2,h3,h4,h5,h6"),
     );
 
     // Scroll-spy: 当前激活项 = 视口顶部参考线以上最后一个标题；
@@ -55,14 +55,15 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
       <div className="min-w-0 grow">
         <div className="mx-auto max-w-4xl">
           <PageHead
+            id={entry?.headingTree.children[0]?.id}
             tag="ARTICLE"
             title={entry?.title ?? "未命名文章"}
             meta={entry?.lastModified ? `UPDATED ${formatDate(entry.lastModified)}` : undefined}
           />
-          <article ref={articleRef} className="prose max-w-full! [&>h1:first-child]:hidden">
+          <main ref={mainRef} className="prose max-w-full! [&>article>h1:first-child]:hidden">
             {children}
-          </article>
-          <div className="border-ink mt-16 border-t-3 pt-6">
+          </main>
+          <footer className="border-ink mt-16 border-t-3 pt-6">
             <Link
               href="/articles"
               className="group/link font-spacemono tracking-16 relative isolate inline-flex items-center gap-3 overflow-hidden py-2 text-xs font-bold"
@@ -79,7 +80,7 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
               </span>
               <span>全部文章 · ALL POSTS</span>
             </Link>
-          </div>
+          </footer>
         </div>
       </div>
     </div>

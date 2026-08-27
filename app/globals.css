@@ -187,6 +187,10 @@ html {
   box-shadow: var(--shadow-ink-4);
 }
 
+.prose pre:has(code.language-mermaid) {
+  display: none;
+}
+
 .prose :where(code):not(:where(pre code)) {
   border-radius: 0;
   background-color: var(--color-acid);
@@ -208,4 +212,8 @@ html {
 
 .prose hr {
   border-top-width: 3px;
+}
+
+.prose .diagram svg {
+  margin: 0 auto;
 }
