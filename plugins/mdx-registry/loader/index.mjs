@@ -4,10 +4,17 @@ import { readFileSync } from "node:fs";
 import { dirname, relative as _relative, resolve, sep } from "node:path";
 import { createProcessor } from "@mdx-js/mdx";
 import { glob } from "glob";
+import rehypeSlug from "rehype-slug";
 import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
 import serialize from "serialize-javascript";
 import { parse as parseYaml } from "yaml";
 import { gitDates } from "./git-date.mjs";
+
+/**
+ * @template T
+ * @typedef {import("webpack").LoaderContext<T>} LoaderContext<T>
+ */
 
 // 类型的唯一来源是 plugins/mdx-registry/mdx-registry.d.ts（TS 侧共用）。
 /**
@@ -23,35 +30,83 @@ import { gitDates } from "./git-date.mjs";
  */
 
 /**
- * Plain text of an mdast node: leaf nodes contribute their `value`, containers
- * the concatenation of their children (emphasis, links, inline code unwrap to
- * their inner text).
+ * Plain text of an mdast node, mirroring what the rehype side computes with
+ * hast-util-to-string: only `text` and `inlineCode` become hast text nodes
+ * (the latter wrapped in `<code>`), so only they contribute their `value`;
+ * expressions, JSX, images and raw html contribute nothing beyond their
+ * children's text.
  *
  * @param {any} node
  * @returns {string}
  */
 function textOf(node) {
-  if (typeof node.value === "string") return node.value;
+  if (node.type === "text" || node.type === "inlineCode") return node.value ?? "";
   return (node.children ?? []).map(textOf).join("");
 }
 
 /**
- * Parse an MDX file with remark (the same parser MDX itself uses, so code
- * fences, JSX blocks, and inline markup are all handled correctly) and extract:
+ * Rehype plugin factory: returns a plugin that records the id and level of
+ * every h1–h6 element into `out`, in the same document preorder that
+ * rehype-slug's own unist-util-visit pass uses. Appended after the shared
+ * rehype plugins, it harvests the ids the render pipeline actually wrote —
+ * rehype-slug's real output, not a re-implementation of it.
  *
- * - the heading tree: headings nested by level, with ids assigned in document
- *   order so the client can re-attach them to the rendered DOM headings by
- *   index;
+ * @param {Array<{ id: string | null, level: number }>} out
+ * @returns {() => (tree: any) => void}
+ */
+function collectHeadingIds(out) {
+  return function attacher() {
+    return function transformer(tree) {
+      visit(tree);
+    };
+  };
+
+  /**
+   * @param {any} node
+   */
+  function visit(node) {
+    if (node.type === "element" && /^h[1-6]$/.test(node.tagName)) {
+      out.push({ id: node.properties?.id ?? null, level: Number(node.tagName[1]) });
+    }
+    for (const child of node.children ?? []) {
+      visit(child);
+    }
+  }
+}
+
+/**
+ * Parse an MDX file with the same processor the render pipeline uses
+ * (@next/mdx + the plugin list mirrored in next.config.ts) and extract:
+ *
+ * - the heading tree: structure (nesting, level) and text come from the
+ *   mdast; the ids are NOT re-implemented — the file is additionally run
+ *   through remark-rehype and the real rehype plugins, and the id each
+ *   rendered heading actually received is harvested back. Registry anchors
+ *   therefore match the HTML by construction rather than by convention;
  * - the frontmatter: the first `---` YAML block parsed into a plain object
  *   (remark-frontmatter is registered so the block is a `yaml` node, not
  *   thematic breaks).
  *
  * @param {string} file  Absolute file path.
- * @returns {{ headingTree: HeadingTreeNode, frontmatter: Record<string, unknown> }}
+ * @returns {Promise<{ headingTree: HeadingTreeNode, frontmatter: Record<string, unknown> }>}
  */
-function readArticle(file) {
+async function readArticle(file) {
   const content = readFileSync(file, "utf8");
-  const mdast = createProcessor().use(remarkFrontmatter).parse({ value: content, path: file });
+
+  /** @type {Array<{ id: string | null, level: number }>} */
+  const renderedHeadings = [];
+  // Keep in sync with the plugin list handed to @next/mdx in next.config.ts.
+  const processor = createProcessor({
+    remarkPlugins: [remarkFrontmatter, remarkGfm],
+    rehypePlugins: [rehypeSlug, collectHeadingIds(renderedHeadings)],
+  });
+
+  // Parse twice: the first tree feeds the structural walk below, the second
+  // is consumed by the remark→rehype transform (which mutates it) to let the
+  // real rehype plugins assign heading ids. (createProcessor's run() is typed
+  // for the full MDX-to-Program pipeline; we only ride it through rehype.)
+  const mdast = processor.parse({ value: content, path: file });
+  await processor.run(/** @type {any} */ (processor.parse({ value: content, path: file })));
 
   /** @type {Array<{ id: string, level: number, text: string }>} */
   const items = [];
@@ -70,17 +125,37 @@ function readArticle(file) {
       }
     }
     if (node.type === "heading") {
-      items.push({
-        id: `heading-${items.length}`,
-        level: node.depth,
-        text: textOf(node),
-      });
+      items.push({ id: "", level: node.depth, text: textOf(node) });
     }
     for (const child of node.children ?? []) {
       collect(child);
     }
   }
   collect(mdast);
+
+  // Pair each mdast heading with the id the rehype pipeline assigned. Both
+  // walks are preorder over the same heading set — JSX-written headings
+  // (`<h2>…</h2>`) are invisible to both sides (mdast sees an
+  // mdxJsxFlowElement; hast keeps it as a passed-through node that
+  // rehype-slug's `element` visit skips) — so the two lists must line up
+  // exactly. A mismatch means a plugin changed the heading set between parse
+  // and render; fail the build instead of emitting wrong anchors.
+  if (renderedHeadings.length !== items.length) {
+    throw new Error(
+      `Heading count mismatch in ${file}: the mdast has ${items.length} heading(s), ` +
+        `but the rehype pipeline rendered ${renderedHeadings.length}.`,
+    );
+  }
+  for (const [i, item] of items.entries()) {
+    const rendered = renderedHeadings[i];
+    if (rendered.level !== item.level || typeof rendered.id !== "string") {
+      throw new Error(
+        `Heading mismatch in ${file} at index ${i}: mdast has h${item.level} "${item.text}", ` +
+          `but the rehype pipeline rendered h${rendered.level} with id ${JSON.stringify(rendered.id)}.`,
+      );
+    }
+    item.id = rendered.id;
+  }
 
   // Stack-based nesting: each heading goes under the nearest preceding
   // heading with a strictly smaller level.
@@ -120,7 +195,7 @@ function findFirstH1(nodes) {
  * Loader entry point. The `source` of the virtual module is irrelevant — the
  * registry is derived entirely from the articles directory.
  *
- * @this {import("webpack").LoaderContext<ArticleRegistryLoaderOptions>}
+ * @this {LoaderContext<ArticleRegistryLoaderOptions>}
  * @param {string | Buffer} _source  Unused virtual-module source.
  * @returns {Promise<string>} Generated module code.
  */
@@ -150,7 +225,7 @@ async function articleRegistryLoader(_source) {
     this.addContextDependency(dirname(absoluteFile));
 
     const filePosix = filePosixList[i];
-    const { headingTree, frontmatter } = readArticle(absoluteFile);
+    const { headingTree, frontmatter } = await readArticle(absoluteFile);
 
     entries[filePosix] = {
       path: filePosix,

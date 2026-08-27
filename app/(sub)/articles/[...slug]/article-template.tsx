@@ -19,7 +19,7 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
   useEffect(() => {
     if (!mainRef.current) return;
 
-    // 标题的锚点 id 已由 rehype-heading-ids 在渲染时写入。
+    // 标题的锚点 id 已由 rehype-slug 在渲染时写入。
     const headings = Array.from(
       mainRef.current.querySelectorAll<HTMLHeadingElement>("h1,h2,h3,h4,h5,h6"),
     );

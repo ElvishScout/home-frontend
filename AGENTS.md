@@ -36,9 +36,8 @@ articles/                    MDX 文章源，构建期被扫描注册
 lib/articles.ts              slug ↔ registry key ↔ href 换算
 lib/date.ts                  中文长日期格式化
 plugins/mdx-registry/        自写 webpack loader：扫描 articles/**/*.mdx 生成 virtual:mdx-registry（title / lastModified / headingTree）
-plugins/rehype-heading-ids.mjs  为 MDX 标题写入锚点 id
 public/grain.svg             全站噪点材质
-next.config.ts               @next/mdx（+rehype-heading-ids）与 mdx-registry 串联
+next.config.ts               @next/mdx 与 mdx-registry 串联（MDX 插件清单与 loader 内的是两份，改动需同步）
 ```
 
 关键机制：
