@@ -75,7 +75,7 @@ function collectHeadingIds(out) {
 }
 
 /**
- * Parse an MDX file with the same processor the render pipeline uses
+ * Parse an article with the same processor the render pipeline uses
  * (@next/mdx + the plugin list mirrored in next.config.ts) and extract:
  *
  * - the heading tree: structure (nesting, level) and text come from the
@@ -97,7 +97,10 @@ async function readArticle(file) {
   const renderedHeadings = [];
   // Keep in sync with the plugin list handed to @next/mdx in next.config.ts,
   // 例外：remark-mermaid 只改写代码块，与标题/frontmatter 无关，不引入（见 next.config.ts 注释）。
+  // format 按扩展名区分：@mdx-js/loader 默认 detect（.md 走纯 markdown），
+  // 而 createProcessor 只接受 'md' | 'mdx'，这里手动映射，否则 .md 里的 `<0.1` 会被当 JSX 解析而报错。
   const processor = createProcessor({
+    format: file.endsWith(".mdx") ? "mdx" : "md",
     remarkPlugins: [remarkFrontmatter, remarkGfm],
     rehypePlugins: [rehypeSlug, collectHeadingIds(renderedHeadings)],
   });
