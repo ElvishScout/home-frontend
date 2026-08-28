@@ -21,7 +21,26 @@ interface ArticleTemplateProps {
 
 export default function ArticleTemplate({ children, entry, prev, next }: ArticleTemplateProps) {
   const mainRef = useRef<HTMLElement>(null);
+  const spyLockedRef = useRef(false);
+  const scrollEndTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [activeId, setActiveId] = useState<string | null>(null);
+
+  // 点击 TOC 后锁定 scroll-spy，平滑滚动途中不被经过的标题抢走高亮。
+  // 解锁走两条路：原生 scrollend（精确）；滚动事件停 200ms 的兜底——
+  // 覆盖不支持 scrollend 的浏览器（Firefox / 旧版 Safari），以及点击的
+  // 目标已在视口内、根本不产生滚动（也就不会触发 scrollend）的情形。
+  const unlockScrolling = () => {
+    spyLockedRef.current = false;
+    if (scrollEndTimerRef.current) {
+      clearTimeout(scrollEndTimerRef.current);
+      scrollEndTimerRef.current = null;
+    }
+  };
+
+  const scheduleUnlock = () => {
+    if (scrollEndTimerRef.current) clearTimeout(scrollEndTimerRef.current);
+    scrollEndTimerRef.current = setTimeout(unlockScrolling, 200);
+  };
 
   useEffect(() => {
     if (!mainRef.current) return;
@@ -31,12 +50,17 @@ export default function ArticleTemplate({ children, entry, prev, next }: Article
       mainRef.current.querySelectorAll<HTMLHeadingElement>("h1,h2,h3,h4,h5,h6"),
     );
 
-    // Scroll-spy: 当前激活项 = 视口顶部参考线以上最后一个标题；
-    // 还没有标题越过参考线（页面顶部）时，高亮第一个标题。
+    // Scroll-spy: 当前激活项 = 已越过视口顶部的最后一个标题；
+    // 还没有标题越过时（页面顶部），高亮第一个标题。
     const onScroll = () => {
+      if (spyLockedRef.current) {
+        scheduleUnlock();
+        return;
+      }
+
       let current: string | null = headings[0]?.id ?? null;
       for (const heading of headings) {
-        if (heading.getBoundingClientRect().top <= 100) {
+        if (heading.getBoundingClientRect().top <= 0) {
           current = heading.id;
         } else {
           break;
@@ -46,15 +70,30 @@ export default function ArticleTemplate({ children, entry, prev, next }: Article
     };
 
     onScroll();
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scrollend", unlockScrolling);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scrollend", unlockScrolling);
+      if (scrollEndTimerRef.current) clearTimeout(scrollEndTimerRef.current);
+    };
   }, []);
 
   return (
     <div className="flex gap-12">
       <aside className="w-52 shrink-0 max-lg:hidden">
         <div className="sticky top-10 max-h-[calc(100vh-5rem)] overflow-y-auto pr-2">
-          <TableOfContents tree={entry.headingTree} activeId={activeId} />
+          <TableOfContents
+            tree={entry.headingTree}
+            activeId={activeId}
+            onClick={(id) => {
+              spyLockedRef.current = true;
+              setActiveId(id);
+              scheduleUnlock();
+            }}
+          />
         </div>
       </aside>
       <div className="min-w-0 grow">
