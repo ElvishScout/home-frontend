@@ -196,8 +196,10 @@ function findFirstH1(nodes) {
  * Resolve a frontmatter navigation target to a registry key.
  *
  * Accepted forms:
- * - absolute: `/articles/llm/foo`（可带 `.mdx` 后缀）— 路由路径原样换算；
- * - relative: `bar.mdx`、`../baz.mdx` — 相对当前文章所在目录解析。
+ * - absolute: `/articles/llm/foo`（可带 `.md` / `.mdx` 后缀）— 路由路径原样换算；
+ * - relative: `bar.md`、`../baz.mdx` — 相对当前文章所在目录解析。
+ *
+ * 不带后缀时先按 `.mdx` 计，不存在再由调用方退回 `.md`。
  *
  * @param {string} value  frontmatter 里的 prev / next 值
  * @param {string} fromKey  当前文章的 registry key（posix 相对路径）
@@ -213,7 +215,7 @@ function resolveNavigationKey(value, fromKey) {
   } else {
     key = posix.join(posix.dirname(fromKey), value);
   }
-  return key.endsWith(".mdx") ? key : `${key}.mdx`;
+  return /\.mdx?$/.test(key) ? key : `${key}.mdx`;
 }
 
 /**
@@ -278,7 +280,12 @@ async function articleRegistryLoader(_source) {
       if (typeof value !== "string" || !value) {
         throw new Error(`Invalid navigation.${dir} in ${entry.path}: expected a non-empty string`);
       }
-      const target = resolveNavigationKey(value, entry.path);
+      let target = resolveNavigationKey(value, entry.path);
+      // 显式写了后缀的目标不做扩展名兜底，写错就报错；只有不带后缀时 .mdx 不存在才退回 .md。
+      if (!entries[target] && !/\.mdx?$/.test(value) && target.endsWith(".mdx")) {
+        const mdTarget = `${target.slice(0, -".mdx".length)}.md`;
+        if (entries[mdTarget]) target = mdTarget;
+      }
       if (!entries[target]) {
         throw new Error(`Invalid navigation.${dir} in ${entry.path}: "${value}" resolves to ${target}, which is not in the registry`);
       }

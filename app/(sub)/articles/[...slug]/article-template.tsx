@@ -14,7 +14,7 @@ interface ArticleNavItem {
 
 interface ArticleTemplateProps {
   children: ReactNode;
-  entry: ArticleRegistryEntry | undefined;
+  entry: ArticleRegistryEntry;
   prev?: ArticleNavItem;
   next?: ArticleNavItem;
 }
@@ -54,18 +54,16 @@ export default function ArticleTemplate({ children, entry, prev, next }: Article
     <div className="flex gap-12">
       <aside className="w-52 shrink-0 max-lg:hidden">
         <div className="sticky top-10 max-h-[calc(100vh-5rem)] overflow-y-auto pr-2">
-          {entry?.headingTree ? (
-            <TableOfContents tree={entry.headingTree} activeId={activeId} />
-          ) : null}
+          <TableOfContents tree={entry.headingTree} activeId={activeId} />
         </div>
       </aside>
       <div className="min-w-0 grow">
         <div className="mx-auto max-w-3xl">
           <PageHead
-            id={entry?.headingTree.children[0]?.id}
+            id={entry.headingTree.children[0]?.id}
             tag="ARTICLE"
-            title={entry?.title ?? "未命名文章"}
-            meta={entry?.lastModified ? `UPDATED ${formatDate(entry.lastModified)}` : undefined}
+            title={entry.title ?? "未命名文章"}
+            meta={entry.lastModified ? `UPDATED ${formatDate(entry.lastModified)}` : undefined}
           />
           <main ref={mainRef} className="prose max-w-full! [&>h1:first-child]:hidden">
             {children}

@@ -18,7 +18,7 @@ const plugins = [
       ],
     },
   }),
-  createMdxRegistry({ pattern: ["./articles/**/*.mdx"] }),
+  createMdxRegistry({ pattern: ["./articles/**/*.{md,mdx}"] }),
 ];
 
 const nextConfig: NextConfig = {

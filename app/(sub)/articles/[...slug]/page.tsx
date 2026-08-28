@@ -1,21 +1,15 @@
 import { notFound } from "next/navigation";
-import registry from "virtual:mdx-registry";
-import { slugToRegistryKey } from "@/lib/articles";
+import { findArticle } from "@/lib/articles";
 
 export const dynamicParams = false;
 
 export default async function Page({ params }: PageProps<"/articles/[...slug]">) {
   const { slug } = await params;
 
-  const path = slugToRegistryKey(slug);
-  const entry = registry[path];
+  const article = findArticle(slug);
+  if (!article) return notFound();
 
-  let Post;
-  try {
-    Post = (await import(`@/articles/${slug.join("/")}.mdx`)).default;
-  } catch {
-    return notFound();
-  }
+  const Post = (await import(`@/articles/${slug.join("/")}.${article.extension}`)).default;
 
-  return <Post {...entry} />;
+  return <Post {...article.entry} />;
 }
