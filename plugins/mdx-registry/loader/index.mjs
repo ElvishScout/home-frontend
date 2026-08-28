@@ -1,7 +1,7 @@
 // @ts-check
 
 import { readFileSync } from "node:fs";
-import { dirname, relative as _relative, resolve, sep } from "node:path";
+import { dirname, posix, relative as _relative, resolve, sep } from "node:path";
 import { createProcessor } from "@mdx-js/mdx";
 import { glob } from "glob";
 import rehypeSlug from "rehype-slug";
@@ -192,6 +192,30 @@ function findFirstH1(nodes) {
 }
 
 /**
+ * Resolve a frontmatter navigation target to a registry key.
+ *
+ * Accepted forms:
+ * - absolute: `/articles/llm/foo`（可带 `.mdx` 后缀）— 路由路径原样换算；
+ * - relative: `bar.mdx`、`../baz.mdx` — 相对当前文章所在目录解析。
+ *
+ * @param {string} value  frontmatter 里的 prev / next 值
+ * @param {string} fromKey  当前文章的 registry key（posix 相对路径）
+ * @returns {string} 目标文章的 registry key
+ */
+function resolveNavigationKey(value, fromKey) {
+  let key;
+  if (value.startsWith("/")) {
+    if (!value.startsWith("/articles/")) {
+      throw new Error(`Invalid navigation target "${value}" in ${fromKey}: must start with /articles/`);
+    }
+    key = value.slice(1);
+  } else {
+    key = posix.join(posix.dirname(fromKey), value);
+  }
+  return key.endsWith(".mdx") ? key : `${key}.mdx`;
+}
+
+/**
  * Loader entry point. The `source` of the virtual module is irrelevant — the
  * registry is derived entirely from the articles directory.
  *
@@ -236,7 +260,29 @@ async function articleRegistryLoader(_source) {
       lastModified: dates.get(filePosix) ?? null,
       frontmatter,
       headingTree,
+      navigation: { prev: null, next: null },
     };
+  }
+
+  // 第二遍解析 navigation：目标必须已在 registry 里，否则构建期报错而不是留下死链。
+  for (const entry of Object.values(entries)) {
+    const nav = entry.frontmatter.navigation;
+    if (nav === undefined || nav === null) continue;
+    if (typeof nav !== "object") {
+      throw new Error(`Invalid navigation in ${entry.path}: expected a mapping with prev/next`);
+    }
+    for (const dir of /** @type {const} */ (["prev", "next"])) {
+      const value = /** @type {Record<string, unknown>} */ (nav)[dir];
+      if (value === undefined || value === null) continue;
+      if (typeof value !== "string" || !value) {
+        throw new Error(`Invalid navigation.${dir} in ${entry.path}: expected a non-empty string`);
+      }
+      const target = resolveNavigationKey(value, entry.path);
+      if (!entries[target]) {
+        throw new Error(`Invalid navigation.${dir} in ${entry.path}: "${value}" resolves to ${target}, which is not in the registry`);
+      }
+      entry.navigation[dir] = target;
+    }
   }
 
   return `export default ${serialize(entries, { space: 2 })};\n`;

@@ -12,6 +12,8 @@ declare module "virtual:mdx-registry" {
     lastModified: Date | null;
     frontmatter: Record<string, unknown>;
     headingTree: HeadingTreeNode;
+    /** frontmatter navigation 经构建期解析、校验后的目标文章 registry key */
+    navigation: { prev: string | null; next: string | null };
   }
 
   const registry: Record<string, ArticleRegistryEntry>;

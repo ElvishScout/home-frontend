@@ -7,12 +7,19 @@ import { formatDate } from "@/lib/date";
 import { PageHead } from "../../components/page-head";
 import TableOfContents from "../table-of-contents";
 
+interface ArticleNavItem {
+  href: string;
+  title: string;
+}
+
 interface ArticleTemplateProps {
   children: ReactNode;
   entry: ArticleRegistryEntry | undefined;
+  prev?: ArticleNavItem;
+  next?: ArticleNavItem;
 }
 
-export default function ArticleTemplate({ children, entry }: ArticleTemplateProps) {
+export default function ArticleTemplate({ children, entry, prev, next }: ArticleTemplateProps) {
   const mainRef = useRef<HTMLElement>(null);
   const [activeId, setActiveId] = useState<string | null>(null);
 
@@ -64,6 +71,12 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
             {children}
           </main>
           <footer className="border-ink mt-16 border-t-3 pt-6">
+            {(prev || next) && (
+              <nav className="mb-8 grid grid-cols-2 gap-4">
+                {prev ? <NavCard dir="prev" item={prev} /> : <span />}
+                {next ? <NavCard dir="next" item={next} /> : <span />}
+              </nav>
+            )}
             <Link
               href="/articles"
               className="group/link font-spacemono tracking-16 relative isolate inline-flex items-center gap-3 overflow-hidden py-2 text-xs font-bold"
@@ -84,5 +97,37 @@ export default function ArticleTemplate({ children, entry }: ArticleTemplateProp
         </div>
       </div>
     </div>
+  );
+}
+
+/** 上一篇 / 下一篇导航卡：直角描边 + 硬阴影，悬停 clip-path 擦除反色。 */
+function NavCard({ dir, item }: { dir: "prev" | "next"; item: ArticleNavItem }) {
+  const isPrev = dir === "prev";
+  return (
+    <Link
+      href={item.href}
+      className={`group/nav border-ink shadow-ink-4 relative isolate flex flex-col gap-1.5 overflow-hidden border-2 px-4 py-3.5 transition-[box-shadow,translate] duration-300 hover:translate-0.5 hover:shadow-none ${
+        isPrev ? "" : "col-start-2 items-end text-right"
+      }`}
+    >
+      <span
+        aria-hidden
+        className="bg-ink ease-expo absolute inset-0 -z-10 transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/nav:[clip-path:inset(0_0_0_0)]"
+      />
+      <span className="font-spacemono tracking-16 group-hover/nav:text-paper flex items-center gap-2 text-xs font-bold">
+        <span
+          aria-hidden
+          className={`ease-expo inline-block transition-transform duration-500 ${
+            isPrev ? "group-hover/nav:-translate-x-1" : "group-hover/nav:translate-x-1"
+          }`}
+        >
+          {isPrev ? "←" : "→"}
+        </span>
+        {isPrev ? "PREV" : "NEXT"}
+      </span>
+      <span className="font-zh group-hover/nav:text-paper text-sm leading-snug font-black">
+        {item.title}
+      </span>
+    </Link>
   );
 }
