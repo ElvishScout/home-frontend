@@ -12,7 +12,7 @@ function W({ children, className = "" }: { children: ReactNode; className?: stri
 }
 
 /** 关于页宣言：滚动 scrub 逐段点亮。 */
-export function Statement() {
+export function Statement({ className = "" }: { className?: string }) {
   const ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -30,7 +30,10 @@ export function Statement() {
   }, []);
 
   return (
-    <p ref={ref} className="text-fluid-4.5 max-w-6xl leading-relaxed font-black tracking-wide">
+    <p
+      ref={ref}
+      className={`text-fluid-4.5 max-w-6xl leading-relaxed font-black tracking-wide ${className}`}
+    >
       <W>白天训练</W>
       <W className="bg-acid text-ink box-decoration-clone px-2">模型</W>
       <W>理解世界，晚上训练自己</W>

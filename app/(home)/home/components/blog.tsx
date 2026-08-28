@@ -1,6 +1,6 @@
-import { SecHead } from "./sec-head";
 import { Reveal } from "./reveal";
 import { EntryList, MoreLink, type Entry } from "./entry-list";
+import { Section } from "./section";
 
 const POSTS: Entry[] = [
   {
@@ -28,33 +28,28 @@ const POSTS: Entry[] = [
 
 export function Blog() {
   return (
-    <section id="blog" className="bg-ink text-paper px-12 py-[16vh] max-md:px-6 max-md:py-[12vh]">
-      <div className="relative mx-auto max-w-7xl">
-        <SecHead idx="03" zh="博客" en="TECH BLOG" dark />
-
-        <div className="grid grid-cols-12 items-stretch gap-x-12 max-lg:flex max-lg:flex-col max-lg:gap-14">
-          <div className="col-span-5 flex flex-col">
-            <Reveal className="text-fluid-3.5 max-w-xl leading-snug font-black">
-              好记性不如<em className="bg-acid text-ink px-2 not-italic">烂笔头</em>，
-              <br />
-              写下来，才算学会。
-            </Reveal>
-            <Reveal className="font-spacemono tracking-14 mt-8 text-xs leading-loose opacity-70">
-              POSTS 23 ✦ WORDS 86K
-              <br />
-              UPDATED 2026.08
-              <br />
-              TECH NOTES
-            </Reveal>
-            <Reveal className="mt-auto pt-8">
-              <MoreLink href="/articles" label="查看更多 · ALL POSTS" dark />
-            </Reveal>
-          </div>
-          <div className="col-span-7">
-            <EntryList items={POSTS} dark />
-          </div>
-        </div>
+    <Section id="blog" index="03" zh="博客" en="TECH BLOG" dark>
+      <div className="col-span-5 flex flex-col">
+        <Reveal className="text-fluid-3.5 max-w-xl leading-snug font-black">
+          好记性不如<em className="bg-acid text-ink px-2 not-italic">烂笔头</em>，
+          <br />
+          写下来，才算学会。
+        </Reveal>
+        <Reveal className="font-spacemono tracking-14 mt-8 text-xs leading-loose opacity-70">
+          POSTS 23 ✦ WORDS 86K
+          <br />
+          UPDATED 2026.08
+          <br />
+          TECH NOTES
+        </Reveal>
+        <Reveal className="mt-auto pt-8">
+          <MoreLink href="/articles" label="查看更多 · ALL POSTS" dark />
+        </Reveal>
       </div>
-    </section>
+
+      <div className="col-span-7">
+        <EntryList items={POSTS} dark />
+      </div>
+    </Section>
   );
 }
