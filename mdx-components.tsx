@@ -1,8 +1,8 @@
 import type { MDXComponents } from "mdx/types";
-import { MdxWrapper } from "./components/mdx-wrapper";
+import { MermaidDiagram } from "./components/mermaid-diagram";
 
 export function useMDXComponents(): MDXComponents {
   return {
-    wrapper: MdxWrapper,
+    MermaidDiagram,
   };
 }

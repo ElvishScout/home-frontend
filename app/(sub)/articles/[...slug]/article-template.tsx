@@ -67,7 +67,7 @@ export default function ArticleTemplate({ children, entry, prev, next }: Article
             title={entry?.title ?? "未命名文章"}
             meta={entry?.lastModified ? `UPDATED ${formatDate(entry.lastModified)}` : undefined}
           />
-          <main ref={mainRef} className="prose max-w-full! [&>article>h1:first-child]:hidden">
+          <main ref={mainRef} className="prose max-w-full! [&>h1:first-child]:hidden">
             {children}
           </main>
           <footer className="border-ink mt-16 border-t-3 pt-6">

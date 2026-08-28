@@ -95,7 +95,8 @@ async function readArticle(file) {
 
   /** @type {Array<{ id: string | null, level: number }>} */
   const renderedHeadings = [];
-  // Keep in sync with the plugin list handed to @next/mdx in next.config.ts.
+  // Keep in sync with the plugin list handed to @next/mdx in next.config.ts,
+  // 例外：remark-mermaid 只改写代码块，与标题/frontmatter 无关，不引入（见 next.config.ts 注释）。
   const processor = createProcessor({
     remarkPlugins: [remarkFrontmatter, remarkGfm],
     rehypePlugins: [rehypeSlug, collectHeadingIds(renderedHeadings)],
