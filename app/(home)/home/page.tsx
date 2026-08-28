@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="bg-paper font-zh text-ink selection:bg-acid selection:text-ink overflow-x-clip">
+    <div className="overflow-x-clip">
       <SmoothScrollProvider>
         <IntroProvider>
           <Loader />
