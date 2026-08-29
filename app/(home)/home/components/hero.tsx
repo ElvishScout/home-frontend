@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, prefersReducedMotion } from "../lib/gsap";
 import { useIntro } from "./providers";
-import { MarqueeRow } from "./marquee-row";
+import { MarqueeBlock, MarqueeRow } from "./marquee-row";
 
 function HeroMeta({
   className = "",
@@ -160,12 +160,12 @@ export function Hero() {
       </header>
 
       <div ref={marqueeRef}>
-        <MarqueeRow
-          items={["TRAIN", "CREATE", "PLAY", "模型", "页面", "音符"]}
-          rowClassName="relative z-3 overflow-hidden border-y-3 border-ink bg-acid py-3.5 whitespace-nowrap"
-          itemClassName="inline-flex items-center gap-6.5 px-6.5 font-disp text-fluid-2.5 tracking-wider"
-          starClassName="text-2xl"
-        />
+        <MarqueeRow className="border-ink bg-acid z-3 border-y-3 py-3.5">
+          <MarqueeBlock
+            className="font-disp text-fluid-2.5 gap-6.5 pr-6.5 tracking-wider"
+            items={["TRAIN", "CREATE", "PLAY", "模型", "页面", "音符"]}
+          />
+        </MarqueeRow>
       </div>
     </>
   );

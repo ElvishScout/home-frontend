@@ -1,23 +1,41 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { Fragment, ReactNode, useLayoutEffect, useRef, useState } from "react";
 
 const DEFAULT_SPEED = 80; // px/s，视觉滚动速度
+const MAX_REPEAT = 50;
+
+export function MarqueeBlock({
+  items,
+  className = "",
+}: {
+  items: Iterable<ReactNode>;
+  className?: string;
+}) {
+  return (
+    <>
+      {Array.from(items).map((item, i) => (
+        <span key={i} className={`inline-flex items-center ${className}`}>
+          {item}
+          <span aria-hidden className="marquee-star text-[0.75em]">
+            ✦
+          </span>
+        </span>
+      ))}
+    </>
+  );
+}
 
 export function MarqueeRow({
-  items,
-  rowClassName,
-  trackClassName = "",
-  itemClassName,
-  starClassName,
+  className = "",
   speed = DEFAULT_SPEED,
+  reverse,
+  children,
 }: {
-  items: string[];
-  rowClassName: string;
-  trackClassName?: string;
-  itemClassName: string;
-  starClassName: string;
+  className?: string;
   speed?: number;
+  reverse?: boolean;
+  children?: ReactNode;
 }) {
   const rowRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLSpanElement>(null);
@@ -36,7 +54,7 @@ export function MarqueeRow({
       if (singleWidth) {
         // 动画 translateX(-50%) 要求轨道总长 >= 2 倍容器宽，
         // 且前后两半内容完全相同，因此 repeat 必须是偶数。
-        const nextRepeat = Math.max(2, Math.ceil(rowWidth / singleWidth) * 2);
+        const nextRepeat = Math.min(Math.max(2, Math.ceil(rowWidth / singleWidth) * 2), MAX_REPEAT);
         setRepeat(nextRepeat);
       }
 
@@ -56,40 +74,26 @@ export function MarqueeRow({
     return () => {
       observer.disconnect();
     };
-  }, [items, speed]);
+  }, [speed]);
 
   return (
-    <div ref={rowRef} className={rowClassName}>
+    <div ref={rowRef} className={`overflow-hidden whitespace-nowrap ${className}`}>
       {/* 隐藏的单个副本，用于独立测量一份内容的宽度，避免 repeat 与 trackWidth 互相依赖 */}
       <span
         ref={measureRef}
         aria-hidden
-        className={`pointer-events-none invisible absolute -z-10 inline-flex w-fit ${trackClassName}`}
+        className={`pointer-events-none invisible absolute -z-10 inline-flex w-fit`}
       >
-        {items.map((item, j) => (
-          <span key={j} className={itemClassName}>
-            {item}
-            <span aria-hidden className={starClassName}>
-              ✦
-            </span>
-          </span>
-        ))}
+        {children}
       </span>
       <div
         ref={trackRef}
-        className={`animate-mq inline-flex w-fit will-change-transform ${trackClassName}`}
+        className={`animate-mq inline-flex w-fit will-change-transform ${reverse ? "[animation-direction:reverse]" : ""}`}
         style={duration ? { animationDuration: `${duration}s` } : undefined}
       >
-        {Array.from({ length: repeat }, (_, i) =>
-          items.map((item, j) => (
-            <span key={i * items.length + j} className={itemClassName}>
-              {item}
-              <span aria-hidden className={starClassName}>
-                ✦
-              </span>
-            </span>
-          )),
-        )}
+        {Array.from({ length: repeat }, (_, i) => (
+          <Fragment key={i}>{children}</Fragment>
+        ))}
       </div>
     </div>
   );
