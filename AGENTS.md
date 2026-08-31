@@ -32,10 +32,10 @@ app/
    │  └─ [...slug]/          文章详情；layout.tsx 查 registry 并注入 ArticleTemplate（scroll-spy TOC + prose）
    └─ music/                 /music 音乐创作（占位框架，曲目是 TRACKS 常量）
 
-articles/                    MDX 文章源，构建期被扫描注册
+articles/                    文章源（.md / .mdx），构建期被扫描注册
 lib/articles.ts              slug ↔ registry key ↔ href 换算
 lib/date.ts                  中文长日期格式化
-plugins/mdx-registry/        自写 webpack loader：扫描 articles/**/*.mdx 生成 virtual:mdx-registry（title / lastModified / headingTree）
+plugins/mdx-registry/        自写 webpack loader：扫描 articles/**/*.{md,mdx} 生成 virtual:mdx-registry（title / lastModified / headingTree）
 public/grain.svg             全站噪点材质
 next.config.ts               @next/mdx 与 mdx-registry 串联（MDX 插件清单与 loader 内的是两份，改动需同步）
 ```
@@ -43,7 +43,7 @@ next.config.ts               @next/mdx 与 mdx-registry 串联（MDX 插件清�
 关键机制：
 
 - **路由分组决定布局归属**：`(home)` 与 `(sub)` 平级，URL 不受影响；子页面外壳只写在 `(sub)/layout.tsx`，新增子页面放进 `(sub)` 组即自动获得外壳。
-- **virtual:mdx-registry**：文章元信息（标题、修改时间、标题树）在构建期生成，列表页与详情页都从这里取数；写新文章只需在 `articles/` 放 `.mdx`。
+- **virtual:mdx-registry**：文章元信息（标题、修改时间、标题树）在构建期生成，列表页与详情页都从这里取数；写新文章只需在 `articles/` 放 `.md` 或 `.mdx`。
 - **样式取值先查 theme token**：`globals.css` 的 `@theme` / `@utility` 已收编全站的设计签名样式（流式字号、超宽字距、行距、硬阴影、描边字等），新增样式时优先复用；确需新的签名值就更新/新增 token，不要在组件里平行另写。一次性使用的元素大小、位置、transform 等布局值可以直接写任意值。
 
 ---
