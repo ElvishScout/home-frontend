@@ -270,7 +270,7 @@ async function articleRegistryLoader(_source) {
     };
   }
 
-  // 第二遍解析 navigation：目标必须已在 registry 里，否则构建期报错而不是留下死链。
+  // 第二遍解析 navigation：目标不在 registry 里（如系列文章还没写到下一篇）时留空，不报错。
   for (const entry of Object.values(entries)) {
     const nav = entry.frontmatter.navigation;
     if (nav === undefined || nav === null) continue;
@@ -284,14 +284,12 @@ async function articleRegistryLoader(_source) {
         throw new Error(`Invalid navigation.${dir} in ${entry.path}: expected a non-empty string`);
       }
       let target = resolveNavigationKey(value, entry.path);
-      // 显式写了后缀的目标不做扩展名兜底，写错就报错；只有不带后缀时 .mdx 不存在才退回 .md。
+      // 显式写了后缀的目标不做扩展名兜底；只有不带后缀时 .mdx 不存在才退回 .md。
       if (!entries[target] && !/\.mdx?$/.test(value) && target.endsWith(".mdx")) {
         const mdTarget = `${target.slice(0, -".mdx".length)}.md`;
         if (entries[mdTarget]) target = mdTarget;
       }
-      if (!entries[target]) {
-        throw new Error(`Invalid navigation.${dir} in ${entry.path}: "${value}" resolves to ${target}, which is not in the registry`);
-      }
+      if (!entries[target]) continue;
       entry.navigation[dir] = target;
     }
   }
