@@ -23,6 +23,13 @@ const plugins = [
 
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  experimental: {
+    // Turbopack 的 dev 持久化缓存会把 next/font/google 生成的 CSS
+    // （引用 @vercel/turbopack-next/internal/font/google/font 虚拟模块）写入 .next，
+    // 重启后 import map 不再包含该虚拟模块，恢复出的缓存模块解析失败导致 500。
+    // 在 Google Fonts 不可达（首次 fallback、重试后拿到真实 CSS）的网络环境下必现。
+    turbopackFileSystemCacheForDev: false,
+  },
 };
 
 export default plugins.reduce((config, plugin) => plugin(config), nextConfig);
