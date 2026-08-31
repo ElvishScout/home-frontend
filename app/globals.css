@@ -188,6 +188,10 @@ html {
   box-shadow: var(--shadow-ink-4);
 }
 
+.prose pre:has(code.language-mermaid) {
+  @apply sr-only;
+}
+
 .prose :where(code):not(:where(pre code)) {
   border-radius: 0;
   background-color: var(--color-acid);
