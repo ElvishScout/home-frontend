@@ -3,7 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import mermaid from "mermaid";
 
-mermaid.initialize({ fontSize: 16, fontFamily: "var(--font-zh)" });
+mermaid.initialize({
+  fontSize: 16,
+  fontFamily: "inherit",
+  htmlLabels: false,
+});
 
 const generateDiagramId = (() => {
   let index = 0;
