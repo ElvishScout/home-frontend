@@ -77,7 +77,9 @@ export function MarqueeRow({
   }, [speed]);
 
   return (
-    <div ref={rowRef} className={`overflow-hidden whitespace-nowrap ${className}`}>
+    // relative 让隐藏测量副本的包含块落在行内，从而被 overflow-hidden 裁掉；
+    // 否则 absolute 副本逃逸到初始包含块，移动端 Chrome 会因此扩大布局视口
+    <div ref={rowRef} className={`relative overflow-hidden whitespace-nowrap ${className}`}>
       {/* 隐藏的单个副本，用于独立测量一份内容的宽度，避免 repeat 与 trackWidth 互相依赖 */}
       <span
         ref={measureRef}
