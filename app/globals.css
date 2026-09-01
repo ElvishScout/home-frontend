@@ -138,10 +138,8 @@
 
 /* ---------- 页面滚动条 ---------- */
 
-html {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-ink) var(--color-paper);
-  overscroll-behavior: none;
+* {
+  @apply scrollbar-thumb-ink scrollbar-track-paper scrollbar-thin overscroll-none;
 }
 
 /* ---------- 长文排版（设计规范 · 子页面 §3：只覆盖颜色、边框与标题字重） ---------- */
@@ -164,65 +162,61 @@ html {
   --tw-prose-th-borders: var(--color-ink);
   --tw-prose-td-borders: var(--color-ink);
 
-  font-size: 1rem;
-  line-height: 1.9;
-  max-width: 70ch;
+  @apply max-w-[70ch] text-base leading-[1.9];
 }
 
 .prose :where(h1, h2, h3, h4, h5, h6) {
-  font-weight: 900;
-  letter-spacing: 0.02em;
+  @apply font-black tracking-[0.02em];
 }
 
 .prose a {
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-}
-.prose a:hover {
-  background-color: var(--color-acid);
+  @apply hover:bg-acid decoration-2 underline-offset-[3px];
 }
 
 .prose pre {
-  border: 3px solid var(--color-ink);
-  border-radius: 0;
-  box-shadow: var(--shadow-ink-4);
+  @apply border-ink shadow-ink-4 rounded-none border-[3px];
 }
 
 .prose pre:has(code.language-mermaid) {
-  display: none;
+  @apply hidden;
 }
 
 .prose :where(code):not(:where(pre code)) {
-  border-radius: 0;
-  background-color: var(--color-acid);
-  padding: 0.1em 0.3em;
-  font-weight: 700;
+  @apply bg-acid rounded-none px-[0.3em] py-[0.1em] font-bold;
 }
-.prose :where(code):not(:where(pre code))::before,
+.prose :where(code):not(:where(pre code))::before {
+  @apply content-none;
+}
 .prose :where(code):not(:where(pre code))::after {
-  content: none;
+  @apply content-none;
 }
 
 .prose blockquote {
-  font-style: normal;
+  @apply not-italic;
 }
-.prose blockquote p:first-of-type::before,
+.prose blockquote p:first-of-type::before {
+  @apply content-none;
+}
 .prose blockquote p:last-of-type::after {
-  content: none;
+  @apply content-none;
 }
 
 .prose hr {
-  border-top-width: 3px;
+  @apply border-t-[3px];
+}
+
+.prose .katex .katex-mathml math {
+  @apply overflow-x-auto overflow-y-hidden transition-[scrollbar-color] duration-300 not-hover:scrollbar-thumb-transparent;
 }
 
 .prose .katex .katex-html {
-  display: none;
+  @apply hidden;
+}
+
+.prose .katex-display {
+  @apply my-[1.25em];
 }
 
 .prose .diagram {
-  margin: 2em 0;
-  padding: 1.5rem 1.5rem;
-  border: 3px solid var(--color-ink);
-  box-shadow: var(--shadow-ink-4);
-  font-size: 0.875rem;
+  @apply border-ink shadow-ink-4 my-[1.25em] border-[3px] p-6 text-sm;
 }
