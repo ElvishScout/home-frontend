@@ -189,7 +189,7 @@ html {
 }
 
 .prose pre:has(code.language-mermaid) {
-  @apply sr-only;
+  display: none;
 }
 
 .prose :where(code):not(:where(pre code)) {
@@ -213,6 +213,10 @@ html {
 
 .prose hr {
   border-top-width: 3px;
+}
+
+.prose .katex .katex-html {
+  display: none;
 }
 
 .prose .diagram {

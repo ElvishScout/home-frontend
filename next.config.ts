@@ -10,10 +10,11 @@ const plugins = [
   createMDX({
     extension: /\.(md|mdx)$/,
     options: {
-      rehypePlugins: [require.resolve("rehype-slug")],
+      rehypePlugins: [require.resolve("rehype-slug"), require.resolve("rehype-katex")],
       remarkPlugins: [
         require.resolve("remark-frontmatter"),
         require.resolve("remark-gfm"),
+        require.resolve("remark-math"),
         require.resolve("./plugins/remark-mermaid.mjs"),
       ],
     },
