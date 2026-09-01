@@ -1,6 +1,7 @@
 ---
 navigation:
   prev: perceptron.md
+  next: optimization.md
 ---
 
 # 多层感知机：把误差传回去
