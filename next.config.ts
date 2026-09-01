@@ -18,7 +18,10 @@ const plugins = [
       ],
     },
   }),
-  createMdxRegistry({ pattern: ["./articles/**/*.{md,mdx}"] }),
+  createMdxRegistry({
+    pattern: ["./articles/**/*.{md,mdx}"],
+    exclude: ["./articles/**/CLAUDE.md"],
+  }),
 ];
 
 const nextConfig: NextConfig = {

@@ -8,6 +8,7 @@ const COMPONENTS_STUB = "mdx-components.stub.ts";
 
 export function createMdxRegistry(options: {
   pattern: string | string[];
+  exclude?: string | string[];
 }): (config: NextConfig) => NextConfig {
   const loaderPath = require.resolve("./loader/index.mjs");
   const registryStub = `./plugins/mdx-registry/${REGISTRY_STUB}`;
