@@ -27,6 +27,8 @@ import { gitDates } from "./git-date.mjs";
  *
  * @typedef {Object} ArticleRegistryLoaderOptions
  * @property {string | string[]} [pattern]
+ * @property {"registry" | "components"} [mode]  默认 "registry"；
+ *   "components" 输出 注册表 key → 懒加载文章组件 的静态 import 映射。
  */
 
 /**
@@ -244,6 +246,21 @@ async function articleRegistryLoader(_source) {
 
   // Turbopack normalizes Windows paths to `/`; keep emitted code portable.
   const filePosixList = files.map((file) => _relative(this.rootContext, file).split(sep).join("/"));
+
+  if (options.mode === "components") {
+    // 详情页不能写动态 import（Turbopack 会拒绝含变量的 specifier，import.meta.glob
+    // 跨目录引用服务端组件也有已知 bug），所以在构建期把全部文章的 import 静态展开。
+    // import 路径相对挂 loader 的 stub 文件（plugins/mdx-registry/*.stub.ts）解析。
+    for (const file of files) {
+      const absoluteFile = resolve(this.rootContext, file);
+      this.addContextDependency(dirname(absoluteFile));
+    }
+    const entries = filePosixList.map(
+      (filePosix) => `  ${JSON.stringify(filePosix)}: () => import(${JSON.stringify(`../../${filePosix}`)}),`,
+    );
+    return `export default {\n${entries.join("\n")}\n};\n`;
+  }
+
   const dates = await gitDates(filePosixList);
 
   /** @type {Record<string, ArticleRegistryEntry>} */
