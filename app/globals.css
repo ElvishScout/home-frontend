@@ -166,19 +166,19 @@ html {
   --tw-prose-th-borders: var(--color-ink);
   --tw-prose-td-borders: var(--color-ink);
 
-  @apply max-w-[70ch] text-base leading-[1.9];
+  @apply text-base leading-loose;
 }
 
 .prose :where(h1, h2, h3, h4, h5, h6) {
-  @apply font-black tracking-[0.02em];
+  @apply font-black tracking-wide;
 }
 
 .prose a {
-  @apply hover:bg-acid decoration-2 underline-offset-[3px];
+  @apply hover:bg-acid decoration-2 underline-offset-3;
 }
 
 .prose pre {
-  @apply border-ink shadow-ink-4 rounded-none border-[3px];
+  @apply border-ink shadow-ink-4 rounded-none border-3;
 }
 
 .prose pre:has(code.language-mermaid) {
@@ -206,7 +206,7 @@ html {
 }
 
 .prose hr {
-  @apply border-t-[3px];
+  @apply border-t-3;
 }
 
 .prose .katex .katex-mathml math {
@@ -222,5 +222,5 @@ html {
 }
 
 .prose .diagram {
-  @apply border-ink shadow-ink-4 my-[1.25em] border-[3px] p-6 text-sm;
+  @apply border-ink shadow-ink-4 my-[1.25em] border-3 p-6 text-sm;
 }
