@@ -6,3 +6,9 @@ export function formatDate(date: Date): string {
     day: "numeric",
   });
 }
+
+/** 年月点分格式，如 "2026.08"。 */
+export function formatYearMonth(date: Date): string {
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  return `${date.getFullYear()}.${month}`;
+}

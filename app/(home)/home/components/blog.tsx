@@ -1,30 +1,24 @@
+import registry from "virtual:mdx-registry";
+import { registryKeyToHref } from "@/lib/articles";
+import { formatYearMonth } from "@/lib/date";
 import { Reveal } from "./reveal";
 import { EntryList, MoreLink, type Entry } from "./entry-list";
 import { Section } from "./section";
 
-const POSTS: Entry[] = [
-  {
-    num: "EP.01",
-    title: "让元素蹦出来，而不是淡出来",
-    note: "GSAP 入场编排笔记",
-    meta: "2026.08",
-    href: "/articles",
-  },
-  {
-    num: "EP.02",
-    title: "Turbopack 在 Windows 上的路径脾气",
-    note: "工程踩坑记录",
-    meta: "2026.07",
-    href: "/articles",
-  },
-  {
-    num: "EP.03",
-    title: "把设计规范写进 AGENTS.md 之后",
-    note: "AI 协作实验",
-    meta: "2026.06",
-    href: "/articles",
-  },
-];
+/** 按修改时间倒序取最新三篇；编号沿用列表页规则（EP.01 为最旧一篇）。 */
+const ENTRIES = Object.values(registry).sort((a, b) => {
+  if (!a.lastModified) return 1;
+  if (!b.lastModified) return -1;
+  return b.lastModified.getTime() - a.lastModified.getTime();
+});
+const POSTS: Entry[] = ENTRIES.slice(0, 3).map((entry, i) => ({
+  num: `EP.${String(ENTRIES.length - i).padStart(2, "0")}`,
+  title: entry.title ?? entry.path,
+  note: entry.path.split("/")[1]?.replaceAll("-", " ").toUpperCase() ?? "",
+  meta: entry.lastModified ? formatYearMonth(entry.lastModified) : "",
+  href: registryKeyToHref(entry.path),
+}));
+const UPDATED = ENTRIES[0]?.lastModified ? formatYearMonth(ENTRIES[0].lastModified) : "";
 
 export function Blog() {
   return (
@@ -36,9 +30,9 @@ export function Blog() {
           写下来，才算学会。
         </Reveal>
         <Reveal className="font-spacemono tracking-14 mt-8 text-xs leading-loose opacity-70">
-          POSTS 23 ✦ WORDS 86K
+          POSTS {String(ENTRIES.length).padStart(2, "0")}
           <br />
-          UPDATED 2026.08
+          UPDATED {UPDATED}
           <br />
           TECH NOTES
         </Reveal>
