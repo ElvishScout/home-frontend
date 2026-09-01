@@ -98,9 +98,15 @@ export function useIntro() {
   return useContext(IntroContext);
 }
 
+// 模块级标记：App Router 客户端导航不重置模块状态，从子页面返回首页时不再重播 loader（整页刷新仍会播放）
+let introDone = false;
+
 export function IntroProvider({ children }: { children: ReactNode }) {
-  const [done, setDone] = useState(false);
-  const complete = useCallback(() => setDone(true), []);
+  const [done, setDone] = useState(introDone);
+  const complete = useCallback(() => {
+    introDone = true;
+    setDone(true);
+  }, []);
   const value = useMemo(() => ({ done, complete }), [done, complete]);
   return <IntroContext.Provider value={value}>{children}</IntroContext.Provider>;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap, prefersReducedMotion } from "../lib/gsap";
 import { useIntro, useLenis } from "./providers";
 
@@ -12,6 +12,9 @@ export function Loader() {
   const lineRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const { done, complete } = useIntro();
   const lenis = useLenis();
+  // 只认挂载时的 done（从子页面返回 = 整场跳过）；播放中途 complete 提前 0.6s 触发 hero，
+  // 不能据此隐藏自身，否则收尾的遮罩升起动画会被截断
+  const [skip] = useState(done);
 
   // loading 期间锁定页面滚动（原生 overflow + Lenis 双保险），完成后恢复
   useEffect(() => {
@@ -27,9 +30,9 @@ export function Loader() {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    if (prefersReducedMotion()) {
+    if (skip || prefersReducedMotion()) {
       root.style.display = "none";
-      complete();
+      if (!skip) complete();
       return;
     }
     const lines = lineRefs.current.filter((el): el is HTMLSpanElement => el !== null);
@@ -57,7 +60,10 @@ export function Loader() {
         .call(complete, [], "-=0.6");
     });
     return () => ctx.revert();
-  }, [complete]);
+  }, [complete, skip]);
+
+  // 已完成 intro（如从子页面返回）时直接不渲染，避免一帧闪黑
+  if (skip) return null;
 
   return (
     <div ref={rootRef} className="bg-ink fixed inset-0 z-8000 flex items-center justify-center">
