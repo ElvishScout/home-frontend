@@ -139,7 +139,11 @@
 /* ---------- 页面滚动条 ---------- */
 
 * {
-  @apply scrollbar-thumb-ink scrollbar-track-paper scrollbar-thin overscroll-none;
+  @apply scrollbar-thumb-ink scrollbar-track-paper scrollbar-thin;
+}
+
+html {
+  @apply overscroll-none;
 }
 
 /* ---------- 长文排版（设计规范 · 子页面 §3：只覆盖颜色、边框与标题字重） ---------- */
