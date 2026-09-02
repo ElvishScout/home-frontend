@@ -5,7 +5,7 @@ import { Section } from "./section";
 
 const STATS: { count?: number; value?: string; color: string; label: string }[] = [
   { count: 1, color: "text-acid", label: "份正职 · 大模型预训练" },
-  { count: 1, color: "text-aqua", label: "个主页 · 你正在看" },
+  { count: 2, color: "text-aqua", label: "条赛道 · 全栈 → 预训练" },
   { count: 1, color: "text-scarlet", label: "首曲子 · 还在路上" },
   { value: "24′", color: "text-paper", label: "分钟 · 新番的时间单位" },
 ];
@@ -17,11 +17,11 @@ export function About() {
 
       <Reveal className="col-span-7 text-base leading-loose opacity-85">
         <p>
-          这个主页本身就是展品：版式规则先落在纸面，再逐行用代码还原，源码全开。
-          <strong className="text-acid">好不好，你已经在看了。</strong>
+          我是一名程序员，目前的主业是大模型预训练。入行不算久，之前写过一年全栈，从页面到接口都做过。
+          <strong className="text-acid">赛道换过一次，写代码这件事一直没变。</strong>
         </p>
         <p className="mt-5">
-          音乐在练，目标很具体：写出一首自己愿意单曲循环的歌。新番按季追，24 分钟是雷打不动的时间单位。
+          工作之外，时间主要分给三样：音乐、游戏、新番。音乐在系统地学，乐理、和声、编曲一样一样来，目标很具体：写出一首自己愿意单曲循环的歌。新番按季追，24 分钟是雷打不动的时间单位。游戏打得杂，是三样里唯一不设目标的。
         </p>
       </Reveal>
 
