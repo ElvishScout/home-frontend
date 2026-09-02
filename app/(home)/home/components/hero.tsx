@@ -18,6 +18,7 @@ export function Hero() {
   const barRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLParagraphElement>(null);
   const lineRef = useRef<HTMLParagraphElement>(null);
+  const clauseRef = useRef<HTMLDivElement>(null);
   const hintRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
@@ -50,7 +51,7 @@ export function Hero() {
           { scale: 0, rotate: -14, duration: 0.6, ease: "back.out(2.2)" },
           "-=0.5",
         )
-        // 验票章"啪"地盖上
+        // 启程章"啪"地盖上
         .from(
           stampRef.current,
           { scale: 0, rotate: 40, duration: 0.7, ease: "back.out(2.5)" },
@@ -64,7 +65,7 @@ export function Hero() {
           duration: 0.25,
         }, "-=0.4")
         .from(
-          [eyebrowRef.current, lineRef.current, hintRef.current],
+          [eyebrowRef.current, lineRef.current, clauseRef.current, hintRef.current],
           { opacity: 0, y: 16, stagger: 0.08, duration: 0.5 },
           "-=0.5",
         )
@@ -89,10 +90,10 @@ export function Hero() {
           <div ref={ticketRef} className="relative rotate-[-1.5deg] will-change-transform">
             <div className="border-ink bg-paper shadow-ink-10 grid border-3 md:grid-cols-[1fr_15rem]">
               {/* 票面 */}
-              <div className="p-7 max-md:p-5">
-                <div className="font-spacemono tracking-24 border-ink flex items-center justify-between border-b-2 pb-3 text-2xs font-bold max-md:tracking-14">
+              <div className="relative p-7 max-md:p-5">
+                <div className="font-spacemono tracking-24 border-ink flex items-center justify-between border-b-2 pb-3 text-2xs font-bold max-md:tracking-14 md:mr-40">
                   <span>ADMIT ONE</span>
-                  <span>2026 ★ 仅此一票</span>
+                  <span>2026 ★ 就此启程</span>
                 </div>
                 <h1 className="leading-95 mt-5 select-none">
                   <div className="overflow-hidden py-1.5">
@@ -124,15 +125,32 @@ export function Hero() {
                   ref={tagRef}
                   className="border-ink bg-acid text-fluid-2 tracking-14 shadow-ink-6 mt-5 inline-block border-3 px-5 py-2 font-black"
                 >
-                  大模型训练 × 创意前端
+                  随身携带：模型 · 页面 · 音符
                 </span>
                 <p
                   ref={lineRef}
-                  className="font-spacemono tracking-16 border-ink mt-6 flex items-center justify-between gap-4 border-t-2 pt-3 text-xs font-bold max-md:mt-5"
+                  className="font-spacemono tracking-16 border-ink mt-6 border-t-2 pt-3 text-xs font-bold max-md:mt-5 md:mr-40"
                 >
-                  <span>一直在学，一直在做</span>
-                  <span aria-hidden>★</span>
+                  <span>
+                    旅程即将开启，敬请期待
+                    <br />
+                    THE JOURNEY IS ABOUT TO BEGIN
+                  </span>
                 </p>
+
+                {/* 票面右侧：竖排条款大字，票面专属的"概不退换" */}
+                <div
+                  ref={clauseRef}
+                  aria-hidden
+                  className="absolute top-1/2 right-7 flex -translate-y-1/2 items-center gap-3 max-md:hidden"
+                >
+                  <span className="font-disp text-fluid-5 text-stroke-ink text-stroke-2 leading-none text-transparent [writing-mode:vertical-rl]">
+                    NO REFUND
+                  </span>
+                  <span className="font-spacemono text-2xs tracking-24 font-bold [writing-mode:vertical-rl]">
+                    概不退换 ★
+                  </span>
+                </div>
               </div>
 
               {/* 票根 */}
@@ -162,12 +180,12 @@ export function Hero() {
               </div>
             </div>
 
-            {/* 验票章：斜跨票面右下角 */}
+            {/* 启程章：斜跨票面右下角 */}
             <div
               ref={stampRef}
               className="border-scarlet text-scarlet bg-paper font-zh absolute -right-4 -bottom-5 z-3 rotate-[2.5deg] border-4 border-double px-3 py-1.5 text-sm font-black tracking-14 max-md:-right-2"
             >
-              已验票
+              已启程
             </div>
           </div>
 

@@ -4,9 +4,9 @@ import { StatNum } from "./stat-num";
 import { Section } from "./section";
 
 const STATS: { count?: number; value?: string; color: string; label: string }[] = [
-  { count: 1, color: "text-acid", label: "份主业 · 大模型训练" },
-  { count: 2, color: "text-aqua", label: "门手艺 · 前端与设计" },
-  { count: 3, color: "text-scarlet", label: "条轨道 · 音乐练习中" },
+  { count: 1, color: "text-acid", label: "份正职 · 大模型预训练" },
+  { count: 1, color: "text-aqua", label: "个主页 · 你正在看" },
+  { count: 1, color: "text-scarlet", label: "首曲子 · 还在路上" },
   { value: "24′", color: "text-paper", label: "分钟 · 新番的时间单位" },
 ];
 
@@ -17,11 +17,11 @@ export function About() {
 
       <Reveal className="col-span-7 text-base leading-loose opacity-85">
         <p>
-          我是一名程序员，主业是训练大模型——在数据和算力之间追求稳定与效率。但这个主页不走那条路。没系统学过设计，就把它当成一次公开练习：先把版式推到极限，再亲手用代码一比一还原。
-          <strong className="text-acid">写得动模型，也写得动页面。</strong>
+          这个主页本身就是展品：版式规则先落在纸面，再逐行用代码还原，源码全开。
+          <strong className="text-acid">好不好，你已经在看了。</strong>
         </p>
         <p className="mt-5">
-          业余时间在学音乐，乐理、和声、编曲，目标很朴素：写出一首自己愿意单曲循环的曲子。剩下的余量，留给当季新番。
+          音乐在练，目标很具体：写出一首自己愿意单曲循环的歌。新番按季追，24 分钟是雷打不动的时间单位。
         </p>
       </Reveal>
 

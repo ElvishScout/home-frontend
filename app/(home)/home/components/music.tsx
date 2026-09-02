@@ -39,8 +39,8 @@ export function Music() {
     <Section id="music" index="04" zh="音乐" en="MUSIC WORKS">
       <div className="order-2 col-span-5 flex flex-col max-lg:order-1">
         <Reveal className="text-fluid-3.5 max-w-xl leading-snug font-black">
-          在代码与旋律之间，
-          <br />找<em className="bg-aqua text-ink px-2 not-italic">同一种节奏</em>。
+          写代码靠 <em className="bg-aqua text-ink px-2 not-italic">loop</em>，
+          <br />写歌也从 loop 开始。
         </Reveal>
         <Reveal className="mt-8 flex items-end gap-3">
           <span aria-hidden className="flex h-9 items-end gap-1">
@@ -52,9 +52,9 @@ export function Music() {
             ))}
           </span>
           <span className="font-spacemono tracking-14 text-xs leading-loose opacity-70">
-            LOOPS 12 ✦ DEMOS 3
+            STATUS: LOOP 阶段
             <br />
-            BPM 76 — 128 · TARGET: ONE FULL TRACK
+            TARGET: ONE FULL TRACK
           </span>
         </Reveal>
         <Reveal className="mt-auto pt-8">

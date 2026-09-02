@@ -32,8 +32,8 @@ export function Skills() {
       </div>
 
       <Reveal className="text-fluid-3 col-span-8 leading-normal font-black">
-        没上过设计课，<em className="bg-acid text-ink px-2 not-italic">审美是野路子</em>；<br />
-        音乐还在学，但曲子一定会有的。
+        技能清单谁都会写，<br />
+        <em className="bg-acid text-ink px-2 not-italic">交过账的才算</em>。
       </Reveal>
 
       <Reveal className="font-spacemono col-span-4 max-w-lg text-sm leading-loose tracking-wider opacity-75">

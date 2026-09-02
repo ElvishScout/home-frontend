@@ -34,12 +34,11 @@ export function Statement({ className = "" }: { className?: string }) {
       ref={ref}
       className={`text-fluid-4.5 max-w-6xl leading-relaxed font-black tracking-wide ${className}`}
     >
-      <W>白天训练</W>
-      <W className="bg-acid text-ink box-decoration-clone px-2">模型</W>
-      <W>理解世界，晚上训练自己</W>
-      <W className="bg-aqua text-ink px-2">感受</W>
-      <W>世界——用代码、用版式、用</W>
-      <W className="bg-scarlet text-paper px-2">音符</W>
+      <W>模型、页面、曲子，</W>
+      <W>看起来是三件事，</W>
+      <W className="bg-acid text-ink box-decoration-clone px-2">做到底是同一件事</W>
+      <W>——把想法变成</W>
+      <W className="bg-scarlet text-paper px-2">能跑的东西</W>
       <W>。</W>
     </p>
   );
