@@ -40,7 +40,8 @@ export function Music() {
       <div className="order-2 col-span-5 flex flex-col max-lg:order-1">
         <Reveal className="text-fluid-3xl max-w-xl leading-snug font-black">
           写代码靠 <em className="bg-aqua text-ink px-2 not-italic">loop</em>，
-          <br />写歌也从 loop 开始。
+          <br />
+          写歌也从 loop 开始。
         </Reveal>
         <Reveal className="mt-8 flex items-end gap-3">
           <span aria-hidden className="flex h-9 items-end gap-1">
