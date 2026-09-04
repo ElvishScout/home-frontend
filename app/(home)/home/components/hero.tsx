@@ -96,7 +96,7 @@ export function Hero() {
 
           {/* ---------- 演出票 ---------- */}
           <div ref={ticketRef} className="relative rotate-[-1.5deg] will-change-transform">
-            <div className="border-ink bg-paper shadow-ink-10 grid border-3 md:grid-cols-[1fr_15rem]">
+            <div className="border-ink bg-paper shadow-ink shadow-hard-10 grid border-3 md:grid-cols-[1fr_15rem]">
               {/* 票面 */}
               <div className="relative p-7 max-md:p-5">
                 <div className="font-spacemono tracking-24 border-ink text-2xs max-md:tracking-14 flex items-center justify-between border-b-2 pb-3 font-bold md:mr-40">
@@ -131,7 +131,7 @@ export function Hero() {
                 </h1>
                 <span
                   ref={tagRef}
-                  className="border-ink bg-acid text-fluid-base tracking-14 shadow-ink-6 mt-5 inline-block border-3 px-5 py-2 font-black"
+                  className="border-ink bg-acid text-fluid-base tracking-14 shadow-ink shadow-hard-6 mt-5 inline-block border-3 px-5 py-2 font-black"
                 >
                   随身携带：模型 · 页面 · 音符
                 </span>

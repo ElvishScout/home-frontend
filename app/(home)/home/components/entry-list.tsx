@@ -100,7 +100,9 @@ export function MoreLink({
 }) {
   const wipe = dark ? "bg-acid" : "bg-ink";
   const onWipe = dark ? "group-hover/link:text-ink" : "group-hover/link:text-paper";
-  const shadow = dark ? "shadow-paper-6 hover:shadow-paper-2" : "shadow-ink-6 hover:shadow-ink-2";
+  const shadow = dark
+    ? "shadow-paper shadow-hard-6 hover:shadow-hard-2"
+    : "shadow-ink shadow-hard-6 hover:shadow-hard-2";
 
   return (
     <Link

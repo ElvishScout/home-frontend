@@ -78,7 +78,7 @@ export function WorkArticle({
         </span>
         <div
           ref={frameRef}
-          className={`border-ink bg-ink shadow-ink-10 relative aspect-4/3 overflow-hidden border-4 ${
+          className={`border-ink bg-ink shadow-ink shadow-hard-10 relative aspect-4/3 overflow-hidden border-4 ${
             even ? "rotate-[1.4deg]" : "rotate-[-1.6deg]"
           }`}
         >

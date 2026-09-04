@@ -37,15 +37,6 @@
   /* 负收紧行距：巨型标题叠排，标准最小是 none(1)；数值 = 倍数×100 */
   --leading-tighter: 0.875;
 
-  /* 硬阴影：纯偏移无模糊。ink 用于纸底元素，paper 用于墨底元素；数值 = 偏移 px */
-  --shadow-ink-2: 2px 2px 0 0 var(--color-ink); /* 悬停按压态 */
-  --shadow-ink-4: 4px 4px 0 0 var(--color-ink); /* 子页面 */
-  --shadow-ink-6: 6px 6px 0 0 var(--color-ink); /* 首页贴纸 / 标签 */
-  --shadow-ink-8: 8px 8px 0 0 var(--color-ink); /* 首页按钮 */
-  --shadow-ink-10: 10px 10px 0 0 var(--color-ink); /* 首页画框 */
-  --shadow-paper-2: 2px 2px 0 0 var(--color-paper); /* 悬停按压态 */
-  --shadow-paper-6: 6px 6px 0 0 var(--color-paper); /* 墨底贴纸 / 标签 */
-
   --animate-grain: grain 8s steps(10) infinite;
   --animate-spin-slow: spin-slow 6s linear infinite;
   --animate-bob: bob 1.2s cubic-bezier(0.19, 1, 0.22, 1) infinite alternate;
@@ -96,6 +87,12 @@
       transform: scaleY(1);
     }
   }
+}
+
+/* ---------- 硬阴影 ---------- */
+
+@utility shadow-hard-* {
+  box-shadow: calc(--value(number) * 1px) calc(--value(number) * 1px) 0 0;
 }
 
 /* ---------- 流式字号（档位与 text-* 命名刻度一致：最小字号与行高取同名刻度，min : preferred : max = 1 : 2vw : 1.5） ---------- */
@@ -242,7 +239,7 @@ html {
 }
 
 .prose pre {
-  @apply border-ink shadow-ink-4 rounded-none border-3;
+  @apply border-ink shadow-ink shadow-hard-4 rounded-none border-3;
 }
 
 .prose pre:has(code.language-mermaid) {
@@ -286,5 +283,5 @@ html {
 }
 
 .prose .diagram {
-  @apply border-ink shadow-ink-4 my-[1.25em] border-3 p-6 text-sm;
+  @apply border-ink shadow-ink shadow-hard-4 my-[1.25em] border-3 p-6 text-sm;
 }

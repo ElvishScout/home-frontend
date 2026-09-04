@@ -24,7 +24,7 @@ export function Projects() {
               </div>
               <span
                 aria-hidden
-                className="border-ink bg-acid font-zh text-fluid-xl text-ink shadow-paper-6 absolute top-[34%] left-[12%] -rotate-3 border-3 px-4 py-2.5 font-black"
+                className="border-ink bg-acid font-zh text-fluid-xl text-ink shadow-paper shadow-hard-6 absolute top-[34%] left-[12%] -rotate-3 border-3 px-4 py-2.5 font-black"
               >
                 开源中 · STAR ME
               </span>

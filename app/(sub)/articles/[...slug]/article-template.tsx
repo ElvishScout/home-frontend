@@ -143,7 +143,7 @@ function NavCard({ dir, item }: { dir: "prev" | "next"; item: ArticleNavItem }) 
   return (
     <Link
       href={item.href}
-      className={`group/nav border-ink shadow-ink-4 relative isolate flex flex-col gap-1.5 overflow-hidden border-2 px-4 py-3.5 transition-[box-shadow,translate] duration-300 hover:translate-0.5 hover:shadow-none ${
+      className={`group/nav border-ink shadow-ink shadow-hard-4 relative isolate flex flex-col gap-1.5 overflow-hidden border-2 px-4 py-3.5 transition-[box-shadow,translate] duration-300 hover:translate-0.5 hover:shadow-none ${
         isPrev ? "" : "col-start-2 items-end text-right"
       }`}
     >
