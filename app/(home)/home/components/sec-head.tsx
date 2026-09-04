@@ -41,7 +41,7 @@ export function SecHead({
       >
         {idx}
       </span>
-      <h2 className="font-zh text-fluid-7 leading-none font-black tracking-wider">
+      <h2 className="font-zh text-fluid-6xl leading-none font-black tracking-wider">
         {zh}
         <span className="font-disp tracking-14 text-stroke-1 text-stroke-current text-fill-transparent mt-4 block text-4xl">
           {en}

@@ -24,7 +24,7 @@ export function Blog() {
   return (
     <Section id="blog" index="03" zh="博客" en="TECH BLOG" dark>
       <div className="col-span-5 flex flex-col">
-        <Reveal className="text-fluid-3.5 max-w-xl leading-snug font-black">
+        <Reveal className="text-fluid-3xl max-w-xl leading-snug font-black">
           好记性不如<em className="bg-acid text-ink px-2 not-italic">烂笔头</em>，
           <br />
           写下来，才算学会。

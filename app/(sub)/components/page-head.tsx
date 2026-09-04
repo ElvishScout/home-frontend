@@ -17,7 +17,7 @@ export function PageHead({
       <span className="bg-ink font-spacemono tracking-20 text-acid inline-block px-2.5 py-1 text-xs font-bold">
         {tag}
       </span>
-      <h1 id={id} className="font-zh text-fluid-4 mt-5 leading-none font-black tracking-wide">
+      <h1 id={id} className="font-zh text-fluid-3xl mt-5 leading-none font-black tracking-wide">
         {title}
       </h1>
       {meta ? <p className="font-spacemono tracking-16 mt-4 text-xs opacity-70">{meta}</p> : null}

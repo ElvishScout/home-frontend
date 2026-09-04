@@ -34,13 +34,17 @@ export function Hero() {
           duration: 0.9,
           ease: "back.out(1.2)",
         })
-        .from(charRefs.current.filter(Boolean), {
-          yPercent: 115,
-          rotate: 6,
-          duration: 0.9,
-          stagger: 0.06,
-          ease: "power4.out",
-        }, "-=0.45")
+        .from(
+          charRefs.current.filter(Boolean),
+          {
+            yPercent: 115,
+            rotate: 6,
+            duration: 0.9,
+            stagger: 0.06,
+            ease: "power4.out",
+          },
+          "-=0.45",
+        )
         .from(
           enRef.current,
           { xPercent: -12, opacity: 0, duration: 0.8, ease: "power3.out" },
@@ -58,12 +62,16 @@ export function Hero() {
           "-=0.35",
         )
         // 条码逐条刷出
-        .from(barRef.current?.children ?? [], {
-          scaleX: 0,
-          transformOrigin: "left center",
-          stagger: 0.02,
-          duration: 0.25,
-        }, "-=0.4")
+        .from(
+          barRef.current?.children ?? [],
+          {
+            scaleX: 0,
+            transformOrigin: "left center",
+            stagger: 0.02,
+            duration: 0.25,
+          },
+          "-=0.4",
+        )
         .from(
           [eyebrowRef.current, lineRef.current, clauseRef.current, hintRef.current],
           { opacity: 0, y: 16, stagger: 0.08, duration: 0.5 },
@@ -91,13 +99,13 @@ export function Hero() {
             <div className="border-ink bg-paper shadow-ink-10 grid border-3 md:grid-cols-[1fr_15rem]">
               {/* 票面 */}
               <div className="relative p-7 max-md:p-5">
-                <div className="font-spacemono tracking-24 border-ink flex items-center justify-between border-b-2 pb-3 text-2xs font-bold max-md:tracking-14 md:mr-40">
+                <div className="font-spacemono tracking-24 border-ink text-2xs max-md:tracking-14 flex items-center justify-between border-b-2 pb-3 font-bold md:mr-40">
                   <span>ADMIT ONE</span>
                   <span>2026 ★ 就此启程</span>
                 </div>
-                <h1 className="leading-95 mt-5 select-none">
+                <h1 className="leading-tighter mt-5 select-none">
                   <div className="overflow-hidden py-1.5">
-                    <span className="font-disp text-fluid-9 inline-block font-black tracking-wide will-change-transform">
+                    <span className="font-disp text-fluid-7xl inline-block font-black tracking-wide will-change-transform">
                       {"ELVISH".split("").map((ch, i) => (
                         <span key={ch} className="inline-block overflow-hidden align-bottom">
                           <span
@@ -115,7 +123,7 @@ export function Hero() {
                   <div className="overflow-hidden py-1.5">
                     <span
                       ref={enRef}
-                      className="font-disp text-fluid-7 text-stroke-ink text-stroke-2.5 ml-[10%] inline-block text-transparent will-change-transform"
+                      className="font-disp text-fluid-6xl text-stroke-ink text-stroke-2.5 ml-[10%] inline-block text-transparent will-change-transform"
                     >
                       SCOUT
                     </span>
@@ -123,7 +131,7 @@ export function Hero() {
                 </h1>
                 <span
                   ref={tagRef}
-                  className="border-ink bg-acid text-fluid-2 tracking-14 shadow-ink-6 mt-5 inline-block border-3 px-5 py-2 font-black"
+                  className="border-ink bg-acid text-fluid-base tracking-14 shadow-ink-6 mt-5 inline-block border-3 px-5 py-2 font-black"
                 >
                   随身携带：模型 · 页面 · 音符
                 </span>
@@ -144,7 +152,7 @@ export function Hero() {
                   aria-hidden
                   className="absolute top-1/2 right-7 flex -translate-y-1/2 items-center gap-3 max-md:hidden"
                 >
-                  <span className="font-disp text-fluid-5 text-stroke-ink text-stroke-2 leading-none text-transparent [writing-mode:vertical-rl]">
+                  <span className="font-disp text-fluid-4xl text-stroke-ink text-stroke-2 leading-none text-transparent [writing-mode:vertical-rl]">
                     NO REFUND
                   </span>
                   <span className="font-spacemono text-2xs tracking-24 font-bold [writing-mode:vertical-rl]">
@@ -156,15 +164,27 @@ export function Hero() {
               {/* 票根 */}
               <div className="border-ink relative flex items-center justify-between gap-6 border-dashed p-6 max-md:border-t-3 md:flex-col md:border-l-3 md:py-8">
                 {/* 打孔缺口：桌面在打孔线两端，移动端在左右两侧 */}
-                <i aria-hidden className="bg-paper border-ink absolute -top-4 -left-4 z-2 h-7 w-7 rounded-full border-3 max-md:hidden" />
-                <i aria-hidden className="bg-paper border-ink absolute -bottom-4 -left-4 z-2 h-7 w-7 rounded-full border-3 max-md:hidden" />
-                <i aria-hidden className="bg-paper border-ink absolute -top-4 -left-4 z-2 h-7 w-7 rounded-full border-3 md:hidden" />
-                <i aria-hidden className="bg-paper border-ink absolute -top-4 -right-4 z-2 h-7 w-7 rounded-full border-3 md:hidden" />
+                <i
+                  aria-hidden
+                  className="bg-paper border-ink absolute -top-4 -left-4 z-2 h-7 w-7 rounded-full border-3 max-md:hidden"
+                />
+                <i
+                  aria-hidden
+                  className="bg-paper border-ink absolute -bottom-4 -left-4 z-2 h-7 w-7 rounded-full border-3 max-md:hidden"
+                />
+                <i
+                  aria-hidden
+                  className="bg-paper border-ink absolute -top-4 -left-4 z-2 h-7 w-7 rounded-full border-3 md:hidden"
+                />
+                <i
+                  aria-hidden
+                  className="bg-paper border-ink absolute -top-4 -right-4 z-2 h-7 w-7 rounded-full border-3 md:hidden"
+                />
 
                 <span className="font-spacemono tracking-24 text-xs font-bold whitespace-nowrap">
                   N°0901
                 </span>
-                <span className="font-zh text-lg font-black tracking-14 whitespace-nowrap md:[writing-mode:vertical-rl]">
+                <span className="font-zh tracking-14 text-lg font-black whitespace-nowrap md:[writing-mode:vertical-rl]">
                   保持训练。
                 </span>
                 <div className="flex flex-col items-center gap-2 max-md:flex-1">
@@ -173,9 +193,7 @@ export function Hero() {
                       <i key={i} className="bg-ink block h-full" style={{ width: w }} />
                     ))}
                   </div>
-                  <span className="font-spacemono text-3xs tracking-24 font-bold">
-                    0901·2026
-                  </span>
+                  <span className="font-spacemono text-3xs tracking-24 font-bold">0901·2026</span>
                 </div>
               </div>
             </div>
@@ -183,7 +201,7 @@ export function Hero() {
             {/* 启程章：斜跨票面右下角 */}
             <div
               ref={stampRef}
-              className="border-scarlet text-scarlet bg-paper font-zh absolute -right-4 -bottom-5 z-3 rotate-[2.5deg] border-4 border-double px-3 py-1.5 text-sm font-black tracking-14 max-md:-right-2"
+              className="border-scarlet text-scarlet bg-paper font-zh tracking-14 absolute -right-4 -bottom-5 z-3 rotate-[2.5deg] border-4 border-double px-3 py-1.5 text-sm font-black max-md:-right-2"
             >
               已启程
             </div>
@@ -200,7 +218,7 @@ export function Hero() {
       <div ref={marqueeRef}>
         <MarqueeRow className="border-ink bg-acid z-3 border-y-3 py-3.5">
           <MarqueeBlock
-            className="font-disp text-fluid-2.5 gap-6.5 pr-6.5 tracking-wider"
+            className="font-disp text-fluid-xl gap-6.5 pr-6.5 tracking-wider"
             items={["TRAIN", "CREATE", "PLAY", "模型", "页面", "音符"]}
           />
         </MarqueeRow>

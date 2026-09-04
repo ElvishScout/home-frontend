@@ -18,13 +18,13 @@ export function Projects() {
               />
               <div
                 aria-hidden
-                className="font-disp text-fluid-13 text-stroke-aqua text-stroke-3 absolute bottom-[4%] left-[3%] leading-none text-transparent"
+                className="font-disp text-fluid-8xl text-stroke-aqua text-stroke-3 absolute bottom-[4%] left-[3%] leading-none text-transparent"
               >
                 &lt;/&gt;
               </div>
               <span
                 aria-hidden
-                className="border-ink bg-acid font-zh text-fluid-2.5 text-ink shadow-paper-6 absolute top-[34%] left-[12%] -rotate-3 border-3 px-4 py-2.5 font-black"
+                className="border-ink bg-acid font-zh text-fluid-xl text-ink shadow-paper-6 absolute top-[34%] left-[12%] -rotate-3 border-3 px-4 py-2.5 font-black"
               >
                 开源中 · STAR ME
               </span>

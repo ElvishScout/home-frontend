@@ -28,7 +28,7 @@ export function RowList({ rows }: { rows: Row[] }) {
             <span className="min-w-0">
               <span
                 title={row.title}
-                className="text-fluid-2 block truncate leading-snug font-black tracking-wide"
+                className="text-fluid-base block truncate leading-snug font-black tracking-wide"
               >
                 {row.title}
               </span>

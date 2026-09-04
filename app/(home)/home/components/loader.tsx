@@ -69,18 +69,18 @@ export function Loader() {
     <div ref={rootRef} className="bg-ink fixed inset-0 z-8000 flex items-center justify-center">
       <div
         ref={pctRef}
-        className="font-spacemono text-fluid-3 text-acid absolute top-6 right-8 font-bold"
+        className="font-spacemono text-fluid-2xl text-acid absolute top-6 right-8 font-bold"
       >
         000%
       </div>
       <div className="text-paper">
         {LINES.map((line, i) => (
-          <div key={line} className="overflow-hidden leading-95">
+          <div key={line} className="leading-tighter overflow-hidden">
             <span
               ref={(el) => {
                 lineRefs.current[i] = el;
               }}
-              className={`font-disp text-fluid-10 block translate-y-[110%] tracking-wide ${
+              className={`font-disp text-fluid-7xl block translate-y-[110%] tracking-wide ${
                 i === 1 ? "text-acid" : ""
               }`}
             >

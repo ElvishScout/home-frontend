@@ -60,7 +60,7 @@ export function EntryList({ items, dark = false }: { items: Entry[]; dark?: bool
             <span className="min-w-0">
               <span
                 title={item.title}
-                className={`text-fluid-2.5 block truncate leading-snug font-black tracking-wide transition-colors duration-300 ${onWipe}`}
+                className={`text-fluid-xl block truncate leading-snug font-black tracking-wide transition-colors duration-300 ${onWipe}`}
               >
                 {item.title}
               </span>

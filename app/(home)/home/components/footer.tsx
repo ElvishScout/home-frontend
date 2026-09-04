@@ -3,7 +3,7 @@ import { MarqueeBlock, MarqueeRow } from "./marquee-row";
 export function Footer() {
   return (
     <footer className="bg-ink text-paper relative pb-8.5">
-      <MarqueeRow className="border-paper/20 font-disp text-fluid-7 text-stroke-paper/80 text-stroke-1.5 border-b py-5.5 tracking-wider text-transparent">
+      <MarqueeRow className="border-paper/20 font-disp text-fluid-6xl text-stroke-paper/80 text-stroke-1.5 border-b py-5.5 tracking-wider text-transparent">
         <MarqueeBlock
           className="[&>.marquee-star]:text-acid [&>.marquee-star]:text-stroke-0 gap-13.5 pr-13.5"
           items={["THANKS FOR SCROLLING", "感谢观看"]}

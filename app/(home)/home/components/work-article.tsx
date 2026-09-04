@@ -70,7 +70,7 @@ export function WorkArticle({
     >
       <div className={`relative col-span-6 ${even ? "order-2" : ""}`}>
         <span
-          className={`font-disp text-fluid-9 text-stroke-ink text-stroke-2.5 absolute -top-17.5 z-3 leading-none text-transparent ${
+          className={`font-disp text-fluid-7xl text-stroke-ink text-stroke-2.5 absolute -top-17.5 z-3 leading-none text-transparent ${
             even ? "-right-5" : "-left-5"
           }`}
         >
@@ -92,7 +92,7 @@ export function WorkArticle({
       <div
         className={`relative z-2 col-span-6 max-lg:pt-12 ${even ? "order-1 text-right max-lg:order-2 max-lg:text-left" : ""}`}
       >
-        <h3 className="text-fluid-3.5 leading-tight font-black tracking-wide">
+        <h3 className="text-fluid-3xl leading-tight font-black tracking-wide">
           <span className="font-disp mb-2 block text-2xl tracking-widest">{en}</span>
           {title}
         </h3>

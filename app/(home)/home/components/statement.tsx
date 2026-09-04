@@ -32,7 +32,7 @@ export function Statement({ className = "" }: { className?: string }) {
   return (
     <p
       ref={ref}
-      className={`text-fluid-4.5 max-w-6xl leading-relaxed font-black tracking-wide ${className}`}
+      className={`text-fluid-4xl max-w-6xl leading-relaxed font-black tracking-wide ${className}`}
     >
       <W>模型、页面、曲子，</W>
       <W>看起来是三件事，</W>

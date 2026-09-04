@@ -38,7 +38,7 @@ export function Music() {
   return (
     <Section id="music" index="04" zh="音乐" en="MUSIC WORKS">
       <div className="order-2 col-span-5 flex flex-col max-lg:order-1">
-        <Reveal className="text-fluid-3.5 max-w-xl leading-snug font-black">
+        <Reveal className="text-fluid-3xl max-w-xl leading-snug font-black">
           写代码靠 <em className="bg-aqua text-ink px-2 not-italic">loop</em>，
           <br />写歌也从 loop 开始。
         </Reveal>

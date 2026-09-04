@@ -28,13 +28,14 @@
   --tracking-24: 0.24em;
   --tracking-30: 0.3em;
 
-  /* 超小字号：标准最小 xs(12px) 之下 */
+  /* 超小字号：标准最小 xs(12px) 之下；行高延续标准刻度每档 -0.25rem 的步进（xs 为 1rem） */
   --text-2xs: 0.625rem; /* 侧轨编号 */
+  --text-2xs--line-height: calc(0.75 / 0.625);
   --text-3xs: 0.5rem; /* 上标数字 */
+  --text-3xs--line-height: calc(0.5 / 0.5);
 
   /* 负收紧行距：巨型标题叠排，标准最小是 none(1)；数值 = 倍数×100 */
-  --leading-92: 0.92;
-  --leading-95: 0.95;
+  --leading-tighter: 0.875;
 
   /* 硬阴影：纯偏移无模糊。ink 用于纸底元素，paper 用于墨底元素；数值 = 偏移 px */
   --shadow-ink-2: 2px 2px 0 0 var(--color-ink); /* 悬停按压态 */
@@ -97,14 +98,67 @@
   }
 }
 
-/* ---------- 流式字号 ---------- */
+/* ---------- 流式字号（档位与 text-* 命名刻度一致：最小字号与行高取同名刻度，min : preferred : max = 1 : 2vw : 1.5） ---------- */
 
-@utility text-fluid-* {
-  font-size: clamp(
-    calc(--value(number) * 0.5rem),
-    calc(--value(number) * 1vw),
-    calc(--value(number) * 0.75rem)
-  );
+@utility text-fluid-3xs {
+  font-size: clamp(0.5rem, 1vw, 0.75rem);
+  line-height: calc(0.5 / 0.5);
+}
+@utility text-fluid-2xs {
+  font-size: clamp(0.625rem, 1.25vw, 0.9375rem);
+  line-height: calc(0.75 / 0.625);
+}
+@utility text-fluid-xs {
+  font-size: clamp(0.75rem, 1.5vw, 1.125rem);
+  line-height: calc(1 / 0.75);
+}
+@utility text-fluid-sm {
+  font-size: clamp(0.875rem, 1.75vw, 1.3125rem);
+  line-height: calc(1.25 / 0.875);
+}
+@utility text-fluid-base {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  line-height: calc(1.5 / 1);
+}
+@utility text-fluid-lg {
+  font-size: clamp(1.125rem, 2.25vw, 1.6875rem);
+  line-height: calc(1.75 / 1.125);
+}
+@utility text-fluid-xl {
+  font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+  line-height: calc(1.75 / 1.25);
+}
+@utility text-fluid-2xl {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: calc(2 / 1.5);
+}
+@utility text-fluid-3xl {
+  font-size: clamp(1.875rem, 3.75vw, 2.8125rem);
+  line-height: calc(2.25 / 1.875);
+}
+@utility text-fluid-4xl {
+  font-size: clamp(2.25rem, 4.5vw, 3.375rem);
+  line-height: calc(2.5 / 2.25);
+}
+@utility text-fluid-5xl {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  line-height: 1;
+}
+@utility text-fluid-6xl {
+  font-size: clamp(3.75rem, 7.5vw, 5.625rem);
+  line-height: 1;
+}
+@utility text-fluid-7xl {
+  font-size: clamp(4.5rem, 9vw, 6.75rem);
+  line-height: 1;
+}
+@utility text-fluid-8xl {
+  font-size: clamp(6rem, 12vw, 9rem);
+  line-height: 1;
+}
+@utility text-fluid-9xl {
+  font-size: clamp(8rem, 16vw, 12rem);
+  line-height: 1;
 }
 
 /* ---------- 自适应旋转角度 ---------- */
