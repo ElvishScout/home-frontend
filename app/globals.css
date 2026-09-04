@@ -107,6 +107,16 @@
   );
 }
 
+/* ---------- 自适应旋转角度 ---------- */
+
+@utility rotate-fluid-* {
+  rotate: calc(atan2(--value(number) * 0.25rem, 100vw));
+}
+
+@utility -rotate-fluid-* {
+  rotate: calc(atan2(--value(number) * -0.25rem, 100vw));
+}
+
 /* ---------- 空心描边字（-webkit-text-stroke 收编：颜色与宽度两个维度自由组合；颜色支持 /透明度 修饰符，宽度 = px 直书） ---------- */
 
 @utility text-stroke-* {
