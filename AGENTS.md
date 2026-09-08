@@ -17,11 +17,9 @@ app/
 ├─ layout.tsx                根布局：next/font 字体变量（Anton / Noto Sans SC / Space Mono / Geist）+ globals.css + 全站噪点（grain.tsx）
 ├─ globals.css               全站设计 token + prose 长文覆盖
 ├─ (home)/                   首页组 —— 不经由 (sub) 外壳
-│  ├─ page.tsx               / → redirect /home
-│  └─ home/                  首页本体（海报模式）
-│     ├─ page.tsx            区块组装：Hero → About → Projects → Blog → Music → Skills → Contact → Footer
-│     ├─ components/         区块与机制组件（chrome=噪点+导航 / loader / scroll-rail / providers=Lenis+SmoothLink / reveal …）
-│     └─ lib/gsap.ts         GSAP + ScrollTrigger 封装
+│  ├─ page.tsx            区块组装：Hero → About → Projects → Blog → Music → Skills → Contact → Footer
+│  ├─ components/         区块与机制组件（chrome=噪点+导航 / loader / scroll-rail / providers=Lenis+SmoothLink / reveal …）
+│  └─ lib/gsap.ts         GSAP + ScrollTrigger 封装
 └─ (sub)/                    子页面组 —— 共享统一外壳
    ├─ layout.tsx             子页面外壳：墨底页眉页脚 + 纸底限宽内容区
    ├─ nav-link.tsx           页眉导航项（当前栏目 acid 高亮）
@@ -82,7 +80,7 @@ STREET POP · 街头波普。气质锚点：街头的、漫画的、波普的—
 - 与内容和功能无关的几何图形、网点、色块充当背景壁纸
 - 装饰性视差（不承载信息的背景元素随滚动乱飘）
 
-## 首页（app/(home)/home）
+## 首页（app/(home)）
 
 海报模式：把全局基因推到极限——能量优先，宁可吵，不可温吞。风格元素必须长在交互与信息里；硬阴影、粗描边、错位拼贴，像手工剪贴，不像软件渲染。
 
