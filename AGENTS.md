@@ -14,7 +14,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ```
 app/
-├─ layout.tsx                根布局：next/font 字体变量（Anton / Noto Sans SC / Space Mono / Geist）+ globals.css + 全站噪点（grain.tsx）
+├─ layout.tsx                根布局：next/font 字体变量（Anton / Noto Sans SC / Space Mono）+ globals.css + 全站噪点（grain.tsx）
 ├─ globals.css               全站设计 token + prose 长文覆盖
 ├─ (home)/                   首页组 —— 不经由 (sub) 外壳
 │  ├─ page.tsx            区块组装：Hero → About → Projects → Blog → Music → Skills → Contact → Footer
