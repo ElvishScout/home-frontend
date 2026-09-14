@@ -287,6 +287,10 @@ html {
   @apply font-math;
 }
 
+.prose math mtd {
+  @apply py-[0.25em];
+}
+
 .prose .diagram {
   @apply border-ink shadow-ink shadow-hard-4 my-[1.25em] border-3 p-6 text-sm;
 }
