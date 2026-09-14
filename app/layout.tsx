@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Anton, Noto_Sans_SC, Space_Mono } from "next/font/google";
+import { Anton, Noto_Sans_Math, Noto_Sans_SC, Space_Mono } from "next/font/google";
 import { Grain } from "./components/grain";
 
 const anton = Anton({
@@ -14,6 +14,11 @@ const notoSansSC = Noto_Sans_SC({
   variable: "--font-noto-sans-sc",
   weight: ["400", "700", "900"],
   subsets: ["latin"],
+});
+
+const notoSansMath = Noto_Sans_Math({
+  variable: "--font-noto-sans-math",
+  weight: ["400"],
 });
 
 const spaceMono = Space_Mono({
@@ -31,7 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="zh-CN"
-      className={`${anton.variable} ${notoSansSC.variable} ${spaceMono.variable} h-full antialiased`}
+      className={`${anton.variable} ${notoSansSC.variable} ${notoSansMath.variable} ${spaceMono.variable} h-full antialiased`}
     >
       <body className="bg-paper font-zh text-ink selection:bg-acid selection:text-ink min-h-full">
         <Grain />
