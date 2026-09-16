@@ -10,10 +10,10 @@ export default async function ArticlesLayout({
   params,
 }: {
   children: ReactNode;
-  params: Promise<{ slug: string[] }>;
+  params: Promise<{ path: string[] }>;
 }) {
-  const { slug } = await params;
-  const article = findArticle(slug);
+  const { path } = await params;
+  const article = findArticle(path);
   if (!article) return notFound();
   const entry = article.entry;
 
@@ -26,7 +26,7 @@ export default async function ArticlesLayout({
 
   return (
     <ArticleTemplate
-      key={slug.join("/")}
+      key={path.join("/")}
       entry={entry}
       prev={navItem(entry.navigation.prev)}
       next={navItem(entry.navigation.next)}

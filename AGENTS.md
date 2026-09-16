@@ -27,11 +27,11 @@ app/
    ├─ articles/              /articles 技术博客
    │  ├─ page.tsx            文章列表（数据来自 virtual:mdx-registry）
    │  ├─ table-of-contents.tsx
-   │  └─ [...slug]/          文章详情；layout.tsx 查 registry 并注入 ArticleTemplate（scroll-spy TOC + prose）
+   │  └─ [...path]/          文章详情；layout.tsx 查 registry 并注入 ArticleTemplate（scroll-spy TOC + prose）
    └─ music/                 /music 音乐创作（占位框架，曲目是 TRACKS 常量）
 
 articles/                    文章源（.md / .mdx），构建期被扫描注册
-lib/articles.ts              slug ↔ registry key ↔ href 换算
+lib/articles.ts              路径段 ↔ registry key ↔ href 换算
 lib/date.ts                  中文长日期格式化
 plugins/mdx-registry/        自写 loader：扫描 articles/**/*.{md,mdx} 生成 virtual:mdx-registry（title / lastModified / headingTree）与 virtual:mdx-components（key → 文章组件的静态懒加载映射）
 public/grain.svg             全站噪点材质
