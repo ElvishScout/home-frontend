@@ -28,8 +28,9 @@ import { gitDates } from "./git-date.mjs";
  * @typedef {Object} ArticleRegistryLoaderOptions
  * @property {string | string[]} [pattern]
  * @property {string | string[]} [exclude]
- * @property {"registry" | "components"} [mode]  默认 "registry"；
- *   "components" 输出 注册表 key → 懒加载文章组件 的静态 import 映射。
+ * @property {"registry" | "components" | "source"} [mode]  默认 "registry"；
+ *   "components" 输出 注册表 key → 懒加载文章组件 的静态 import 映射；
+ *   "source" 输出 注册表 key → 文章原文 的映射（内嵌进 bundle，运行时不再读文件系统）。
  */
 
 /**
@@ -262,6 +263,20 @@ async function articleRegistryLoader(_source) {
         `  ${JSON.stringify(filePosix)}: () => import(${JSON.stringify(`../../${filePosix}`)}),`,
     );
     return `export default {\n${entries.join("\n")}\n};\n`;
+  }
+
+  if (mode === "source") {
+    // 原文内嵌：standalone / serverless 产物只含构建期追踪到的模块，运行时
+    // fs 读不到 articles/，所以 /articles/source 路由从这里取数。
+    /** @type {Record<string, string>} */
+    const sources = {};
+    for (const [i, file] of files.entries()) {
+      const absoluteFile = resolve(this.rootContext, file);
+      this.addDependency(absoluteFile);
+      this.addContextDependency(dirname(absoluteFile));
+      sources[filePosixList[i]] = readFileSync(absoluteFile, "utf8");
+    }
+    return `export default ${serialize(sources, { space: 2 })};\n`;
   }
 
   const dates = await gitDates(filePosixList);
