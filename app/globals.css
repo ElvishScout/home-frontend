@@ -6,7 +6,6 @@
 @theme inline {
   --font-disp: var(--font-anton), var(--font-noto-sans-sc), sans-serif;
   --font-zh: var(--font-noto-sans-sc), sans-serif;
-  --font-math: var(--font-noto-sans-math), math, var(--font-noto-sans-sc), sans-serif;
   --font-spacemono: var(--font-space-mono), var(--font-noto-sans-sc), monospace;
 }
 
@@ -271,24 +270,17 @@ html {
   @apply border-t-3;
 }
 
-.prose .katex .katex-mathml math {
-  @apply overflow-x-auto overflow-y-hidden transition-[scrollbar-color] duration-300 not-hover:scrollbar-thumb-transparent;
-}
-
-.prose .katex .katex-html {
-  @apply hidden;
-}
-
 .prose .katex-display {
-  @apply my-[1.25em];
+  @apply my-[1.25em] overflow-x-auto overflow-y-hidden transition-[scrollbar-color] duration-300 not-hover:scrollbar-thumb-transparent;
 }
 
-.prose math {
-  @apply font-math;
+.prose .katex {
+  @apply text-[1em];
 }
 
-.prose math mtd {
-  @apply py-[0.25em];
+.prose .katex .text,
+.prose .katex .textrm {
+  @apply font-zh;
 }
 
 .prose .diagram {

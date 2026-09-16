@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import registry from "virtual:mdx-registry";
 import { findArticle, registryKeyToHref } from "@/lib/articles";
 import ArticleTemplate from "./article-template";
+import "katex/dist/katex.min.css";
 
 export default async function ArticlesLayout({
   children,
