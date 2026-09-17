@@ -1,0 +1,26 @@
+diff --git a/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs b/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs
+index c814333..ef793c7 100644
+--- a/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs
++++ b/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs
+@@ -685,7 +685,7 @@ async function addHtmlSpan(element, node, width, classes, addBackground = false,
+     div.attr("class", "labelBkg");
+   }
+   const bbox = await fastdom_default2.measure(() => div.node().getBoundingClientRect());
+-  if (bbox.width === width) {
++  if (bbox.width >= width - 1) {
+     div.style("display", "table");
+     div.style("white-space", "break-spaces");
+     div.style("width", width + "px");
+diff --git a/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs b/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs
+index 185b51a..cd05449 100644
+--- a/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs
++++ b/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs
+@@ -1892,7 +1892,7 @@ async function addHtmlSpan(element, node, width, classes, addBackground = false,
+     div.attr("class", "labelBkg");
+   }
+   const bbox = await fastdom_default2.measure(() => div.node().getBoundingClientRect());
+-  if (bbox.width === width) {
++  if (bbox.width >= width - 1) {
+     div.style("display", "table");
+     div.style("white-space", "break-spaces");
+     div.style("width", width + "px");

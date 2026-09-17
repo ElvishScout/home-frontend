@@ -7,6 +7,9 @@ mermaid.initialize({
   fontSize: 16,
   fontFamily: "inherit",
   forceLegacyMathML: true,
+  flowchart: {
+    minNodeWidth: 24,
+  },
 });
 
 const generateDiagramId = (() => {
