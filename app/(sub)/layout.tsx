@@ -11,7 +11,7 @@ export default function SubLayout({ children }: { children: ReactNode }) {
     <div className="flex min-h-svh flex-col">
       <header className="bg-ink text-paper">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/home" className="font-disp flex items-center gap-2 text-lg tracking-wider">
+          <Link href="/" className="font-disp flex items-center gap-2 text-lg tracking-wider">
             <span aria-hidden className="animate-spin-slow inline-block text-base">
               ✦
             </span>
