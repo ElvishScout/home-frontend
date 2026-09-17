@@ -19,6 +19,7 @@ import { gitDates } from "./git-date.mjs";
 // 类型的唯一来源是 plugins/mdx-registry/mdx-registry.d.ts（TS 侧共用）。
 /**
  * @typedef {import("virtual:mdx-registry").ArticleRegistryEntry} ArticleRegistryEntry
+ * @typedef {import("virtual:mdx-registry").HeadingTreeRoot} HeadingTreeRoot
  * @typedef {import("virtual:mdx-registry").HeadingTreeNode} HeadingTreeNode
  */
 
@@ -95,7 +96,7 @@ function collectHeadingIds(out) {
  *   thematic breaks).
  *
  * @param {string} file  Absolute file path.
- * @returns {Promise<{ headingTree: HeadingTreeNode, frontmatter: Record<string, unknown> }>}
+ * @returns {Promise<{ headingTree: HeadingTreeRoot, frontmatter: Record<string, unknown> }>}
  */
 async function readArticle(file) {
   const content = readFileSync(file, "utf8");
@@ -170,17 +171,21 @@ async function readArticle(file) {
 
   // Stack-based nesting: each heading goes under the nearest preceding
   // heading with a strictly smaller level.
-  /** @type {HeadingTreeNode} */
-  const root = { id: "", level: 0, text: "", children: [] };
+  /** @type {HeadingTreeRoot} */
+  const root = { children: [] };
+  /** @type {(HeadingTreeRoot | HeadingTreeNode)[]} */
   const stack = [root];
 
   for (const item of items) {
     /** @type {HeadingTreeNode} */
-    const node = { ...item, children: [] };
-    while (stack.length > 1 && stack[stack.length - 1].level >= node.level) {
+    const node = { ...item };
+    while (
+      stack.length > 1 &&
+      /** @type {HeadingTreeNode} */ (stack[stack.length - 1]).level >= node.level
+    ) {
       stack.pop();
     }
-    stack[stack.length - 1].children.push(node);
+    (stack[stack.length - 1].children ??= []).push(node);
     stack.push(node);
   }
 
@@ -196,6 +201,7 @@ async function readArticle(file) {
 function findFirstH1(nodes) {
   for (const node of nodes) {
     if (node.level === 1) return node;
+    if (!node.children) continue;
     const found = findFirstH1(node.children);
     if (found) return found;
   }
@@ -307,7 +313,7 @@ async function articleRegistryLoader(_source) {
       title:
         typeof frontmatter.title === "string" && frontmatter.title
           ? frontmatter.title
-          : findFirstH1(headingTree.children)?.text,
+          : headingTree.children && findFirstH1(headingTree.children)?.text,
       lastModified: dates.get(filePosix) ?? null,
       frontmatter,
       headingTree,

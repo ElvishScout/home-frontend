@@ -99,7 +99,7 @@ export default function ArticleTemplate({ children, entry, prev, next }: Article
       <div className="min-w-0 grow">
         <div className="mx-auto max-w-3xl">
           <PageHead
-            id={entry.headingTree.children[0]?.id}
+            id={entry.headingTree.children?.[0]?.id}
             tag="ARTICLE"
             title={entry.title ?? "未命名文章"}
             meta={entry.lastModified ? `UPDATED ${formatDate(entry.lastModified)}` : undefined}

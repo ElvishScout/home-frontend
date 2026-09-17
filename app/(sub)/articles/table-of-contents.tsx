@@ -1,9 +1,9 @@
 "use client";
 
-import type { HeadingTreeNode } from "virtual:mdx-registry";
+import type { HeadingTreeRoot, HeadingTreeNode } from "virtual:mdx-registry";
 
 interface TableOfContentsProps {
-  tree: HeadingTreeNode;
+  tree: HeadingTreeRoot;
   activeId: string | null;
   onClick?: (id: string) => void;
 }
@@ -31,7 +31,7 @@ function TocItem({
       >
         {node.text}
       </a>
-      {node.children.length > 0 && (
+      {node.children && node.children.length > 0 && (
         <ul className="border-ink/20 mt-1 ml-1.5 space-y-1 border-l-2 pl-3">
           {node.children.map((child) => (
             <TocItem key={child.id} node={child} activeId={activeId} onClick={onClick} />
