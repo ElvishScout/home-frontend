@@ -3,10 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import mermaid from "mermaid";
 
+const MERMAID_FONT_SIZE = 16;
+
 mermaid.initialize({
-  fontSize: 16,
-  fontFamily: "inherit",
   forceLegacyMathML: true,
+  themeVariables: {
+    fontFamily: "inherit",
+    fontSize: `${MERMAID_FONT_SIZE}px`,
+  },
   flowchart: {
     minNodeWidth: 24,
   },
@@ -60,7 +64,7 @@ export function MermaidDiagram({ code }: { code: string }) {
         ref={wrapperRef}
         className="mx-auto max-w-full"
         // 16 = 根字号：viewBox 宽度从 px 换算成 em，图表跟随正文缩放
-        style={{ width: `calc(${svgWidth / 16} * 1em)` }}
+        style={{ width: `${svgWidth / MERMAID_FONT_SIZE}em` }}
       />
     </div>
   );
