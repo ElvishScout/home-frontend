@@ -33,7 +33,7 @@ app/
 articles/                    文章源（.md / .mdx），构建期被扫描注册
 lib/articles.ts              路径段 ↔ registry key ↔ href 换算
 lib/date.ts                  中文长日期格式化
-plugins/mdx-registry/        自写 loader：扫描 articles/**/*.{md,mdx} 生成 virtual:mdx-registry（title / lastModified / headingTree）、virtual:mdx-components（key → 文章组件的静态懒加载映射）与 virtual:mdx-source（key → 文章原文，供 /articles/source 路由）
+plugins/mdx-registry/        自写 loader：扫描 articles/**/*.{md,mdx} 生成 virtual:mdx-registry（title / lastModified / headingTree）、virtual:mdx-components（key → 文章组件的静态懒加载映射）与 virtual:mdx-source（key → 文章原文，供 /raw/articles 路由）
 public/grain.svg             全站噪点材质
 next.config.ts               @next/mdx 与 mdx-registry 串联（MDX 插件清单与 loader 内的是两份，改动需同步）
 ```
