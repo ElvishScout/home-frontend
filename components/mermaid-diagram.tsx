@@ -6,7 +6,7 @@ import mermaid from "mermaid";
 mermaid.initialize({
   fontSize: 16,
   fontFamily: "inherit",
-  htmlLabels: false,
+  forceLegacyMathML: true,
 });
 
 const generateDiagramId = (() => {
