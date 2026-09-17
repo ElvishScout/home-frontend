@@ -1,5 +1,4 @@
 import registry from "virtual:mdx-registry";
-import { registryKeyToHref } from "@/lib/articles";
 import { formatYearMonth } from "@/lib/date";
 import { Reveal } from "./reveal";
 import { EntryList, MoreLink, type Entry } from "./entry-list";
@@ -16,7 +15,7 @@ const POSTS: Entry[] = ENTRIES.slice(0, 3).map(([key, entry], i) => ({
   title: entry.title ?? entry.path,
   note: entry.path.split("/")[1]?.replaceAll("-", " ").toUpperCase() ?? "",
   meta: entry.lastModified ? formatYearMonth(entry.lastModified) : "",
-  href: registryKeyToHref(key),
+  href: `/${key}`,
 }));
 const UPDATED = ENTRIES[0]?.[1].lastModified ? formatYearMonth(ENTRIES[0][1].lastModified) : "";
 

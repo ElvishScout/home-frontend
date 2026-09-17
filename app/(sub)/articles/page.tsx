@@ -1,5 +1,4 @@
 import registry from "virtual:mdx-registry";
-import { registryKeyToHref } from "@/lib/articles";
 import { formatDate } from "@/lib/date";
 import { PageHead } from "../components/page-head";
 import { RowList } from "../components/row-list";
@@ -27,7 +26,7 @@ export default function ArticlesPage() {
           num: `EP.${String(entries.length - i).padStart(2, "0")}`,
           title: entry.title ?? entry.path,
           meta: entry.lastModified ? formatDate(entry.lastModified) : undefined,
-          href: registryKeyToHref(key),
+          href: `/${key}`,
         }))}
       />
     </>

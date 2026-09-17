@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import registry from "virtual:mdx-registry";
-import { pathToRegistryKey, registryKeyToHref } from "@/lib/articles";
 import ArticleTemplate from "./article-template";
 import "katex/dist/katex.min.css";
 
@@ -13,14 +12,15 @@ export default async function ArticlesLayout({
   params: Promise<{ path: string[] }>;
 }) {
   const { path } = await params;
-  const entry = registry[pathToRegistryKey(path)];
+  const key = `articles/${path.join("/")}`;
+  const entry = registry[key];
   if (!entry) return notFound();
 
   // navigation 在构建期已解析成 registry key，这里换成标题与页面路径传入模板。
   const navItem = (key: string | null) => {
     if (!key) return undefined;
     const target = registry[key];
-    return { href: registryKeyToHref(key), title: target?.title ?? "未命名文章" };
+    return { href: `/${key}`, title: target?.title ?? "未命名文章" };
   };
 
   return (
