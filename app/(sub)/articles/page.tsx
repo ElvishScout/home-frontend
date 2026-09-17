@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default function ArticlesPage() {
-  const entries = Object.values(registry).sort((a, b) => {
+  const entries = Object.entries(registry).sort(([, a], [, b]) => {
     if (!a.lastModified) return 1;
     if (!b.lastModified) return -1;
     return b.lastModified.getTime() - a.lastModified.getTime();
@@ -23,11 +23,11 @@ export default function ArticlesPage() {
         meta={`POSTS ${String(entries.length).padStart(2, "0")}`}
       />
       <RowList
-        rows={entries.map((entry, i) => ({
+        rows={entries.map(([key, entry], i) => ({
           num: `EP.${String(entries.length - i).padStart(2, "0")}`,
           title: entry.title ?? entry.path,
           meta: entry.lastModified ? formatDate(entry.lastModified) : undefined,
-          href: registryKeyToHref(entry.path),
+          href: registryKeyToHref(key),
         }))}
       />
     </>

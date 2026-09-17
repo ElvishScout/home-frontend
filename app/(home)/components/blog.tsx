@@ -6,19 +6,19 @@ import { EntryList, MoreLink, type Entry } from "./entry-list";
 import { Section } from "./section";
 
 /** 按修改时间倒序取最新三篇；编号沿用列表页规则（EP.01 为最旧一篇）。 */
-const ENTRIES = Object.values(registry).sort((a, b) => {
+const ENTRIES = Object.entries(registry).sort(([, a], [, b]) => {
   if (!a.lastModified) return 1;
   if (!b.lastModified) return -1;
   return b.lastModified.getTime() - a.lastModified.getTime();
 });
-const POSTS: Entry[] = ENTRIES.slice(0, 3).map((entry, i) => ({
+const POSTS: Entry[] = ENTRIES.slice(0, 3).map(([key, entry], i) => ({
   num: `EP.${String(ENTRIES.length - i).padStart(2, "0")}`,
   title: entry.title ?? entry.path,
   note: entry.path.split("/")[1]?.replaceAll("-", " ").toUpperCase() ?? "",
   meta: entry.lastModified ? formatYearMonth(entry.lastModified) : "",
-  href: registryKeyToHref(entry.path),
+  href: registryKeyToHref(key),
 }));
-const UPDATED = ENTRIES[0]?.lastModified ? formatYearMonth(ENTRIES[0].lastModified) : "";
+const UPDATED = ENTRIES[0]?.[1].lastModified ? formatYearMonth(ENTRIES[0][1].lastModified) : "";
 
 export function Blog() {
   return (

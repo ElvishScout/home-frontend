@@ -1,6 +1,6 @@
 ---
 navigation:
-  next: multilayer-perceptron.md
+  next: multilayer-perceptron
 ---
 
 # 感知机：一切从一条直线开始

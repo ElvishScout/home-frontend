@@ -31,6 +31,9 @@ import { gitDates } from "./git-date.mjs";
  * @property {"registry" | "components" | "source"} [mode]  默认 "registry"；
  *   "components" 输出 注册表 key → 懒加载文章组件 的静态 import 映射；
  *   "source" 输出 注册表 key → 文章原文 的映射（内嵌进 bundle，运行时不再读文件系统）。
+ *
+ * 注册表 key 为不含扩展名的相对路径（articles/foo/bar）；同名 .md 与 .mdx
+ * 共用一个 key，glob 顺序靠后的文件覆盖靠前的。
  */
 
 /**
@@ -200,16 +203,23 @@ function findFirstH1(nodes) {
 }
 
 /**
+ * 将文件路径转为 registry key
+ *
+ * @param {string} path 包含扩展名的文件路径
+ */
+function keyOf(path) {
+  return path.replace(/\.mdx?$/, "");
+}
+
+/**
  * Resolve a frontmatter navigation target to a registry key.
  *
  * Accepted forms:
  * - absolute: `/articles/llm/foo`（可带 `.md` / `.mdx` 后缀）— 路由路径原样换算；
  * - relative: `bar.md`、`../baz.mdx` — 相对当前文章所在目录解析。
  *
- * 不带后缀时先按 `.mdx` 计，不存在再由调用方退回 `.md`。
- *
  * @param {string} value  frontmatter 里的 prev / next 值
- * @param {string} fromKey  当前文章的 registry key（posix 相对路径）
+ * @param {string} fromKey  当前文章的 registry key
  * @returns {string} 目标文章的 registry key
  */
 function resolveNavigationKey(value, fromKey) {
@@ -224,7 +234,7 @@ function resolveNavigationKey(value, fromKey) {
   } else {
     key = posix.join(posix.dirname(fromKey), value);
   }
-  return /\.mdx?$/.test(key) ? key : `${key}.mdx`;
+  return key;
 }
 
 /**
@@ -260,7 +270,7 @@ async function articleRegistryLoader(_source) {
     }
     const entries = filePosixList.map(
       (filePosix) =>
-        `  ${JSON.stringify(filePosix)}: () => import(${JSON.stringify(`../../${filePosix}`)}),`,
+        `  ${JSON.stringify(keyOf(filePosix))}: () => import(${JSON.stringify(`../../${filePosix}`)}),`,
     );
     return `export default {\n${entries.join("\n")}\n};\n`;
   }
@@ -274,7 +284,7 @@ async function articleRegistryLoader(_source) {
       const absoluteFile = resolve(this.rootContext, file);
       this.addDependency(absoluteFile);
       this.addContextDependency(dirname(absoluteFile));
-      sources[filePosixList[i]] = readFileSync(absoluteFile, "utf8");
+      sources[keyOf(filePosixList[i])] = readFileSync(absoluteFile, "utf8");
     }
     return `export default ${serialize(sources, { space: 2 })};\n`;
   }
@@ -292,7 +302,7 @@ async function articleRegistryLoader(_source) {
     const filePosix = filePosixList[i];
     const { headingTree, frontmatter } = await readArticle(absoluteFile);
 
-    entries[filePosix] = {
+    entries[keyOf(filePosix)] = {
       path: filePosix,
       title:
         typeof frontmatter.title === "string" && frontmatter.title
@@ -306,7 +316,7 @@ async function articleRegistryLoader(_source) {
   }
 
   // 第二遍解析 navigation：目标不在 registry 里（如系列文章还没写到下一篇）时留空，不报错。
-  for (const entry of Object.values(entries)) {
+  for (const [key, entry] of Object.entries(entries)) {
     const nav = entry.frontmatter.navigation;
     if (nav === undefined || nav === null) continue;
     if (typeof nav !== "object") {
@@ -318,12 +328,7 @@ async function articleRegistryLoader(_source) {
       if (typeof value !== "string" || !value) {
         throw new Error(`Invalid navigation.${dir} in ${entry.path}: expected a non-empty string`);
       }
-      let target = resolveNavigationKey(value, entry.path);
-      // 显式写了后缀的目标不做扩展名兜底；只有不带后缀时 .mdx 不存在才退回 .md。
-      if (!entries[target] && !/\.mdx?$/.test(value) && target.endsWith(".mdx")) {
-        const mdTarget = `${target.slice(0, -".mdx".length)}.md`;
-        if (entries[mdTarget]) target = mdTarget;
-      }
+      let target = resolveNavigationKey(value, key);
       if (!entries[target]) continue;
       entry.navigation[dir] = target;
     }

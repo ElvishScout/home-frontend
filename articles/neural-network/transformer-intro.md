@@ -1,6 +1,6 @@
 ---
 navigation:
-  prev: attention.md
+  prev: attention
 ---
 
 # Transformer 入门：注意力就是全部

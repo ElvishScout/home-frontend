@@ -1,7 +1,7 @@
 ---
 navigation:
-  prev: sequence-modeling.md
-  next: transformer-intro.md
+  prev: sequence-modeling
+  next: transformer-intro
 ---
 
 # 注意力：可微的查表

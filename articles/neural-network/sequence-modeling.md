@@ -1,7 +1,7 @@
 ---
 navigation:
-  prev: training-deep-networks.md
-  next: attention.md
+  prev: training-deep-networks
+  next: attention
 ---
 
 # 序列建模：RNN 与它的记忆瓶颈

@@ -1,7 +1,7 @@
 ---
 navigation:
-  prev: optimization.md
-  next: sequence-modeling.md
+  prev: optimization
+  next: sequence-modeling
 ---
 
 # 深层的代价：梯度消失、初始化与归一化
