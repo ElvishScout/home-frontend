@@ -33,8 +33,10 @@ app/
 articles/                    文章源（.md / .mdx），构建期被扫描注册
 lib/date.ts                  中文长日期格式化
 plugins/mdx-registry/        自写 loader：扫描 articles/**/*.{md,mdx} 生成 virtual:mdx-registry（title / lastModified / headingTree）、virtual:mdx-components（key → 文章组件的静态懒加载映射）与 virtual:mdx-source（key → 文章原文，供 /raw 路由）
+plugins/remark-mermaid.mjs   把 mermaid 代码块换成 <MermaidDiagram> 组件节点
+plugins/remark-mdx-image.mjs 把正文图片换成 <ImageViewer> 组件节点，相对路径展开成 static import
 public/grain.svg             全站噪点材质
-next.config.ts               @next/mdx 与 mdx-registry 串联（MDX 插件清单与 loader 内的是两份，改动需同步）
+next.config.ts               @next/mdx 与 mdx-registry 串联（MDX 插件清单与 loader 内的是两份：frontmatter / gfm / slug 需同步，只改标题集合之外的插件——mermaid、图片——不必）
 ```
 
 关键机制：
@@ -42,6 +44,7 @@ next.config.ts               @next/mdx 与 mdx-registry 串联（MDX 插件清�
 - **路由分组决定布局归属**：`(home)` 与 `(sub)` 平级，URL 不受影响；子页面外壳只写在 `(sub)/layout.tsx`，新增子页面放进 `(sub)` 组即自动获得外壳。
 - **virtual:mdx-registry**：文章元信息（标题、修改时间、标题树）在构建期生成，列表页与详情页都从这里取数；写新文章只需在 `articles/` 放 `.md` 或 `.mdx`。
 - **virtual:mdx-components**：文章组件的静态 import 映射，详情页经它加载正文。文章 import 路径必须静态（含变量的动态 import 被 Turbopack 拒绝，import.meta.glob 跨目录引服务端组件有已知 bug），故由 loader 在构建期展开；生成路径相对 stub 文件（plugins/mdx-registry/）解析，移动 stub 需同步改 loader 前缀。
+- **正文图片**：markdown 的 `![alt](./x.png)` 经 `plugins/remark-mdx-image.mjs` 换成 `<ImageViewer>` 组件节点，相对路径在编译期展开成 static import；组件本体在 `mdx-components.tsx` 注册，与 `MermaidDiagram` 同款。站点绝对路径与外链不走 import，但同样换成 `<ImageViewer>`——一篇文章里图片的渲染路径只有一条。作者手写的 `<img>` 编译成字面量 `"img"`，插件看不到也拦不到，正文里一律用 markdown 语法（详见 `articles/CLAUDE.md`）。
 - **样式取值先查 theme token**：`globals.css` 的 `@theme` / `@utility` 已收编全站的设计签名样式（流式字号、超宽字距、行距、硬阴影、描边字等），新增样式时优先复用；确需新的签名值就更新/新增 token，不要在组件里平行另写。一次性使用的元素大小、位置、transform 等布局值可以直接写任意值。
 
 ---

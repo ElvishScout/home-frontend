@@ -5,7 +5,8 @@ import { createMdxRegistry } from "./plugins/mdx-registry";
 // MDX 插件必须以可序列化形式传入（字符串路径，不能是函数引用），
 // 否则 Turbopack/webpack 无法把 loader options 传给 Rust 侧。
 // mdx-registry loader 重建管线时只同步 remark-frontmatter / remark-gfm / rehype-slug，
-// 不引入 remark-mermaid——registry 只取标题与 frontmatter，代码块改写与它无关。
+// 不引入 remark-mermaid 与 remark-mdx-image——registry 只取标题与 frontmatter，
+// 代码块改写和图片路径改写都不影响标题集合，故无需在 loader 里同步这两份。
 const plugins = [
   createMDX({
     extension: /\.(md|mdx)$/,
@@ -16,6 +17,7 @@ const plugins = [
         require.resolve("remark-gfm"),
         require.resolve("remark-math"),
         require.resolve("./plugins/remark-mermaid.mjs"),
+        require.resolve("./plugins/remark-mdx-image.mjs"),
       ],
     },
   }),

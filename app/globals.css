@@ -42,6 +42,8 @@
   --animate-bob: bob 1.2s cubic-bezier(0.19, 1, 0.22, 1) infinite alternate;
   --animate-mq: mq 22s linear infinite;
   --animate-eq: eq 1s ease-in-out infinite alternate;
+  --animate-zoom-wipe: zoom-wipe 320ms cubic-bezier(0.19, 1, 0.22, 1);
+  --animate-zoom-figure: zoom-figure 320ms cubic-bezier(0.19, 1, 0.22, 1);
 
   @keyframes grain {
     0%,
@@ -85,6 +87,23 @@
     }
     to {
       transform: scaleY(1);
+    }
+  }
+  /* 遮罩从上擦入 + 内容放大——规范禁止纯 opacity 入场，缩放与擦除都是允许的那一类 */
+  @keyframes zoom-wipe {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes zoom-figure {
+    from {
+      transform: scale(0.92);
+    }
+    to {
+      transform: scale(1);
     }
   }
 }
@@ -285,4 +304,76 @@ html {
 
 .prose .diagram {
   @apply border-ink shadow-ink shadow-hard-4 my-[1.25em] border-3 p-6 text-sm;
+}
+
+.prose .image-viewer {
+  @apply border-ink shadow-ink shadow-hard-4 rounded-none border-3;
+}
+
+/* mermaid 图：宽度由 mermaid 量出的 viewBox 决定（--diagram-width 单位是 em，
+   1em = .diagram 的 text-sm = 14px）。全屏那份由 .zoom-content 接管。 */
+.diagram .diagram-figure {
+  @apply mx-auto block max-w-full;
+  width: calc(var(--diagram-width, 100) * 1em);
+}
+
+.diagram .diagram-figure > svg {
+  @apply block h-auto w-full;
+}
+
+/* ---------- 全屏查看器（components/zoom-viewer.tsx） ---------- */
+
+.zoom-trigger {
+  @apply block w-full cursor-zoom-in;
+}
+
+.zoom-overlay {
+  @apply bg-ink/95 fixed inset-0 z-8000 outline-none;
+}
+
+.zoom-stage {
+  /* 内缩一圈：内容不贴边，四周留出能点击关闭的空白区。
+     clientWidth/Height 就是可用区域，zoom-viewer 按它算含入比例。 */
+  @apply absolute inset-x-8 inset-y-16 flex touch-none items-center justify-center overflow-hidden select-none;
+  cursor: grab;
+}
+
+.zoom-stage:active {
+  cursor: grabbing;
+}
+
+.zoom-figure {
+  @apply flex h-full w-full items-center justify-center;
+}
+
+/* 尺寸由 zoom-viewer 按「固有尺寸 × 含入比例 × 用户缩放」直接写进来，
+   所以这里是精确宽高比，子元素填满即可（等价于 contain，但会重新栅格化）。 */
+.zoom-content {
+  /* shrink-0 不能少：作为 flex 项时默认会被压回容器宽度，
+     显式写进去的尺寸就失效了，放大等于没放大 */
+  @apply flex shrink-0 items-center justify-center;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.zoom-content img,
+.zoom-content .diagram-figure,
+.zoom-content .diagram-figure > svg {
+  @apply block h-full w-full;
+}
+
+/* 遮罩是墨底，而图片和 mermaid 都是按纸底画的：透明 PNG 和图表压在墨底上会看不清。
+   垫一块纸——盒子正好等于内容尺寸（.zoom-content 已被写成精确的固有尺寸），
+   对不透明的图完全不可见，缩放时跟着一起变大。 */
+.zoom-content img,
+.zoom-content .diagram-figure {
+  @apply bg-paper;
+}
+
+.zoom-close {
+  @apply border-paper text-paper shadow-paper shadow-hard-4 font-spacemono tracking-18 group-hover/zoom:text-ink ease-expo absolute top-6 right-6 isolate flex items-center gap-2 overflow-hidden border-2 px-3 py-2 text-xs font-bold transition-colors duration-500;
+}
+
+.zoom-hint {
+  @apply text-paper/60 font-spacemono tracking-16 text-2xs pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-bold;
 }
