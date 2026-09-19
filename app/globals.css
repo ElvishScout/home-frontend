@@ -111,7 +111,8 @@
 /* ---------- 硬阴影 ---------- */
 
 @utility shadow-hard-* {
-  box-shadow: calc(--value(number) * 1px) calc(--value(number) * 1px) 0 0;
+  box-shadow: calc(--value(number) * 1px) calc(--value(number) * 1px) 0 0
+    var(--tw-shadow-color, #000000);
 }
 
 /* ---------- 流式字号（档位与 text-* 命名刻度一致：最小字号与行高取同名刻度，min : preferred : max = 1 : 2vw : 1.5） ---------- */
@@ -323,39 +324,6 @@ html {
 
 /* ---------- 全屏查看器（components/zoom-viewer.tsx） ---------- */
 
-.zoom-trigger {
-  @apply block w-full cursor-zoom-in;
-}
-
-.zoom-overlay {
-  @apply bg-ink/95 fixed inset-0 z-8000 outline-none;
-}
-
-.zoom-stage {
-  /* 内缩一圈：内容不贴边，四周留出能点击关闭的空白区。
-     clientWidth/Height 就是可用区域，zoom-viewer 按它算含入比例。 */
-  @apply absolute inset-x-8 inset-y-16 flex touch-none items-center justify-center overflow-hidden select-none;
-  cursor: grab;
-}
-
-.zoom-stage:active {
-  cursor: grabbing;
-}
-
-.zoom-figure {
-  @apply flex h-full w-full items-center justify-center;
-}
-
-/* 尺寸由 zoom-viewer 按「固有尺寸 × 含入比例 × 用户缩放」直接写进来，
-   所以这里是精确宽高比，子元素填满即可（等价于 contain，但会重新栅格化）。 */
-.zoom-content {
-  /* shrink-0 不能少：作为 flex 项时默认会被压回容器宽度，
-     显式写进去的尺寸就失效了，放大等于没放大 */
-  @apply flex shrink-0 items-center justify-center;
-  transform-origin: center center;
-  will-change: transform;
-}
-
 .zoom-content img,
 .zoom-content .diagram-figure,
 .zoom-content .diagram-figure > svg {
@@ -368,12 +336,4 @@ html {
 .zoom-content img,
 .zoom-content .diagram-figure {
   @apply bg-paper;
-}
-
-.zoom-close {
-  @apply border-paper text-paper shadow-paper shadow-hard-4 font-spacemono tracking-18 group-hover/zoom:text-ink ease-expo absolute top-6 right-6 isolate flex items-center gap-2 overflow-hidden border-2 px-3 py-2 text-xs font-bold transition-colors duration-500;
-}
-
-.zoom-hint {
-  @apply text-paper/60 font-spacemono tracking-16 text-2xs pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-bold;
 }

@@ -97,7 +97,7 @@ export function MermaidDiagram({ code }: { code: string }) {
 
   return (
     <div className={diagram ? "diagram" : "diagram hidden"}>
-      <ZoomViewer label="图表" overlayContent={diagram ? figure(diagram.full) : undefined}>
+      <ZoomViewer label="图表">
         {diagram ? figure(diagram.inline) : <span className="diagram-figure" />}
       </ZoomViewer>
     </div>

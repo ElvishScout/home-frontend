@@ -33,15 +33,7 @@ const DELTA_UNIT: Record<number, number> = { 0: 1, 1: 16, 2: 100 };
  * 遮罩 portal 到 document.body：既躲开 .prose 的正文排版继承，也不受祖先
  * transform 影响。只在打开时渲染，SSR 阶段不会碰到 document。
  */
-export function ZoomViewer({
-  label,
-  children,
-  overlayContent,
-}: {
-  label: string;
-  children: ReactNode;
-  overlayContent?: ReactNode;
-}) {
+export function ZoomViewer({ label, children }: { label: string; children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -61,7 +53,7 @@ export function ZoomViewer({
       <button
         ref={triggerRef}
         type="button"
-        className="zoom-trigger"
+        className="block w-full cursor-zoom-in"
         aria-label={`全屏查看：${label}`}
         onClick={() => setOpen(true)}
       >
@@ -70,7 +62,7 @@ export function ZoomViewer({
       {open &&
         createPortal(
           <ZoomOverlay label={label} onClose={close}>
-            {overlayContent ?? children}
+            {children}
           </ZoomOverlay>,
           document.body,
         )}
@@ -358,7 +350,7 @@ function ZoomOverlay({
       role="dialog"
       aria-modal="true"
       aria-label={label}
-      className="zoom-overlay animate-zoom-wipe motion-reduce:animate-none"
+      className="animate-zoom-wipe bg-ink/95 fixed inset-0 z-8000 outline-none motion-reduce:animate-none"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -369,30 +361,36 @@ function ZoomOverlay({
       // 拖拽手势变成原生拖放
       onDragStart={(event) => event.preventDefault()}
     >
-      <div ref={stageRef} className="zoom-stage">
-        <div className="zoom-figure animate-zoom-figure motion-reduce:animate-none">
-          <div ref={contentRef} className="zoom-content">
+      <div
+        ref={stageRef}
+        className="absolute inset-x-8 inset-y-16 flex cursor-grab touch-none items-center justify-center overflow-hidden select-none active:cursor-grabbing"
+      >
+        <div className="animate-zoom-figure flex h-full w-full items-center justify-center motion-reduce:animate-none">
+          <div
+            ref={contentRef}
+            className="zoom-content flex shrink-0 origin-center items-center justify-center will-change-transform"
+          >
             {children}
           </div>
         </div>
       </div>
 
       <button
-        ref={closeRef}
-        type="button"
-        data-zoom-ui
+        className="group/close hover:text-ink border-paper text-paper bg-ink tracking-18 font-spacemono ease-expo shadow-paper shadow-hard-4 hover:shadow-hard-1 absolute top-6 right-6 isolate flex items-center gap-2 overflow-hidden border-2 px-3 py-2 text-xs font-bold transition-all duration-500 hover:translate-x-0.5 hover:translate-y-0.5"
         onClick={onClose}
-        className="zoom-close group/zoom"
       >
         <span
           aria-hidden
-          className="bg-acid ease-expo absolute inset-0 -z-10 transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/zoom:[clip-path:inset(0_0_0_0)]"
+          className="bg-paper ease-expo absolute inset-0 -z-10 transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/close:[clip-path:inset(0_0_0_0)]"
         />
         <span aria-hidden>✕</span>
         关闭
       </button>
 
-      <p aria-hidden className="zoom-hint">
+      <p
+        aria-hidden
+        className="text-paper/60 font-spacemono tracking-16 text-2xs pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-bold"
+      >
         滚轮 / 双指缩放 · 拖动平移 · 双击归位 · Esc 退出
       </p>
     </div>
