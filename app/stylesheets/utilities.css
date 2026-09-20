@@ -3,8 +3,8 @@
 /* ---------- 硬阴影 ---------- */
 
 @utility shadow-hard-* {
-  box-shadow: calc(--value(number) * 1px) calc(--value(number) * 1px) 0 0
-    var(--tw-shadow-color, #000000);
+  --shadow-size: calc(--value(number) * 1px);
+  box-shadow: var(--shadow-size) var(--shadow-size) 0 0 var(--tw-shadow-color, #000000);
 }
 
 /* ---------- 流式字号（档位与 text-* 命名刻度一致：最小字号与行高取同名刻度，min : preferred : max = 1 : 2vw : 1.5） ---------- */
@@ -122,5 +122,18 @@
 
   &:hover::before {
     clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ---------- 硬阴影按钮 ---------- */
+
+@utility button-hard-* {
+  --shadow-size: calc(--value(number) * 1px);
+  box-shadow: var(--shadow-size) var(--shadow-size) 0 0 var(--tw-shadow-color, #000000);
+  @apply transition-all duration-500 ease-expo;
+
+  &:hover {
+    --shadow-size: calc(--value(number) * 0.5px);
+    translate: var(--shadow-size) var(--shadow-size);
   }
 }

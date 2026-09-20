@@ -376,7 +376,7 @@ function ZoomOverlay({
       </div>
 
       <button
-        className="group/close wipe-paper absolute top-6 right-6 isolate flex items-center gap-2 overflow-hidden border-2 border-paper bg-ink px-3 py-2 font-spacemono text-xs font-bold tracking-18 text-paper shadow-hard-4 shadow-paper transition-all duration-500 ease-expo hover:translate-x-0.5 hover:translate-y-0.5 hover:text-ink hover:shadow-hard-1"
+        className="group/close wipe-paper absolute top-6 right-6 isolate flex button-hard-4 items-center gap-2 overflow-hidden border-2 border-paper bg-ink px-3 py-2 font-spacemono text-xs font-bold tracking-18 text-paper shadow-paper hover:text-ink"
         onClick={onClose}
       >
         <span aria-hidden>✕</span>

@@ -96,14 +96,12 @@ export function MoreLink({
 }) {
   const wipe = dark ? "wipe-acid" : "wipe-ink";
   const onWipe = dark ? "group-hover/link:text-ink" : "group-hover/link:text-paper";
-  const shadow = dark
-    ? "shadow-paper shadow-hard-6 hover:shadow-hard-2"
-    : "shadow-ink shadow-hard-6 hover:shadow-hard-2";
+  const shadow = dark ? "shadow-paper button-hard-6" : "shadow-ink button-hard-6";
 
   return (
     <Link
       href={href}
-      className={`group/link relative isolate inline-flex items-center gap-3 overflow-hidden border-3 border-current px-6 py-3 font-spacemono text-sm font-bold tracking-16 transition-all duration-500 ease-expo hover:translate-x-1 hover:translate-y-1 ${shadow} ${wipe}`}
+      className={`group/link relative isolate inline-flex items-center gap-3 overflow-hidden border-3 border-current px-6 py-3 font-spacemono text-sm font-bold tracking-16 ${shadow} ${wipe}`}
     >
       <span className={`transition-colors duration-300 ${onWipe}`}>{label}</span>
       <span
