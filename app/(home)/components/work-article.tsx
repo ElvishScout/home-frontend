@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { gsap, prefersReducedMotion } from "../lib/gsap";
-import { SmoothLink } from "./providers";
+import Link from "next/link";
 
 export function WorkArticle({
   index,
@@ -15,6 +15,7 @@ export function WorkArticle({
   tags,
   linkHref = "#contact",
   linkLabel = "查看详情",
+  external = false,
 }: {
   index: string;
   even: boolean;
@@ -26,7 +27,10 @@ export function WorkArticle({
   tags: string[];
   linkHref?: string;
   linkLabel?: string;
+  external?: boolean;
 }) {
+  const LinkLike = external ? "a" : Link;
+
   const rootRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
 
@@ -111,17 +115,17 @@ export function WorkArticle({
             </li>
           ))}
         </ul>
-        <a
+        <LinkLike
           href={linkHref}
-          target="_blank"
-          rel="noreferrer"
+          target={external ? "_blank" : undefined}
+          rel={external ? "noreferrer" : undefined}
           className="group/link wipe-acid relative isolate mt-6.5 inline-flex items-center gap-3 overflow-hidden py-2.5 font-spacemono text-sm font-bold tracking-16"
         >
           <span>{linkLabel}</span>
           <span className="inline-block text-lg transition-transform duration-500 ease-expo group-hover/link:translate-x-2.5">
-            ↗
+            {external ? "↗" : "→"}
           </span>
-        </a>
+        </LinkLike>
       </div>
     </article>
   );

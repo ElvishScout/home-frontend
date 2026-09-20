@@ -39,6 +39,7 @@ export function Projects() {
           tags={["NEXT.JS", "GSAP", "STREET POP"]}
           linkHref="https://github.com/"
           linkLabel="源码在 GITHUB"
+          external
         />
       </div>
     </Section>

@@ -5,10 +5,29 @@ export const metadata = {
   title: "音乐创作",
 };
 
+/* 占位：曲目暂无落地页，href 统一指向页顶锚点 */
 const TRACKS: Row[] = [
-  { num: "TRK.01", title: "四和弦也能打", note: "LOOP · C MAJ · 92 BPM", meta: "01:36" },
-  { num: "TRK.02", title: "左手先学会走路", note: "PRACTICE · A MIN · 76 BPM", meta: "02:04" },
-  { num: "TRK.03", title: "给新番 OP 的仿写练习", note: "DEMO · 128 BPM", meta: "01:12" },
+  {
+    num: "TRK.01",
+    title: "四和弦也能打",
+    href: "#",
+    note: "LOOP · C MAJ · 92 BPM",
+    meta: "01:36",
+  },
+  {
+    num: "TRK.02",
+    title: "左手先学会走路",
+    href: "#",
+    note: "PRACTICE · A MIN · 76 BPM",
+    meta: "02:04",
+  },
+  {
+    num: "TRK.03",
+    title: "给新番 OP 的仿写练习",
+    href: "#",
+    note: "DEMO · 128 BPM",
+    meta: "01:12",
+  },
 ];
 
 export default function MusicPage() {

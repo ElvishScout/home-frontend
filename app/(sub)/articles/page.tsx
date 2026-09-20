@@ -25,8 +25,8 @@ export default function ArticlesPage() {
         rows={entries.map(([key, entry], i) => ({
           num: `EP.${String(entries.length - i).padStart(2, "0")}`,
           title: entry.title ?? entry.path,
-          meta: entry.lastModified ? formatDate(entry.lastModified) : undefined,
           href: `/${key}`,
+          meta: entry.lastModified ? formatDate(entry.lastModified) : undefined,
         }))}
       />
     </>
