@@ -38,8 +38,8 @@ export function Music() {
   return (
     <Section id="music" index="04" zh="音乐" en="MUSIC WORKS">
       <div className="order-2 col-span-5 flex flex-col max-lg:order-1">
-        <Reveal className="text-fluid-3xl max-w-xl leading-snug font-black">
-          写代码靠 <em className="bg-aqua text-ink px-2 not-italic">loop</em>，
+        <Reveal className="max-w-xl text-fluid-3xl leading-snug font-black">
+          写代码靠 <em className="bg-aqua px-2 text-ink not-italic">loop</em>，
           <br />
           写歌也从 loop 开始。
         </Reveal>
@@ -48,11 +48,11 @@ export function Music() {
             {EQ_BARS.map((bar, i) => (
               <i
                 key={i}
-                className={`animate-eq w-2 origin-bottom motion-reduce:animate-none ${bar.h} ${bar.bg} ${bar.delay}`}
+                className={`w-2 origin-bottom animate-eq motion-reduce:animate-none ${bar.h} ${bar.bg} ${bar.delay}`}
               />
             ))}
           </span>
-          <span className="font-spacemono tracking-14 text-xs leading-loose opacity-70">
+          <span className="font-spacemono text-xs leading-loose tracking-14 opacity-70">
             STATUS: LOOP 阶段
             <br />
             TARGET: ONE FULL TRACK

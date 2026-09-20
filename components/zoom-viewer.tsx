@@ -350,7 +350,7 @@ function ZoomOverlay({
       role="dialog"
       aria-modal="true"
       aria-label={label}
-      className="animate-zoom-wipe bg-ink/95 fixed inset-0 z-8000 outline-none motion-reduce:animate-none"
+      className="fixed inset-0 z-8000 animate-zoom-wipe bg-ink/95 outline-none motion-reduce:animate-none"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -365,7 +365,7 @@ function ZoomOverlay({
         ref={stageRef}
         className="absolute inset-x-8 inset-y-16 flex cursor-grab touch-none items-center justify-center overflow-hidden select-none active:cursor-grabbing"
       >
-        <div className="animate-zoom-figure flex h-full w-full items-center justify-center motion-reduce:animate-none">
+        <div className="flex h-full w-full animate-zoom-figure items-center justify-center motion-reduce:animate-none">
           <div
             ref={contentRef}
             className="zoom-content flex shrink-0 origin-center items-center justify-center will-change-transform"
@@ -376,7 +376,7 @@ function ZoomOverlay({
       </div>
 
       <button
-        className="group/close wipe-paper hover:text-ink border-paper text-paper bg-ink tracking-18 font-spacemono ease-expo shadow-paper shadow-hard-4 hover:shadow-hard-1 absolute top-6 right-6 isolate flex items-center gap-2 overflow-hidden border-2 px-3 py-2 text-xs font-bold transition-all duration-500 hover:translate-x-0.5 hover:translate-y-0.5"
+        className="group/close wipe-paper absolute top-6 right-6 isolate flex items-center gap-2 overflow-hidden border-2 border-paper bg-ink px-3 py-2 font-spacemono text-xs font-bold tracking-18 text-paper shadow-hard-4 shadow-paper transition-all duration-500 ease-expo hover:translate-x-0.5 hover:translate-y-0.5 hover:text-ink hover:shadow-hard-1"
         onClick={onClose}
       >
         <span aria-hidden>✕</span>
@@ -385,7 +385,7 @@ function ZoomOverlay({
 
       <p
         aria-hidden
-        className="text-paper/60 font-spacemono tracking-16 text-2xs pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-bold"
+        className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-spacemono text-2xs font-bold tracking-16 text-paper/60"
       >
         滚轮 / 双指缩放 · 拖动平移 · 双击归位 · Esc 退出
       </p>

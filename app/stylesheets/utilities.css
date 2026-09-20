@@ -117,7 +117,7 @@
   &::before {
     content: "";
     clip-path: inset(0 100% 0 0);
-    @apply ease-expo absolute inset-0 -z-10 block bg-[--value(--color-*)] transition-[clip-path] duration-500;
+    @apply absolute inset-0 -z-10 block bg-[--value(--color-*)] transition-[clip-path] duration-500 ease-expo;
   }
 
   &:hover::before {

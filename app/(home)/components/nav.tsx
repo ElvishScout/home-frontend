@@ -15,9 +15,9 @@ export function Nav() {
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         <SmoothLink
           href="#top"
-          className="font-disp flex items-center gap-2 text-xl tracking-wider"
+          className="flex items-center gap-2 font-disp text-xl tracking-wider"
         >
-          <span className="animate-spin-slow inline-block text-lg max-md:hidden">✦</span>
+          <span className="inline-block animate-spin-slow text-lg max-md:hidden">✦</span>
           ELVISH&nbsp;SCOUT
         </SmoothLink>
         <ul className="flex gap-7 max-md:gap-2.5">
@@ -25,13 +25,13 @@ export function Nav() {
             <li key={item.href}>
               <SmoothLink
                 href={item.href}
-                className="group font-spacemono tracking-12 max-md:text-3xs relative block py-1 text-xs font-bold max-md:tracking-wider"
+                className="group relative block py-1 font-spacemono text-xs font-bold tracking-12 max-md:text-3xs max-md:tracking-wider"
               >
-                <sup className="text-3xs mr-0.5 opacity-60 max-md:hidden">{item.sup}</sup>
+                <sup className="mr-0.5 text-3xs opacity-60 max-md:hidden">{item.sup}</sup>
                 {item.label}
                 <span
                   aria-hidden
-                  className="ease-expo absolute bottom-0 left-0 h-0.5 w-full origin-right scale-x-0 bg-white transition-transform duration-500 group-hover:origin-left group-hover:scale-x-100"
+                  className="absolute bottom-0 left-0 h-0.5 w-full origin-right scale-x-0 bg-white transition-transform duration-500 ease-expo group-hover:origin-left group-hover:scale-x-100"
                 />
               </SmoothLink>
             </li>

@@ -35,7 +35,7 @@ export function SecHead({
   return (
     <div ref={ref} className="mb-[9vh] flex flex-wrap items-baseline gap-5">
       <span
-        className={`font-spacemono inline-block -rotate-3 px-2.5 py-1 text-sm font-bold tracking-widest ${
+        className={`inline-block -rotate-3 px-2.5 py-1 font-spacemono text-sm font-bold tracking-widest ${
           dark ? "bg-acid text-ink" : "bg-ink text-acid"
         }`}
       >
@@ -43,7 +43,7 @@ export function SecHead({
       </span>
       <h2 className="font-zh text-fluid-6xl leading-none font-black tracking-wider">
         {zh}
-        <span className="font-disp tracking-14 text-stroke-1 text-stroke-current text-fill-transparent mt-4 block text-4xl">
+        <span className="mt-4 block font-disp text-4xl tracking-14 text-fill-transparent text-stroke-1 text-stroke-current">
           {en}
         </span>
       </h2>

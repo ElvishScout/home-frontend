@@ -25,14 +25,14 @@ function TocItem({
         href={`#${node.id}`}
         aria-current={active ? "location" : undefined}
         className={`inline-block px-1.5 py-0.5 text-sm leading-snug transition-colors duration-300 ${
-          active ? "bg-acid text-ink font-bold" : "text-ink/60 hover:text-ink"
+          active ? "bg-acid font-bold text-ink" : "text-ink/60 hover:text-ink"
         }`}
         onClick={() => onClick?.(node.id)}
       >
         {node.text}
       </a>
       {node.children && node.children.length > 0 && (
-        <ul className="border-ink/20 mt-1 ml-1.5 space-y-1 border-l-2 pl-3">
+        <ul className="mt-1 ml-1.5 space-y-1 border-l-2 border-ink/20 pl-3">
           {node.children.map((child) => (
             <TocItem key={child.id} node={child} activeId={activeId} onClick={onClick} />
           ))}
@@ -49,7 +49,7 @@ export default function TableOfContents({ tree, activeId, onClick }: TableOfCont
 
   return (
     <nav aria-label="目录">
-      <p className="font-spacemono tracking-22 mb-4 text-xs font-bold opacity-60">INDEX</p>
+      <p className="mb-4 font-spacemono text-xs font-bold tracking-22 opacity-60">INDEX</p>
       <ul className="space-y-1.5">
         {tree.children.map((node) => (
           <TocItem key={node.id} node={node} activeId={activeId} onClick={onClick} />

@@ -33,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="zh-CN"
       className={`${anton.variable} ${notoSansSC.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="bg-paper font-zh text-ink selection:bg-acid selection:text-ink min-h-full">
+      <body className="min-h-full bg-paper font-zh text-ink selection:bg-acid selection:text-ink">
         <Grain />
         {children}
       </body>

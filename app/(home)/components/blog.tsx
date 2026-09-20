@@ -23,12 +23,12 @@ export function Blog() {
   return (
     <Section id="blog" index="03" zh="博客" en="TECH BLOG" dark>
       <div className="col-span-5 flex flex-col">
-        <Reveal className="text-fluid-3xl max-w-xl leading-snug font-black">
-          好记性不如<em className="bg-acid text-ink px-2 not-italic">烂笔头</em>，
+        <Reveal className="max-w-xl text-fluid-3xl leading-snug font-black">
+          好记性不如<em className="bg-acid px-2 text-ink not-italic">烂笔头</em>，
           <br />
           写下来，才算学会。
         </Reveal>
-        <Reveal className="font-spacemono tracking-14 mt-8 text-xs leading-loose opacity-70">
+        <Reveal className="mt-8 font-spacemono text-xs leading-loose tracking-14 opacity-70">
           POSTS {String(ENTRIES.length).padStart(2, "0")}
           <br />
           UPDATED {UPDATED}

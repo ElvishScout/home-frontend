@@ -14,28 +14,28 @@ export function RowList({ rows }: { rows: Row[] }) {
     "group wipe-acid relative isolate grid grid-cols-[auto_1fr_auto] items-baseline gap-x-6 overflow-hidden px-4 py-5 max-md:gap-x-4 max-md:px-3";
 
   return (
-    <ul className="border-ink border-b-3">
+    <ul className="border-b-3 border-ink">
       {rows.map((row) => {
         const inner = (
           <>
-            <span className="font-spacemono tracking-18 pt-1 text-xs font-bold opacity-60">
+            <span className="pt-1 font-spacemono text-xs font-bold tracking-18 opacity-60">
               {row.num}
             </span>
             <span className="min-w-0">
               <span
                 title={row.title}
-                className="text-fluid-base block truncate leading-snug font-black tracking-wide"
+                className="block truncate text-fluid-base leading-snug font-black tracking-wide"
               >
                 {row.title}
               </span>
               {row.note ? (
-                <span className="font-spacemono tracking-20 mt-1 block text-xs font-bold opacity-60">
+                <span className="mt-1 block font-spacemono text-xs font-bold tracking-20 opacity-60">
                   {row.note}
                 </span>
               ) : null}
             </span>
             {row.meta ? (
-              <span className="font-spacemono tracking-14 text-xs font-bold max-md:hidden">
+              <span className="font-spacemono text-xs font-bold tracking-14 max-md:hidden">
                 {row.meta}
               </span>
             ) : null}
@@ -43,7 +43,7 @@ export function RowList({ rows }: { rows: Row[] }) {
         );
 
         return (
-          <li key={`${row.num}-${row.title}`} className="border-ink border-t-3">
+          <li key={`${row.num}-${row.title}`} className="border-t-3 border-ink">
             {row.href ? (
               <Link href={row.href} className={rowClass}>
                 {inner}

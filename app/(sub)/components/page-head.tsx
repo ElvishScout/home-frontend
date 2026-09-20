@@ -13,14 +13,14 @@ export function PageHead({
   meta?: ReactNode;
 }) {
   return (
-    <header className="border-ink mb-14 max-md:mb-10">
-      <span className="bg-ink font-spacemono tracking-20 text-acid inline-block px-2.5 py-1 text-xs font-bold">
+    <header className="mb-14 border-ink max-md:mb-10">
+      <span className="inline-block bg-ink px-2.5 py-1 font-spacemono text-xs font-bold tracking-20 text-acid">
         {tag}
       </span>
-      <h1 id={id} className="font-zh text-fluid-3xl mt-5 leading-none font-black tracking-wide">
+      <h1 id={id} className="mt-5 font-zh text-fluid-3xl leading-none font-black tracking-wide">
         {title}
       </h1>
-      {meta ? <p className="font-spacemono tracking-16 mt-4 text-xs opacity-70">{meta}</p> : null}
+      {meta ? <p className="mt-4 font-spacemono text-xs tracking-16 opacity-70">{meta}</p> : null}
     </header>
   );
 }

@@ -55,30 +55,30 @@ export function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="bg-paper relative overflow-hidden px-12 py-[16vh] text-center max-md:px-6 max-md:py-[12vh]"
+      className="relative overflow-hidden bg-paper px-12 py-[16vh] text-center max-md:px-6 max-md:py-[12vh]"
     >
       <span
         ref={eyebrowRef}
-        className="bg-scarlet font-spacemono tracking-30 text-paper mb-[4vh] inline-block -rotate-2 px-4.5 py-1.5 text-sm font-bold"
+        className="mb-[4vh] inline-block -rotate-2 bg-scarlet px-4.5 py-1.5 font-spacemono text-sm font-bold tracking-30 text-paper"
       >
         06 / CONTACT — 聊模型、页面，还是新番？
       </span>
       <h2 ref={bigRef} className="group font-disp text-fluid-8xl leading-none select-none">
-        <span ref={l1Ref} className="text-ink block">
+        <span ref={l1Ref} className="block text-ink">
           LET&apos;S
         </span>
         <span
           ref={l2Ref}
-          className="ease-expo group-hover:text-acid text-stroke-ink text-stroke-2.5 block text-transparent transition-colors duration-500"
+          className="block text-transparent transition-colors duration-500 ease-expo text-stroke-2.5 text-stroke-ink group-hover:text-acid"
         >
           TALK
         </span>
       </h2>
       <a
         href="mailto:elvishscoutustc@gmail.com"
-        className="group/mail wipe-ink border-ink bg-paper font-spacemono text-fluid-base ease-expo shadow-ink shadow-hard-8 hover:shadow-hard-2 relative isolate mt-[6vh] inline-block overflow-hidden border-3 px-8 py-3 font-bold tracking-wider transition-all duration-500 hover:translate-x-1 hover:translate-y-1"
+        className="group/mail wipe-ink relative isolate mt-[6vh] inline-block overflow-hidden border-3 border-ink bg-paper px-8 py-3 font-spacemono text-fluid-base font-bold tracking-wider shadow-hard-8 shadow-ink transition-all duration-500 ease-expo hover:translate-x-1 hover:translate-y-1 hover:shadow-hard-2"
       >
-        <span className="group-hover/mail:text-acid relative transition-colors duration-500">
+        <span className="relative transition-colors duration-500 group-hover/mail:text-acid">
           elvishscoutustc@gmail.com
         </span>
       </a>
@@ -87,7 +87,7 @@ export function Contact() {
           <a
             key={social}
             href="#"
-            className="border-ink font-spacemono tracking-14 ease-expo hover:bg-ink hover:text-aqua border-2 px-5.5 py-3 text-xs font-bold transition-colors duration-300"
+            className="border-2 border-ink px-5.5 py-3 font-spacemono text-xs font-bold tracking-14 transition-colors duration-300 ease-expo hover:bg-ink hover:text-aqua"
           >
             {social}
           </a>

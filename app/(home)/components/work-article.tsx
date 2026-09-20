@@ -68,7 +68,7 @@ export function WorkArticle({
     >
       <div className={`relative col-span-6 ${even ? "order-2" : ""}`}>
         <span
-          className={`font-disp text-fluid-7xl text-stroke-ink text-stroke-2.5 absolute -top-17.5 z-3 leading-none text-transparent ${
+          className={`absolute -top-17.5 z-3 font-disp text-fluid-7xl leading-none text-transparent text-stroke-2.5 text-stroke-ink ${
             even ? "-right-5" : "-left-5"
           }`}
         >
@@ -76,12 +76,12 @@ export function WorkArticle({
         </span>
         <div
           ref={frameRef}
-          className={`border-ink bg-ink shadow-ink shadow-hard-10 relative aspect-4/3 overflow-hidden border-4 ${
+          className={`relative aspect-4/3 overflow-hidden border-4 border-ink bg-ink shadow-hard-10 shadow-ink ${
             even ? "rotate-[1.4deg]" : "rotate-[-1.6deg]"
           }`}
         >
           <div
-            className={`ease-expo absolute inset-0 transition-transform duration-900 group-hover:scale-110 group-hover:rotate-1 ${artClass ?? ""}`}
+            className={`absolute inset-0 transition-transform duration-900 ease-expo group-hover:scale-110 group-hover:rotate-1 ${artClass ?? ""}`}
           >
             {art}
           </div>
@@ -91,7 +91,7 @@ export function WorkArticle({
         className={`relative z-2 col-span-6 max-lg:pt-12 ${even ? "order-1 text-right max-lg:order-2 max-lg:text-left" : ""}`}
       >
         <h3 className="text-fluid-3xl leading-tight font-black tracking-wide">
-          <span className="font-disp mb-2 block text-2xl tracking-widest">{en}</span>
+          <span className="mb-2 block font-disp text-2xl tracking-widest">{en}</span>
           {title}
         </h3>
         <p
@@ -105,7 +105,7 @@ export function WorkArticle({
           {tags.map((tag) => (
             <li
               key={tag}
-              className="border-ink bg-paper font-spacemono group-hover:bg-ink group-hover:text-acid border-2 px-3 py-1 text-xs font-bold tracking-widest transition-colors duration-300"
+              className="border-2 border-ink bg-paper px-3 py-1 font-spacemono text-xs font-bold tracking-widest transition-colors duration-300 group-hover:bg-ink group-hover:text-acid"
             >
               {tag}
             </li>
@@ -115,10 +115,10 @@ export function WorkArticle({
           href={linkHref}
           target="_blank"
           rel="noreferrer"
-          className="group/link wipe-acid font-spacemono tracking-16 relative isolate mt-6.5 inline-flex items-center gap-3 overflow-hidden py-2.5 text-sm font-bold"
+          className="group/link wipe-acid relative isolate mt-6.5 inline-flex items-center gap-3 overflow-hidden py-2.5 font-spacemono text-sm font-bold tracking-16"
         >
           <span>{linkLabel}</span>
-          <span className="ease-expo inline-block text-lg transition-transform duration-500 group-hover/link:translate-x-2.5">
+          <span className="inline-block text-lg transition-transform duration-500 ease-expo group-hover/link:translate-x-2.5">
             ↗
           </span>
         </a>

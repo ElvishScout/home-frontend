@@ -11,8 +11,8 @@ export default function SubLayout({ children }: { children: ReactNode }) {
     <div className="flex min-h-svh flex-col">
       <header className="bg-ink text-paper">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/" className="font-disp flex items-center gap-2 text-lg tracking-wider">
-            <span aria-hidden className="animate-spin-slow inline-block text-base">
+          <Link href="/" className="flex items-center gap-2 font-disp text-lg tracking-wider">
+            <span aria-hidden className="inline-block animate-spin-slow text-base">
               ✦
             </span>
             ELVISH&nbsp;SCOUT
@@ -29,12 +29,12 @@ export default function SubLayout({ children }: { children: ReactNode }) {
       <footer className="bg-ink text-paper">
         <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-6 py-5">
           <span className="font-disp text-sm tracking-wider">ELVISH&nbsp;SCOUT</span>
-          <span className="font-spacemono tracking-18 text-xs opacity-60">
+          <span className="font-spacemono text-xs tracking-18 opacity-60">
             CODE ✦ MUSIC ✦ ANIME
           </span>
           <a
             href="mailto:elvishscoutustc@gmail.com"
-            className="font-spacemono tracking-14 hover:text-acid text-xs transition-colors duration-300"
+            className="font-spacemono text-xs tracking-14 transition-colors duration-300 hover:text-acid"
           >
             elvishscoutustc@gmail.com
           </a>

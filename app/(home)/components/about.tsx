@@ -26,21 +26,21 @@ export function About() {
         </p>
       </Reveal>
 
-      <div className="bg-paper col-span-5 grid grid-cols-2 gap-0.75 p-0.75">
+      <div className="col-span-5 grid grid-cols-2 gap-0.75 bg-paper p-0.75">
         {STATS.map((stat) => (
           <div key={stat.label} className="overflow-hidden">
-            <Reveal className="bg-ink relative h-full px-5.5 py-6.5">
+            <Reveal className="relative h-full bg-ink px-5.5 py-6.5">
               {stat.count !== undefined ? (
                 <StatNum
                   count={stat.count}
-                  className={`font-disp text-fluid-4xl block leading-none ${stat.color}`}
+                  className={`block font-disp text-fluid-4xl leading-none ${stat.color}`}
                 />
               ) : (
-                <span className={`font-disp text-fluid-4xl block leading-none ${stat.color}`}>
+                <span className={`block font-disp text-fluid-4xl leading-none ${stat.color}`}>
                   {stat.value}
                 </span>
               )}
-              <span className="font-spacemono tracking-18 mt-2.5 block text-xs opacity-70">
+              <span className="mt-2.5 block font-spacemono text-xs tracking-18 opacity-70">
                 {stat.label}
               </span>
             </Reveal>

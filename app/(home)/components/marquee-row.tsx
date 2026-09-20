@@ -90,7 +90,7 @@ export function MarqueeRow({
       </span>
       <div
         ref={trackRef}
-        className={`animate-mq inline-flex w-fit will-change-transform ${reverse ? "[animation-direction:reverse]" : ""}`}
+        className={`inline-flex w-fit animate-mq will-change-transform ${reverse ? "[animation-direction:reverse]" : ""}`}
         style={duration ? { animationDuration: `${duration}s` } : undefined}
       >
         {Array.from({ length: repeat }, (_, i) => (

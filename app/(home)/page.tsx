@@ -29,7 +29,7 @@ export default function HomePage() {
           <About />
 
           <div className="relative z-4">
-            <div className="border-ink bg-acid h-6.5 w-full border-y-3" />
+            <div className="h-6.5 w-full border-y-3 border-ink bg-acid" />
           </div>
 
           <Projects />
@@ -38,7 +38,7 @@ export default function HomePage() {
           <Skills />
 
           <div className="relative z-4">
-            <div className="border-ink h-4.5 w-full border-y-3 bg-[repeating-conic-gradient(var(--color-ink)_0%_25%,var(--color-paper)_0%_50%)] bg-size-[26px_26px]" />
+            <div className="h-4.5 w-full border-y-3 border-ink bg-[repeating-conic-gradient(var(--color-ink)_0%_25%,var(--color-paper)_0%_50%)] bg-size-[26px_26px]" />
           </div>
 
           <Contact />

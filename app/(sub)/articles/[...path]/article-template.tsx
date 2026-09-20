@@ -107,7 +107,7 @@ export default function ArticleTemplate({ children, entry, prev, next }: Article
           <main ref={mainRef} className="prose max-w-full! [&>h1:first-child]:hidden">
             {children}
           </main>
-          <footer className="border-ink mt-16 border-t-3 pt-6">
+          <footer className="mt-16 border-t-3 border-ink pt-6">
             {(prev || next) && (
               <nav className="mb-8 grid grid-cols-2 gap-4">
                 {prev ? <NavCard dir="prev" item={prev} /> : <span />}
@@ -116,11 +116,11 @@ export default function ArticleTemplate({ children, entry, prev, next }: Article
             )}
             <Link
               href="/articles"
-              className="group/link wipe-acid font-spacemono tracking-16 relative isolate inline-flex items-center gap-3 overflow-hidden py-2 text-xs font-bold"
+              className="group/link wipe-acid relative isolate inline-flex items-center gap-3 overflow-hidden py-2 font-spacemono text-xs font-bold tracking-16"
             >
               <span
                 aria-hidden
-                className="ease-expo inline-block transition-transform duration-500 group-hover/link:-translate-x-1.5"
+                className="inline-block transition-transform duration-500 ease-expo group-hover/link:-translate-x-1.5"
               >
                 ←
               </span>
@@ -139,14 +139,14 @@ function NavCard({ dir, item }: { dir: "prev" | "next"; item: ArticleNavItem }) 
   return (
     <Link
       href={item.href}
-      className={`group/nav wipe-ink border-ink shadow-ink shadow-hard-4 relative isolate flex flex-col gap-1.5 overflow-hidden border-2 px-4 py-3.5 transition-[box-shadow,translate] duration-300 hover:translate-0.5 hover:shadow-none ${
+      className={`group/nav wipe-ink relative isolate flex flex-col gap-1.5 overflow-hidden border-2 border-ink px-4 py-3.5 shadow-hard-4 shadow-ink transition-[box-shadow,translate] duration-300 hover:translate-0.5 hover:shadow-none ${
         isPrev ? "" : "col-start-2 items-end text-right"
       }`}
     >
-      <span className="font-spacemono tracking-16 group-hover/nav:text-paper flex items-center gap-2 text-xs font-bold">
+      <span className="flex items-center gap-2 font-spacemono text-xs font-bold tracking-16 group-hover/nav:text-paper">
         <span
           aria-hidden
-          className={`ease-expo inline-block transition-transform duration-500 ${
+          className={`inline-block transition-transform duration-500 ease-expo ${
             isPrev ? "group-hover/nav:-translate-x-1" : "group-hover/nav:translate-x-1"
           }`}
         >
@@ -154,7 +154,7 @@ function NavCard({ dir, item }: { dir: "prev" | "next"; item: ArticleNavItem }) 
         </span>
         {isPrev ? "PREV" : "NEXT"}
       </span>
-      <span className="font-zh group-hover/nav:text-paper text-sm leading-snug font-black">
+      <span className="font-zh text-sm leading-snug font-black group-hover/nav:text-paper">
         {item.title}
       </span>
     </Link>

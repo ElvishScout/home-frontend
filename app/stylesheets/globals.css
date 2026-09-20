@@ -7,7 +7,7 @@
 /* ---------- 页面滚动条 ---------- */
 
 * {
-  @apply scrollbar-thumb-ink scrollbar-track-paper scrollbar-thin;
+  @apply scrollbar-thin scrollbar-thumb-ink scrollbar-track-paper;
 }
 
 html {
@@ -42,11 +42,11 @@ html {
 }
 
 .prose a {
-  @apply hover:bg-acid decoration-2 underline-offset-3;
+  @apply decoration-2 underline-offset-3 hover:bg-acid;
 }
 
 .prose pre {
-  @apply border-ink shadow-ink shadow-hard-4 rounded-none border-3;
+  @apply rounded-none border-3 border-ink shadow-hard-4 shadow-ink;
 }
 
 .prose pre:has(code.language-mermaid) {
@@ -54,7 +54,7 @@ html {
 }
 
 .prose :where(code):not(:where(pre code)) {
-  @apply bg-acid rounded-none px-[0.3em] py-[0.1em] font-bold;
+  @apply rounded-none bg-acid px-[0.3em] py-[0.1em] font-bold;
 }
 .prose :where(code):not(:where(pre code))::before {
   @apply content-none;
@@ -91,11 +91,11 @@ html {
 }
 
 .prose .diagram {
-  @apply border-ink shadow-ink shadow-hard-4 my-[1.25em] border-3 p-6 text-sm;
+  @apply my-[1.25em] border-3 border-ink p-6 text-sm shadow-hard-4 shadow-ink;
 }
 
 .prose .image-viewer {
-  @apply border-ink shadow-ink shadow-hard-4 rounded-none border-3;
+  @apply rounded-none border-3 border-ink shadow-hard-4 shadow-ink;
 }
 
 /* mermaid 图：宽度由 mermaid 量出的 viewBox 决定（--diagram-width 单位是 em，
