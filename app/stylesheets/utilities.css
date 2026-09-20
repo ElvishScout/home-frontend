@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* ---------- 硬阴影 ---------- */
+
+@utility shadow-hard-* {
+  box-shadow: calc(--value(number) * 1px) calc(--value(number) * 1px) 0 0
+    var(--tw-shadow-color, #000000);
+}
+
+/* ---------- 流式字号（档位与 text-* 命名刻度一致：最小字号与行高取同名刻度，min : preferred : max = 1 : 2vw : 1.5） ---------- */
+
+@utility text-fluid-3xs {
+  font-size: clamp(0.5rem, 1vw, 0.75rem);
+  line-height: calc(0.5 / 0.5);
+}
+@utility text-fluid-2xs {
+  font-size: clamp(0.625rem, 1.25vw, 0.9375rem);
+  line-height: calc(0.75 / 0.625);
+}
+@utility text-fluid-xs {
+  font-size: clamp(0.75rem, 1.5vw, 1.125rem);
+  line-height: calc(1 / 0.75);
+}
+@utility text-fluid-sm {
+  font-size: clamp(0.875rem, 1.75vw, 1.3125rem);
+  line-height: calc(1.25 / 0.875);
+}
+@utility text-fluid-base {
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  line-height: calc(1.5 / 1);
+}
+@utility text-fluid-lg {
+  font-size: clamp(1.125rem, 2.25vw, 1.6875rem);
+  line-height: calc(1.75 / 1.125);
+}
+@utility text-fluid-xl {
+  font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+  line-height: calc(1.75 / 1.25);
+}
+@utility text-fluid-2xl {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: calc(2 / 1.5);
+}
+@utility text-fluid-3xl {
+  font-size: clamp(1.875rem, 3.75vw, 2.8125rem);
+  line-height: calc(2.25 / 1.875);
+}
+@utility text-fluid-4xl {
+  font-size: clamp(2.25rem, 4.5vw, 3.375rem);
+  line-height: calc(2.5 / 2.25);
+}
+@utility text-fluid-5xl {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  line-height: 1;
+}
+@utility text-fluid-6xl {
+  font-size: clamp(3.75rem, 7.5vw, 5.625rem);
+  line-height: 1;
+}
+@utility text-fluid-7xl {
+  font-size: clamp(4.5rem, 9vw, 6.75rem);
+  line-height: 1;
+}
+@utility text-fluid-8xl {
+  font-size: clamp(6rem, 12vw, 9rem);
+  line-height: 1;
+}
+@utility text-fluid-9xl {
+  font-size: clamp(8rem, 16vw, 12rem);
+  line-height: 1;
+}
+
+/* ---------- 自适应旋转角度 ---------- */
+
+@utility rotate-fluid-* {
+  rotate: calc(atan2(--value(number) * 0.25rem, 100vw));
+}
+
+@utility -rotate-fluid-* {
+  rotate: calc(atan2(--value(number) * -0.25rem, 100vw));
+}
+
+/* ---------- 空心描边字（-webkit-text-stroke 收编：颜色与宽度两个维度自由组合；颜色支持 /透明度 修饰符，宽度 = px 直书） ---------- */
+
+@utility text-stroke-* {
+  -webkit-text-stroke-width: calc(--value(number) * 1px);
+  -webkit-text-stroke-color: --value(--color-*);
+  -webkit-text-stroke-color: color-mix(
+    in srgb,
+    --value(--color-*) calc(--modifier(number) * 1%),
+    transparent
+  );
+}
+
+@utility text-stroke-current {
+  -webkit-text-stroke-color: currentColor;
+}
+
+@utility text-fill-* {
+  -webkit-text-fill-color: --value(--color-*);
+  -webkit-text-fill-color: color-mix(
+    in srgb,
+    --value(--color-*) calc(--modifier(number) * 1%),
+    transparent
+  );
+}
+
+@utility text-fill-transparent {
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------- 扫过背景 ---------- */
+
+@utility wipe-* {
+  @apply relative;
+
+  &::before {
+    content: "";
+    clip-path: inset(0 100% 0 0);
+    @apply ease-expo absolute inset-0 -z-10 block bg-[--value(--color-*)] transition-[clip-path] duration-500;
+  }
+
+  &:hover::before {
+    clip-path: inset(0 0 0 0);
+  }
+}

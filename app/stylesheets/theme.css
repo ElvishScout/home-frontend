@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/* ---------- 全局设计 token（设计规范 · 全局规范） ---------- */
+
+@theme inline {
+  --font-disp: var(--font-anton), var(--font-noto-sans-sc), sans-serif;
+  --font-zh: var(--font-noto-sans-sc), sans-serif;
+  --font-spacemono: var(--font-space-mono), var(--font-noto-sans-sc), monospace;
+}
+
+@theme {
+  --color-paper: #f2f0e9;
+  --color-ink: #111110;
+  --color-acid: #ffe306;
+  --color-scarlet: #e60012;
+  --color-aqua: #00ffe2;
+
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+  /* 超宽字距：mono 标签签名，标准刻度到 widest(0.1em) 为止；数值 = em×100 */
+  --tracking-12: 0.12em;
+  --tracking-14: 0.14em;
+  --tracking-16: 0.16em;
+  --tracking-18: 0.18em;
+  --tracking-20: 0.2em;
+  --tracking-22: 0.22em;
+  --tracking-24: 0.24em;
+  --tracking-30: 0.3em;
+
+  /* 超小字号：标准最小 xs(12px) 之下；行高延续标准刻度每档 -0.25rem 的步进（xs 为 1rem） */
+  --text-2xs: 0.625rem; /* 侧轨编号 */
+  --text-2xs--line-height: calc(0.75 / 0.625);
+  --text-3xs: 0.5rem; /* 上标数字 */
+  --text-3xs--line-height: calc(0.5 / 0.5);
+
+  /* 负收紧行距：巨型标题叠排，标准最小是 none(1)；数值 = 倍数×100 */
+  --leading-tighter: 0.875;
+
+  --animate-grain: grain 8s steps(10) infinite;
+  --animate-spin-slow: spin-slow 6s linear infinite;
+  --animate-bob: bob 1.2s cubic-bezier(0.19, 1, 0.22, 1) infinite alternate;
+  --animate-mq: mq 22s linear infinite;
+  --animate-eq: eq 1s ease-in-out infinite alternate;
+  --animate-zoom-wipe: zoom-wipe 320ms cubic-bezier(0.19, 1, 0.22, 1);
+  --animate-zoom-figure: zoom-figure 320ms cubic-bezier(0.19, 1, 0.22, 1);
+
+  @keyframes grain {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+    10% {
+      transform: translate(-5%, -8%);
+    }
+    30% {
+      transform: translate(3%, -12%);
+    }
+    50% {
+      transform: translate(8%, 4%);
+    }
+    70% {
+      transform: translate(-8%, 8%);
+    }
+    90% {
+      transform: translate(4%, 3%);
+    }
+  }
+  @keyframes spin-slow {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes bob {
+    to {
+      transform: translateY(6px);
+    }
+  }
+  @keyframes mq {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes eq {
+    from {
+      transform: scaleY(0.25);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+  /* 遮罩从上擦入 + 内容放大——规范禁止纯 opacity 入场，缩放与擦除都是允许的那一类 */
+  @keyframes zoom-wipe {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes zoom-figure {
+    from {
+      transform: scale(0.92);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+}

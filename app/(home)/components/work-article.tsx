@@ -15,7 +15,6 @@ export function WorkArticle({
   tags,
   linkHref = "#contact",
   linkLabel = "查看详情",
-  linkExternal = false,
 }: {
   index: string;
   even: boolean;
@@ -27,7 +26,6 @@ export function WorkArticle({
   tags: string[];
   linkHref?: string;
   linkLabel?: string;
-  linkExternal?: boolean;
 }) {
   const rootRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
@@ -113,31 +111,17 @@ export function WorkArticle({
             </li>
           ))}
         </ul>
-        {(() => {
-          const linkClass =
-            "group/link relative isolate mt-6.5 inline-flex items-center gap-3 overflow-hidden py-2.5 font-spacemono text-sm font-bold tracking-16";
-          const inner = (
-            <>
-              <span
-                aria-hidden
-                className="bg-acid ease-expo absolute inset-0 -z-10 transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/link:[clip-path:inset(0_0_0_0)]"
-              />
-              <span>{linkLabel}</span>
-              <span className="ease-expo inline-block text-lg transition-transform duration-500 group-hover/link:translate-x-2.5">
-                {linkExternal ? "↗" : "→"}
-              </span>
-            </>
-          );
-          return linkExternal ? (
-            <a href={linkHref} target="_blank" rel="noreferrer" className={linkClass}>
-              {inner}
-            </a>
-          ) : (
-            <SmoothLink href={linkHref} className={linkClass}>
-              {inner}
-            </SmoothLink>
-          );
-        })()}
+        <a
+          href={linkHref}
+          target="_blank"
+          rel="noreferrer"
+          className="group/link wipe-acid font-spacemono tracking-16 relative isolate mt-6.5 inline-flex items-center gap-3 overflow-hidden py-2.5 text-sm font-bold"
+        >
+          <span>{linkLabel}</span>
+          <span className="ease-expo inline-block text-lg transition-transform duration-500 group-hover/link:translate-x-2.5">
+            ↗
+          </span>
+        </a>
       </div>
     </article>
   );

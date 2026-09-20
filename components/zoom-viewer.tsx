@@ -376,13 +376,9 @@ function ZoomOverlay({
       </div>
 
       <button
-        className="group/close hover:text-ink border-paper text-paper bg-ink tracking-18 font-spacemono ease-expo shadow-paper shadow-hard-4 hover:shadow-hard-1 absolute top-6 right-6 isolate flex items-center gap-2 overflow-hidden border-2 px-3 py-2 text-xs font-bold transition-all duration-500 hover:translate-x-0.5 hover:translate-y-0.5"
+        className="group/close wipe-paper hover:text-ink border-paper text-paper bg-ink tracking-18 font-spacemono ease-expo shadow-paper shadow-hard-4 hover:shadow-hard-1 absolute top-6 right-6 isolate flex items-center gap-2 overflow-hidden border-2 px-3 py-2 text-xs font-bold transition-all duration-500 hover:translate-x-0.5 hover:translate-y-0.5"
         onClick={onClose}
       >
-        <span
-          aria-hidden
-          className="bg-paper ease-expo absolute inset-0 -z-10 transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/close:[clip-path:inset(0_0_0_0)]"
-        />
         <span aria-hidden>✕</span>
         关闭
       </button>

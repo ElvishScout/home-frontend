@@ -1,4 +1,4 @@
-import "./globals.css";
+import "./stylesheets/globals.css";
 
 import type { Metadata } from "next";
 import { Anton, Noto_Sans_SC, Space_Mono } from "next/font/google";

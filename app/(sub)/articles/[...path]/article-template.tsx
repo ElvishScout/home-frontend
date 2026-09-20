@@ -116,12 +116,8 @@ export default function ArticleTemplate({ children, entry, prev, next }: Article
             )}
             <Link
               href="/articles"
-              className="group/link font-spacemono tracking-16 relative isolate inline-flex items-center gap-3 overflow-hidden py-2 text-xs font-bold"
+              className="group/link wipe-acid font-spacemono tracking-16 relative isolate inline-flex items-center gap-3 overflow-hidden py-2 text-xs font-bold"
             >
-              <span
-                aria-hidden
-                className="bg-acid ease-expo absolute inset-0 -z-10 transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/link:[clip-path:inset(0_0_0_0)]"
-              />
               <span
                 aria-hidden
                 className="ease-expo inline-block transition-transform duration-500 group-hover/link:-translate-x-1.5"
@@ -143,14 +139,10 @@ function NavCard({ dir, item }: { dir: "prev" | "next"; item: ArticleNavItem }) 
   return (
     <Link
       href={item.href}
-      className={`group/nav border-ink shadow-ink shadow-hard-4 relative isolate flex flex-col gap-1.5 overflow-hidden border-2 px-4 py-3.5 transition-[box-shadow,translate] duration-300 hover:translate-0.5 hover:shadow-none ${
+      className={`group/nav wipe-ink border-ink shadow-ink shadow-hard-4 relative isolate flex flex-col gap-1.5 overflow-hidden border-2 px-4 py-3.5 transition-[box-shadow,translate] duration-300 hover:translate-0.5 hover:shadow-none ${
         isPrev ? "" : "col-start-2 items-end text-right"
       }`}
     >
-      <span
-        aria-hidden
-        className="bg-ink ease-expo absolute inset-0 -z-10 transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/nav:[clip-path:inset(0_0_0_0)]"
-      />
       <span className="font-spacemono tracking-16 group-hover/nav:text-paper flex items-center gap-2 text-xs font-bold">
         <span
           aria-hidden

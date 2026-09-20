@@ -37,7 +37,7 @@ export function EntryList({ items, dark = false }: { items: Entry[]; dark?: bool
   }, []);
 
   const line = dark ? "border-paper" : "border-ink";
-  const wipe = dark ? "bg-acid" : "bg-scarlet";
+  const wipe = dark ? "wipe-acid" : "wipe-scarlet";
   const onWipe = dark ? "group-hover:text-ink" : "group-hover:text-paper";
 
   return (
@@ -46,12 +46,8 @@ export function EntryList({ items, dark = false }: { items: Entry[]; dark?: bool
         <li key={item.num} className={`border-t-3 ${line}`}>
           <Link
             href={item.href}
-            className="group relative isolate grid grid-cols-[auto_1fr_auto] items-baseline gap-x-7 overflow-hidden px-4 py-5 max-md:gap-x-4 max-md:px-3"
+            className={`group relative isolate grid grid-cols-[auto_1fr_auto] items-baseline gap-x-7 overflow-hidden px-4 py-5 max-md:gap-x-4 max-md:px-3 ${wipe}`}
           >
-            <span
-              aria-hidden
-              className={`absolute inset-0 -z-10 ${wipe} ease-expo transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover:[clip-path:inset(0_0_0_0)]`}
-            />
             <span
               className={`font-spacemono tracking-18 pt-1 text-xs font-bold opacity-60 transition-colors duration-300 ${onWipe}`}
             >
@@ -98,7 +94,7 @@ export function MoreLink({
   label: string;
   dark?: boolean;
 }) {
-  const wipe = dark ? "bg-acid" : "bg-ink";
+  const wipe = dark ? "wipe-acid" : "wipe-ink";
   const onWipe = dark ? "group-hover/link:text-ink" : "group-hover/link:text-paper";
   const shadow = dark
     ? "shadow-paper shadow-hard-6 hover:shadow-hard-2"
@@ -107,12 +103,8 @@ export function MoreLink({
   return (
     <Link
       href={href}
-      className={`group/link font-spacemono tracking-16 ease-expo relative isolate inline-flex items-center gap-3 overflow-hidden border-3 border-current px-6 py-3 text-sm font-bold transition-all duration-500 hover:translate-x-1 hover:translate-y-1 ${shadow}`}
+      className={`group/link font-spacemono tracking-16 ease-expo relative isolate inline-flex items-center gap-3 overflow-hidden border-3 border-current px-6 py-3 text-sm font-bold transition-all duration-500 hover:translate-x-1 hover:translate-y-1 ${shadow} ${wipe}`}
     >
-      <span
-        aria-hidden
-        className={`absolute inset-0 -z-10 ${wipe} ease-expo transition-[clip-path] duration-500 [clip-path:inset(0_100%_0_0)] group-hover/link:[clip-path:inset(0_0_0_0)]`}
-      />
       <span className={`transition-colors duration-300 ${onWipe}`}>{label}</span>
       <span
         aria-hidden
