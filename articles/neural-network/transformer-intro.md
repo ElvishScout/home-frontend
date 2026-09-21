@@ -1,6 +1,5 @@
 ---
-navigation:
-  prev: attention
+index: 7
 ---
 
 # Transformer 入门：注意力就是全部

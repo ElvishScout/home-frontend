@@ -12,12 +12,12 @@ declare module "virtual:mdx-registry" {
 
   export interface ArticleRegistryEntry {
     path: string;
-    title: string | undefined;
-    lastModified: Date | null;
+    index?: number;
+    title?: string;
+    lastModified?: Date;
     frontmatter: Record<string, unknown>;
     headingTree: HeadingTreeRoot;
-    /** frontmatter navigation 经构建期解析、校验后的目标文章 registry key */
-    navigation: { prev: string | null; next: string | null };
+    navigation: { prev?: string; next?: string };
   }
 
   const registry: Record<string, ArticleRegistryEntry>;

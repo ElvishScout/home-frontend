@@ -1,7 +1,5 @@
 ---
-navigation:
-  prev: multilayer-perceptron
-  next: training-deep-networks
+index: 3
 ---
 
 # 训练实战：损失、批量与优化器

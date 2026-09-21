@@ -16,8 +16,8 @@ export default async function ArticlesLayout({
   const entry = registry[key];
   if (!entry) return notFound();
 
-  // navigation 在构建期已解析成 registry key，这里换成标题与页面路径传入模板。
-  const navItem = (key: string | null) => {
+  // navigation 在构建期已按 index 解析成 registry key，这里换成标题与页面路径传入模板。
+  const navItem = (key: string | undefined) => {
     if (!key) return undefined;
     const target = registry[key];
     return { href: `/${key}`, title: target?.title ?? "未命名文章" };

@@ -6,21 +6,19 @@
 
 - 格式：Markdown（`.md`）。
 - 命名：小写横线（kebab-case），如 `attention-from-scratch.md`；按主题可建子目录。
-- 章节内的系列文章按阅读顺序排好前后链接（见 frontmatter）。
+- 章节内的系列文章按阅读顺序编 `index`（见 frontmatter），前后链接由构建期自动派生。
 
 ## Frontmatter
 
 ```markdown
 ---
 title: 标题
-navigation:
-  prev: 上一篇链接
-  next: 下一篇链接
+index: 1
 ---
 ```
 
 - `title` 非必须——**建议非必要不写**，让正文第一个 `#` 标题充当标题。
-- `navigation.prev` / `navigation.next` 指向同目录内的相对路径，可为空；目标文章不存在时构建期自动置空，因此可以提前写好指向后续文章的链接。
+- `index` 是同目录内的阅读序号（整数，不可重复）；写了就参与上一篇 / 下一篇导航，不写则没有导航。
 
 ## 内容与写法
 

@@ -1,6 +1,5 @@
 ---
-navigation:
-  next: multilayer-perceptron
+index: 1
 ---
 
 # 感知机：一切从一条直线开始

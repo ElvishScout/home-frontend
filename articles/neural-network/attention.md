@@ -1,7 +1,5 @@
 ---
-navigation:
-  prev: sequence-modeling
-  next: transformer-intro
+index: 6
 ---
 
 # 注意力：可微的查表

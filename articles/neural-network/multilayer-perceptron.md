@@ -1,7 +1,5 @@
 ---
-navigation:
-  prev: perceptron
-  next: optimization
+index: 2
 ---
 
 # 多层感知机：把误差传回去

@@ -218,32 +218,6 @@ function keyOf(path) {
 }
 
 /**
- * Resolve a frontmatter navigation target to a registry key.
- *
- * Accepted forms:
- * - absolute: `/articles/llm/foo`（可带 `.md` / `.mdx` 后缀）— 路由路径原样换算；
- * - relative: `bar.md`、`../baz.mdx` — 相对当前文章所在目录解析。
- *
- * @param {string} value  frontmatter 里的 prev / next 值
- * @param {string} fromKey  当前文章的 registry key
- * @returns {string} 目标文章的 registry key
- */
-function resolveNavigationKey(value, fromKey) {
-  let key;
-  if (value.startsWith("/")) {
-    if (!value.startsWith("/articles/")) {
-      throw new Error(
-        `Invalid navigation target "${value}" in ${fromKey}: must start with /articles/`,
-      );
-    }
-    key = value.slice(1);
-  } else {
-    key = posix.join(posix.dirname(fromKey), value);
-  }
-  return key;
-}
-
-/**
  * Loader entry point. The `source` of the virtual module is irrelevant — the
  * registry is derived entirely from the articles directory.
  *
@@ -310,33 +284,36 @@ async function articleRegistryLoader(_source) {
 
     entries[keyOf(filePosix)] = {
       path: filePosix,
+      index: typeof frontmatter.index === "number" ? frontmatter.index : undefined,
       title:
         typeof frontmatter.title === "string" && frontmatter.title
           ? frontmatter.title
           : headingTree.children && findFirstH1(headingTree.children)?.text,
-      lastModified: dates.get(filePosix) ?? null,
+      lastModified: dates.get(filePosix),
       frontmatter,
       headingTree,
-      navigation: { prev: null, next: null },
+      navigation: {},
     };
   }
 
-  // 第二遍解析 navigation：目标不在 registry 里（如系列文章还没写到下一篇）时留空，不报错。
+  /** @type {Map<string, { key: string, index: number }[]>} */
+  const indexedByDir = new Map();
   for (const [key, entry] of Object.entries(entries)) {
-    const nav = entry.frontmatter.navigation;
-    if (nav === undefined || nav === null) continue;
-    if (typeof nav !== "object") {
-      throw new Error(`Invalid navigation in ${entry.path}: expected a mapping with prev/next`);
+    if (entry.index === undefined) continue;
+    const dir = posix.dirname(key);
+    const siblings = indexedByDir.get(dir) ?? [];
+    if (siblings.some((s) => s.index === entry.index)) {
+      throw new Error(`Duplicate index ${entry.index} in ${dir}: ${entry.path}`);
     }
-    for (const dir of /** @type {const} */ (["prev", "next"])) {
-      const value = /** @type {Record<string, unknown>} */ (nav)[dir];
-      if (value === undefined || value === null) continue;
-      if (typeof value !== "string" || !value) {
-        throw new Error(`Invalid navigation.${dir} in ${entry.path}: expected a non-empty string`);
-      }
-      let target = resolveNavigationKey(value, key);
-      if (!entries[target]) continue;
-      entry.navigation[dir] = target;
+    siblings.push({ key, index: entry.index });
+    indexedByDir.set(dir, siblings);
+  }
+  for (const siblings of indexedByDir.values()) {
+    siblings.sort((a, b) => a.index - b.index);
+    for (const [i, { key }] of siblings.entries()) {
+      const navigation = entries[key].navigation;
+      if (siblings[i - 1]) navigation.prev = siblings[i - 1].key;
+      if (siblings[i + 1]) navigation.next = siblings[i + 1].key;
     }
   }
 
