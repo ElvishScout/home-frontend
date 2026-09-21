@@ -86,7 +86,7 @@ export function MermaidDiagram({ code }: { code: string }) {
 
   /** span 而非 div：触发按钮里只能放短语内容。正文里的宽度由 --diagram-width 给（见 globals.css）。 */
   const figure = (markup: string) => (
-    <span
+    <div
       className="diagram-figure"
       style={
         { "--diagram-width": diagram ? diagram.width / MERMAID_FONT_SIZE : 0 } as CSSProperties
@@ -98,7 +98,7 @@ export function MermaidDiagram({ code }: { code: string }) {
   return (
     <div className={diagram ? "diagram" : "diagram hidden"}>
       <ZoomViewer label="图表">
-        {diagram ? figure(diagram.inline) : <span className="diagram-figure" />}
+        {diagram ? figure(diagram.inline) : <div className="diagram-figure" />}
       </ZoomViewer>
     </div>
   );

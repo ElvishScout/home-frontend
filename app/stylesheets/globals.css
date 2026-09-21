@@ -116,11 +116,3 @@ html {
 .zoom-content .diagram-figure > svg {
   @apply block h-full w-full;
 }
-
-/* 遮罩是墨底，而图片和 mermaid 都是按纸底画的：透明 PNG 和图表压在墨底上会看不清。
-   垫一块纸——盒子正好等于内容尺寸（.zoom-content 已被写成精确的固有尺寸），
-   对不透明的图完全不可见，缩放时跟着一起变大。 */
-.zoom-content img,
-.zoom-content .diagram-figure {
-  @apply bg-paper;
-}

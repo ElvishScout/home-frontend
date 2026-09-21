@@ -368,7 +368,7 @@ function ZoomOverlay({
         <div className="flex h-full w-full animate-zoom-figure items-center justify-center motion-reduce:animate-none">
           <div
             ref={contentRef}
-            className="zoom-content flex shrink-0 origin-center items-center justify-center will-change-transform"
+            className="zoom-content flex shrink-0 origin-center items-center justify-center bg-paper will-change-transform"
           >
             {children}
           </div>
