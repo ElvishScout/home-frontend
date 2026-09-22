@@ -96,7 +96,7 @@ function collectHeadingIds(out) {
  *   thematic breaks).
  *
  * @param {string} file  Absolute file path.
- * @returns {Promise<{ headingTree: HeadingTreeRoot, frontmatter: Record<string, unknown> }>}
+ * @returns {Promise<{ headingTree: HeadingTreeRoot, frontmatter?: Record<string, unknown> }>}
  */
 async function readArticle(file) {
   const content = readFileSync(file, "utf8");
@@ -122,8 +122,8 @@ async function readArticle(file) {
 
   /** @type {Array<{ id: string, level: number, text: string }>} */
   const items = [];
-  /** @type {Record<string, unknown>} */
-  let frontmatter = {};
+  /** @type {Record<string, unknown> | undefined} */
+  let frontmatter;
 
   /**
    * @param {any} node
@@ -131,7 +131,7 @@ async function readArticle(file) {
   function collect(node) {
     if (node.type === "yaml" && node.value) {
       try {
-        frontmatter = /** @type {Record<string, unknown>} */ (parseYaml(node.value) ?? {});
+        frontmatter = /** @type {Record<string, unknown>} */ (parseYaml(node.value) ?? undefined);
       } catch (error) {
         throw new Error(`Invalid frontmatter in ${file}: ${error}`);
       }
@@ -284,15 +284,14 @@ async function articleRegistryLoader(_source) {
 
     entries[keyOf(filePosix)] = {
       path: filePosix,
-      index: typeof frontmatter.index === "number" ? frontmatter.index : undefined,
+      index: typeof frontmatter?.index === "number" ? frontmatter.index : undefined,
       title:
-        typeof frontmatter.title === "string" && frontmatter.title
+        typeof frontmatter?.title === "string" && frontmatter.title
           ? frontmatter.title
           : headingTree.children && findFirstH1(headingTree.children)?.text,
       lastModified: dates.get(filePosix),
       frontmatter,
       headingTree,
-      navigation: {},
     };
   }
 
@@ -311,7 +310,7 @@ async function articleRegistryLoader(_source) {
   for (const siblings of indexedByDir.values()) {
     siblings.sort((a, b) => a.index - b.index);
     for (const [i, { key }] of siblings.entries()) {
-      const navigation = entries[key].navigation;
+      const navigation = (entries[key].navigation ??= {});
       if (siblings[i - 1]) navigation.prev = siblings[i - 1].key;
       if (siblings[i + 1]) navigation.next = siblings[i + 1].key;
     }

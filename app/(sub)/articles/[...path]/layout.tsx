@@ -27,8 +27,8 @@ export default async function ArticlesLayout({
     <ArticleTemplate
       key={path.join("/")}
       entry={entry}
-      prev={navItem(entry.navigation.prev)}
-      next={navItem(entry.navigation.next)}
+      prev={navItem(entry.navigation?.prev)}
+      next={navItem(entry.navigation?.next)}
     >
       {children}
     </ArticleTemplate>

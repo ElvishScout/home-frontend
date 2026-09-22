@@ -15,9 +15,9 @@ declare module "virtual:mdx-registry" {
     index?: number;
     title?: string;
     lastModified?: Date;
-    frontmatter: Record<string, unknown>;
+    frontmatter?: Record<string, unknown>;
+    navigation?: { prev?: string; next?: string };
     headingTree: HeadingTreeRoot;
-    navigation: { prev?: string; next?: string };
   }
 
   const registry: Record<string, ArticleRegistryEntry>;
