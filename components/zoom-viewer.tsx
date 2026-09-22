@@ -357,7 +357,7 @@ function ZoomOverlay({
       role="dialog"
       aria-modal="true"
       aria-label={label}
-      className={`fixed inset-0 z-8000 animate-zoom-wipe bg-ink/95 outline-none motion-reduce:animate-none ${
+      className={`fixed inset-0 z-8000 flex animate-zoom-wipe flex-col bg-ink/90 outline-none motion-reduce:animate-none ${
         dragging ? "cursor-grabbing" : ""
       }`}
       onPointerDown={onPointerDown}
@@ -370,9 +370,18 @@ function ZoomOverlay({
       // 拖拽手势变成原生拖放
       onDragStart={(event) => event.preventDefault()}
     >
+      <button
+        data-zoom-ui
+        className="group/close wipe-paper isolate z-10 my-4 mr-4 flex button-hard-4 items-center gap-2 self-end overflow-hidden border-2 border-paper bg-ink/90 px-3 py-2 font-spacemono text-xs font-bold tracking-18 text-paper shadow-paper hover:text-ink"
+        onClick={onClose}
+      >
+        <span aria-hidden>✕</span>
+        关闭
+      </button>
+
       <div
         ref={stageRef}
-        className="absolute inset-x-8 inset-y-16 flex cursor-grab touch-none items-center justify-center overflow-hidden select-none active:cursor-grabbing"
+        className="flex min-h-0 grow basis-0 cursor-grab touch-none items-center justify-center select-none active:cursor-grabbing"
       >
         <div className="flex h-full w-full animate-zoom-figure items-center justify-center motion-reduce:animate-none">
           <div
@@ -384,18 +393,9 @@ function ZoomOverlay({
         </div>
       </div>
 
-      <button
-        data-zoom-ui
-        className="group/close wipe-paper absolute top-6 right-6 isolate flex button-hard-4 items-center gap-2 overflow-hidden border-2 border-paper bg-ink px-3 py-2 font-spacemono text-xs font-bold tracking-18 text-paper shadow-paper hover:text-ink"
-        onClick={onClose}
-      >
-        <span aria-hidden>✕</span>
-        关闭
-      </button>
-
       <p
         aria-hidden
-        className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 font-spacemono text-2xs font-bold tracking-16 text-paper/60"
+        className="pointer-events-none z-10 my-4 self-center bg-inherit px-4 py-4 font-spacemono text-2xs font-bold tracking-16 text-paper/90"
       >
         滚轮 / 双指缩放 · 拖动平移 · 双击归位 · Esc 退出
       </p>
