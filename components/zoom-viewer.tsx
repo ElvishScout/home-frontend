@@ -88,6 +88,10 @@ function ZoomOverlay({
   const contentRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
 
+  // 拖拽中的光标归遮罩，不归舞台：指针被 setPointerCapture 捕获后浏览器只按捕获
+  // 元素做命中测试，舞台的 cursor-grab 与 :active 一起失效，光标掉回默认。
+  const [dragging, setDragging] = useState(false);
+
   // 手势期间不走 React state：直接改 style，免得每帧 reconcile 一次
   const view = useRef({ s: 1, x: 0, y: 0 });
   const pointers = useRef(new Map<number, { x: number; y: number }>());
@@ -258,6 +262,7 @@ function ZoomOverlay({
     moved.current = false;
     downAt.current = { x: event.clientX, y: event.clientY };
     overlayRef.current?.setPointerCapture(event.pointerId);
+    setDragging(true);
     pointers.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
 
     if (pointers.current.size === 1) {
@@ -312,6 +317,8 @@ function ZoomOverlay({
     pointers.current.delete(event.pointerId);
     if (drag.current?.id === event.pointerId) drag.current = null;
     if (pointers.current.size < 2) pinch.current = null;
+    // 双指里抬起一根不算松手，还有一根按着就继续拖
+    if (pointers.current.size === 0) setDragging(false);
 
     // 双指抬起一根后，剩下的那根接着拖，不要跳
     if (pointers.current.size === 1) {
@@ -350,7 +357,9 @@ function ZoomOverlay({
       role="dialog"
       aria-modal="true"
       aria-label={label}
-      className="fixed inset-0 z-8000 animate-zoom-wipe bg-ink/95 outline-none motion-reduce:animate-none"
+      className={`fixed inset-0 z-8000 animate-zoom-wipe bg-ink/95 outline-none motion-reduce:animate-none ${
+        dragging ? "cursor-grabbing" : ""
+      }`}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -376,6 +385,7 @@ function ZoomOverlay({
       </div>
 
       <button
+        data-zoom-ui
         className="group/close wipe-paper absolute top-6 right-6 isolate flex button-hard-4 items-center gap-2 overflow-hidden border-2 border-paper bg-ink px-3 py-2 font-spacemono text-xs font-bold tracking-18 text-paper shadow-paper hover:text-ink"
         onClick={onClose}
       >
