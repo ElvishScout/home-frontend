@@ -9,6 +9,7 @@ const SOURCE_SPECIFIER = "virtual:mdx-source";
 const SOURCE_STUB = "mdx-source.stub.ts";
 
 export function createMdxRegistry(options: {
+  base: string;
   pattern: string | string[];
   exclude?: string | string[];
 }): (config: NextConfig) => NextConfig {

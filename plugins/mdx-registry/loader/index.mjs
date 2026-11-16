@@ -27,14 +27,15 @@ import { gitDates } from "./git-date.mjs";
  * Options accepted by this loader (via `loaders: [{ loader, options }]`).
  *
  * @typedef {Object} ArticleRegistryLoaderOptions
- * @property {string | string[]} [pattern]
+ * @property {string} base
+ * @property {string | string[]} pattern
  * @property {string | string[]} [exclude]
  * @property {"registry" | "components" | "source"} [mode]  默认 "registry"；
  *   "components" 输出 注册表 key → 懒加载文章组件 的静态 import 映射；
  *   "source" 输出 注册表 key → 文章原文 的映射（内嵌进 bundle，运行时不再读文件系统）。
  *
- * 注册表 key 为不含扩展名的相对路径（articles/foo/bar）；同名 .md 与 .mdx
- * 共用一个 key，glob 顺序靠后的文件覆盖靠前的。
+ * 注册表 key 为不含扩展名、相对 base 的路径（neural-network/attention）；
+ * 同名 .md 与 .mdx 共用一个 key，glob 顺序靠后的文件覆盖靠前的。
  */
 
 /**
@@ -228,17 +229,28 @@ function keyOf(path) {
 async function articleRegistryLoader(_source) {
   this.cacheable();
 
-  const { pattern, exclude, mode } = this.getOptions();
+  const { base, pattern, exclude, mode } = this.getOptions();
 
+  if (!base) {
+    throw "A base directory to watch must be provided.";
+  }
   if (!pattern) {
     throw "Glob patterns must be provided.";
   }
 
+  const baseAbs = resolve(this.rootContext, base);
+  // Turbopack normalizes Windows paths to `/`; keep emitted code portable.
+  const basePosix = _relative(this.rootContext, baseAbs).split(sep).join("/");
+
+  this.addContextDependency(baseAbs);
+
   /** @type {string[]} */
   const files = await glob(pattern, { ignore: exclude });
 
-  // Turbopack normalizes Windows paths to `/`; keep emitted code portable.
-  const filePosixList = files.map((file) => _relative(this.rootContext, file).split(sep).join("/"));
+  /** @type {string[]} */
+  const repoPosixList = files.map((file) => _relative(this.rootContext, file).split(sep).join("/"));
+  /** @type {string[]} */
+  const filePosixList = files.map((file) => _relative(baseAbs, file).split(sep).join("/"));
 
   if (mode === "components") {
     // 详情页不能写动态 import（Turbopack 会拒绝含变量的 specifier，import.meta.glob
@@ -250,7 +262,7 @@ async function articleRegistryLoader(_source) {
     }
     const entries = filePosixList.map(
       (filePosix) =>
-        `  ${JSON.stringify(keyOf(filePosix))}: () => import(${JSON.stringify(`../../${filePosix}`)}),`,
+        `  ${JSON.stringify(keyOf(filePosix))}: () => import(${JSON.stringify(`../../${basePosix}/${filePosix}`)}),`,
     );
     return `export default {\n${entries.join("\n")}\n};\n`;
   }
@@ -269,7 +281,7 @@ async function articleRegistryLoader(_source) {
     return `export default ${serialize(sources, { space: 2 })};\n`;
   }
 
-  const dates = await gitDates(filePosixList);
+  const dates = await gitDates(repoPosixList);
 
   /** @type {Record<string, ArticleRegistryEntry>} */
   const entries = {};
@@ -289,7 +301,7 @@ async function articleRegistryLoader(_source) {
         typeof frontmatter?.title === "string" && frontmatter.title
           ? frontmatter.title
           : headingTree.children && findFirstH1(headingTree.children)?.text,
-      lastModified: dates.get(filePosix),
+      lastModified: dates.get(repoPosixList[i]),
       frontmatter,
       headingTree,
     };

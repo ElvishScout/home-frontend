@@ -12,7 +12,7 @@ export default async function ArticlesLayout({
   params: Promise<{ path: string[] }>;
 }) {
   const { path } = await params;
-  const key = `articles/${path.join("/")}`;
+  const key = path.join("/");
   const entry = registry[key];
   if (!entry) return notFound();
 
@@ -20,7 +20,7 @@ export default async function ArticlesLayout({
   const navItem = (key: string | undefined) => {
     if (!key) return undefined;
     const target = registry[key];
-    return { href: `/${key}`, title: target?.title ?? "未命名文章" };
+    return { href: `/articles/${key}`, title: target?.title ?? "未命名文章" };
   };
 
   return (

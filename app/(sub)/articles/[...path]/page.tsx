@@ -6,7 +6,7 @@ export const dynamicParams = false;
 
 export default async function Page({ params }: PageProps<"/articles/[...path]">) {
   const { path } = await params;
-  const key = `articles/${path.join("/")}`;
+  const key = path.join("/");
   const entry = registry[key];
   if (!entry) return notFound();
 
