@@ -1,7 +1,7 @@
-diff --git a/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs b/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs
-index c814333..86b2584 100644
---- a/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs
-+++ b/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs
+diff --git a/node_modules/mermaid/dist/chunks/mermaid.core/chunk-STOXU5M4.mjs b/node_modules/mermaid/dist/chunks/mermaid.core/chunk-STOXU5M4.mjs
+index 6a3049a..9b43ef7 100644
+--- a/node_modules/mermaid/dist/chunks/mermaid.core/chunk-STOXU5M4.mjs
++++ b/node_modules/mermaid/dist/chunks/mermaid.core/chunk-STOXU5M4.mjs
 @@ -666,7 +666,7 @@ async function addHtmlSpan(element, node, width, classes, addBackground = false,
    fo.attr("width", `${Math.min(10 * width, maxSafeSizeForWidth)}px`);
    fo.attr("height", `${Math.min(10 * width, maxSafeSizeForWidth)}px`);
@@ -20,10 +20,10 @@ index c814333..86b2584 100644
      div.style("display", "table");
      div.style("white-space", "break-spaces");
      div.style("width", width + "px");
-diff --git a/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs b/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs
-index 185b51a..26910b5 100644
---- a/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs
-+++ b/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs
+diff --git a/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-UVJ2HR4M.mjs b/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-UVJ2HR4M.mjs
+index fd26a7d..abbb6b6 100644
+--- a/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-UVJ2HR4M.mjs
++++ b/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-UVJ2HR4M.mjs
 @@ -1873,7 +1873,7 @@ async function addHtmlSpan(element, node, width, classes, addBackground = false,
    fo.attr("width", `${Math.min(10 * width, maxSafeSizeForWidth)}px`);
    fo.attr("height", `${Math.min(10 * width, maxSafeSizeForWidth)}px`);

@@ -14,15 +14,13 @@ mermaid.initialize({
   },
   flowchart: {
     minNodeWidth: 24,
+    wrappingWidth: Number.POSITIVE_INFINITY,
   },
 });
 
-const generateDiagramId = (() => {
-  let index = 0;
-  return () => {
-    return `diagram-${index++}`;
-  };
-})();
+function generateDiagramId() {
+  return `diagram-${crypto.randomUUID()}`;
+}
 
 /**
  * useMaxWidth（默认开启）时 mermaid 会给根 svg 塞 style="max-width: Wpx;"，
