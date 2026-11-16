@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
-
 @import "./theme.css";
 @import "./utilities.css";
+
+@plugin "@tailwindcss/typography";
 
 /* ---------- 页面滚动条 ---------- */
 
