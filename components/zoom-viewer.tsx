@@ -24,16 +24,49 @@ const DRAG_THRESHOLD = 4;
 const DELTA_UNIT: Record<number, number> = { 0: 1, 1: 16, 2: 100 };
 
 /**
+ * 媒体外面那圈装帧（边框 + 内边距）占掉的尺寸，px。
+ * mermaid 全屏时图套的是与正文同一层纸框（.diagram-frame），框厚不随缩放变，
+ * 只能加在媒体固有尺寸之外：并进固有尺寸会把图的可用区域啃掉一圈，长宽比
+ * 跟着走样，矢量图只好留白。图片没有装帧，量出来就是 0。
+ */
+function measureChrome(root: HTMLElement) {
+  const media = root.querySelector("img, svg");
+  if (!media) return null;
+
+  const px = (value: string) => Number.parseFloat(value) || 0;
+  let width = 0;
+  let height = 0;
+  // 从媒体往上逐层加，到 .zoom-content（root）为止，排除舞台自身的留白
+  for (let el: Element | null = media; el && el !== root; el = el.parentElement) {
+    const style = getComputedStyle(el);
+    width +=
+      px(style.paddingLeft) + px(style.paddingRight) + px(style.borderLeftWidth) + px(style.borderRightWidth);
+    height +=
+      px(style.paddingTop) + px(style.paddingBottom) + px(style.borderTopWidth) + px(style.borderBottomWidth);
+  }
+  return { width, height };
+}
+
+/**
  * 让内容点击后全屏显示，并支持滚轮/双指缩放与拖拽平移。
  *
- * `children` 会被渲染两次：内联那份包在触发按钮里，全屏那份在 portal 出来的
- * 遮罩里。因此它必须是可重复渲染的普通元素——不能是已经存在于文档中的活节点。
- * 两份内容不同时用 `overlayContent`（mermaid 全屏那份需要换一套 id）。
+ * `children` 渲染在内联触发按钮里；全屏那份默认复用它，内容需要换一套 DOM 时
+ * 用 `overlayContent`（mermaid 全屏那份要换一套 id）。因此两者都必须是可重复
+ * 渲染的普通元素——不能是已经存在于文档中的活节点。
  *
  * 遮罩 portal 到 document.body：既躲开 .prose 的正文排版继承，也不受祖先
  * transform 影响。只在打开时渲染，SSR 阶段不会碰到 document。
  */
-export function ZoomViewer({ label, children }: { label: string; children: ReactNode }) {
+export function ZoomViewer({
+  label,
+  children,
+  overlayContent,
+}: {
+  label: string;
+  children: ReactNode;
+  /** 全屏那份的内容，默认就是 children。 */
+  overlayContent?: ReactNode;
+}) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -62,7 +95,7 @@ export function ZoomViewer({ label, children }: { label: string; children: React
       {open &&
         createPortal(
           <ZoomOverlay label={label} onClose={close}>
-            {children}
+            {overlayContent ?? children}
           </ZoomOverlay>,
           document.body,
         )}
@@ -118,16 +151,30 @@ function ZoomOverlay({
     return null;
   }, []);
 
-  /** 含入舞台的比例。只缩不放：小图保持 1:1，要更大就自己滚。 */
+  /** 装帧厚度只量一次：同一个全屏内容的边框与内边距不会变。 */
+  const chromeRef = useRef<{ width: number; height: number } | null>(null);
+  const chrome = useCallback(() => {
+    const root = contentRef.current;
+    if (!root) return null;
+    return (chromeRef.current ??= measureChrome(root));
+  }, []);
+
+  /** 含入舞台的比例。只缩不放：小图保持 1:1，要更大就自己滚。装帧的厚度不算在缩放里。 */
   const fitScale = useCallback(() => {
     const stage = stageRef.current;
     const natural = naturalSize();
-    if (!stage || !natural) return null;
+    const extra = chrome();
+    if (!stage || !natural || !extra) return null;
     return {
       natural,
-      base: Math.min(1, stage.clientWidth / natural.width, stage.clientHeight / natural.height),
+      extra,
+      base: Math.min(
+        1,
+        Math.max(0, stage.clientWidth - extra.width) / natural.width,
+        Math.max(0, stage.clientHeight - extra.height) / natural.height,
+      ),
     };
-  }, [naturalSize]);
+  }, [naturalSize, chrome]);
 
   /**
    * 缩放靠改元素的实际尺寸，不靠 transform: scale。
@@ -140,19 +187,21 @@ function ZoomOverlay({
     if (!el || !fit) return;
     const { s, x, y } = view.current;
     const scale = fit.base * s;
-    el.style.width = `${fit.natural.width * scale}px`;
-    el.style.height = `${fit.natural.height * scale}px`;
+    el.style.width = `${fit.natural.width * scale + fit.extra.width}px`;
+    el.style.height = `${fit.natural.height * scale + fit.extra.height}px`;
     el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
   }, [fitScale]);
 
-  /** 图不会被拖出视野：缩放后的图边缘最多贴到舞台边缘。尺寸没量到时不夹。 */
+  /** 图不会被拖出视野：缩放后的图（含装帧）边缘最多贴到舞台边缘。尺寸没量到时不夹。 */
   const clampPan = useCallback(() => {
     const stage = stageRef.current;
     const fit = fitScale();
     if (!stage || !fit) return;
     const v = view.current;
-    const maxX = Math.max(0, (fit.natural.width * fit.base * v.s - stage.clientWidth) / 2);
-    const maxY = Math.max(0, (fit.natural.height * fit.base * v.s - stage.clientHeight) / 2);
+    const width = fit.natural.width * fit.base * v.s + fit.extra.width;
+    const height = fit.natural.height * fit.base * v.s + fit.extra.height;
+    const maxX = Math.max(0, (width - stage.clientWidth) / 2);
+    const maxY = Math.max(0, (height - stage.clientHeight) / 2);
     v.x = Math.min(maxX, Math.max(-maxX, v.x));
     v.y = Math.min(maxY, Math.max(-maxY, v.y));
   }, [fitScale]);

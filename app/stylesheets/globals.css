@@ -77,21 +77,36 @@ html {
   @apply border-t-3;
 }
 
-.prose .katex-display {
+/* 正文里的 KaTeX 覆盖：字号归一到正文、行内公式不撑行。
+   注意排除 .diagram：mermaid 的边标签是 foreignObject 里的 KaTeX，盒子尺寸是
+   mermaid 在 body 下量好的，覆盖渗进去会让字比盒子小、行高比盒子高，灰底就错位。 */
+.prose .katex-display:not(.diagram *) {
   @apply my-[1.25em] overflow-x-auto overflow-y-hidden transition-[scrollbar-color] duration-300 not-hover:scrollbar-thumb-transparent;
 }
 
-.prose .katex {
+.prose .katex:not(.diagram *) {
   @apply text-[1em];
 }
 
-.prose .katex .text,
-.prose .katex .textrm {
+.prose .katex:not(.diagram *) .text,
+.prose .katex:not(.diagram *) .textrm {
   @apply font-zh;
 }
 
+/* mermaid 的 HTML 标签是 foreignObject 里的 KaTeX，量尺寸走的也是 foreignObject：
+   行间公式的上下 margin 会把标签盒撑高，灰底与文字分开。两边一起压平。 */
+foreignObject .katex-display {
+  @apply my-0;
+}
+
+/* 图的纸框：正文与全屏共用同一套装帧，全屏只放大尺寸（见 components/mermaid-diagram.tsx）。
+   .diagram 只在正文里负责外边距与未渲染时的隐藏。 */
+.diagram-frame {
+  @apply border-3 border-ink p-6 text-sm shadow-hard-4 shadow-ink;
+}
+
 .prose .diagram {
-  @apply my-[1.25em] border-3 border-ink p-6 text-sm shadow-hard-4 shadow-ink;
+  @apply my-[1.25em];
 }
 
 .prose .image-viewer {
@@ -99,7 +114,8 @@ html {
 }
 
 /* mermaid 图：宽度由 mermaid 量出的 viewBox 决定（--diagram-width 单位是 em，
-   1em = .diagram 的 text-sm = 14px）。全屏那份由 .zoom-content 接管。 */
+   1em = .diagram-frame 的 text-sm = 14px）。全屏那份的宽度交给 .zoom-content，
+   由 zoom-viewer 按舞台尺寸算出来；纸框照旧套着，只是填满缩放盒。 */
 .diagram .diagram-figure {
   @apply mx-auto block max-w-full;
   width: calc(var(--diagram-width, 100) * 1em);
@@ -112,6 +128,7 @@ html {
 /* ---------- 全屏查看器（components/zoom-viewer.tsx） ---------- */
 
 .zoom-content img,
+.zoom-content .diagram-frame,
 .zoom-content .diagram-figure,
 .zoom-content .diagram-figure > svg {
   @apply block h-full w-full;

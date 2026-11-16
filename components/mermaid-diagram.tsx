@@ -84,21 +84,28 @@ export function MermaidDiagram({ code }: { code: string }) {
     };
   }, [code]);
 
-  /** span 而非 div：触发按钮里只能放短语内容。正文里的宽度由 --diagram-width 给（见 globals.css）。 */
-  const figure = (markup: string) => (
-    <div
-      className="diagram-figure"
-      style={
-        { "--diagram-width": diagram ? diagram.width / MERMAID_FONT_SIZE : 0 } as CSSProperties
-      }
-      dangerouslySetInnerHTML={{ __html: markup }}
-    />
+  /**
+   * 纸框包在图的里面，正文与全屏拿到的是同一份装帧（边框、内边距、硬阴影见
+   * globals.css 的 .diagram-frame）——两者只差尺寸：正文按 --diagram-width 定宽，
+   * 全屏由 .zoom-content 撑满舞台。外层 .diagram 只管正文里的外边距与未渲染时的隐藏。
+   */
+  const frame = (markup: string) => (
+    <div className="diagram-frame">
+      <div
+        className="diagram-figure"
+        style={
+          { "--diagram-width": diagram ? diagram.width / MERMAID_FONT_SIZE : 0 } as CSSProperties
+        }
+        dangerouslySetInnerHTML={{ __html: markup }}
+      />
+    </div>
   );
 
   return (
     <div className={diagram ? "diagram" : "diagram hidden"}>
-      <ZoomViewer label="图表">
-        {diagram ? figure(diagram.inline) : <div className="diagram-figure" />}
+      {/* 全屏那份用换过 id 的 markup，否则两份同 id 的 <style> 与 marker 会互相串。 */}
+      <ZoomViewer label="图表" overlayContent={diagram ? frame(diagram.full) : undefined}>
+        {frame(diagram?.inline ?? "")}
       </ZoomViewer>
     </div>
   );
