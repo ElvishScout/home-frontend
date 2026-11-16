@@ -1,7 +1,16 @@
 diff --git a/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs b/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs
-index c814333..ef793c7 100644
+index c814333..86b2584 100644
 --- a/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs
 +++ b/node_modules/mermaid/dist/chunks/mermaid.core/chunk-MBY4JIJT.mjs
+@@ -666,7 +666,7 @@ async function addHtmlSpan(element, node, width, classes, addBackground = false,
+   fo.attr("width", `${Math.min(10 * width, maxSafeSizeForWidth)}px`);
+   fo.attr("height", `${Math.min(10 * width, maxSafeSizeForWidth)}px`);
+   const div = fo.append("xhtml:div");
+-  const sanitizedLabel = hasKatex(node.label) ? await renderKatexSanitized(node.label.replace(common_default.lineBreakRegex, "\n"), config) : sanitizeText(node.label, config);
++  const sanitizedLabel = hasKatex(node.label) ? await renderKatexSanitized(node.label, config) : sanitizeText(node.label, config);
+   const labelClass = node.isNode ? "nodeLabel" : "edgeLabel";
+   const span = div.append("span");
+   span.html(sanitizedLabel);
 @@ -685,7 +685,7 @@ async function addHtmlSpan(element, node, width, classes, addBackground = false,
      div.attr("class", "labelBkg");
    }
@@ -12,9 +21,18 @@ index c814333..ef793c7 100644
      div.style("white-space", "break-spaces");
      div.style("width", width + "px");
 diff --git a/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs b/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs
-index 185b51a..cd05449 100644
+index 185b51a..26910b5 100644
 --- a/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs
 +++ b/node_modules/mermaid/dist/chunks/mermaid.esm/chunk-EBKONHZ7.mjs
+@@ -1873,7 +1873,7 @@ async function addHtmlSpan(element, node, width, classes, addBackground = false,
+   fo.attr("width", `${Math.min(10 * width, maxSafeSizeForWidth)}px`);
+   fo.attr("height", `${Math.min(10 * width, maxSafeSizeForWidth)}px`);
+   const div = fo.append("xhtml:div");
+-  const sanitizedLabel = hasKatex(node.label) ? await renderKatexSanitized(node.label.replace(common_default.lineBreakRegex, "\n"), config) : sanitizeText(node.label, config);
++  const sanitizedLabel = hasKatex(node.label) ? await renderKatexSanitized(node.label, config) : sanitizeText(node.label, config);
+   const labelClass = node.isNode ? "nodeLabel" : "edgeLabel";
+   const span = div.append("span");
+   span.html(sanitizedLabel);
 @@ -1892,7 +1892,7 @@ async function addHtmlSpan(element, node, width, classes, addBackground = false,
      div.attr("class", "labelBkg");
    }
