@@ -105,7 +105,8 @@ async function readArticle(file) {
   /** @type {Array<{ id: string | null, level: number }>} */
   const renderedHeadings = [];
   // Keep in sync with the plugin list handed to @next/mdx in next.config.ts,
-  // 例外：remark-mermaid 只改写代码块，与标题/frontmatter 无关，不引入（见 next.config.ts 注释）。
+  // 例外：remark-mermaid / remark-mdx-image / @shikijs/rehype 只改写代码块与图片，
+  // 与标题/frontmatter 无关，不引入。
   // format 按扩展名区分：@mdx-js/loader 默认 detect（.md 走纯 markdown），
   // 而 createProcessor 只接受 'md' | 'mdx'，这里手动映射，否则 .md 里的 `<0.1` 会被当 JSX 解析而报错。
   const processor = createProcessor({

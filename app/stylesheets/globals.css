@@ -46,6 +46,24 @@ html {
 }
 
 .prose pre {
+  /* 代码块语法着色（@shikijs/rehype 的 css-variables 主题）：span 颜色是
+     var(--shiki-token-*)，这里把变量接到设计 token 上，墨底上只用纸白与 acid / scarlet。
+     纯 scarlet 对比度不足 4.5:1，向纸白提亮一档；注释取纸白 50%。 */
+  --shiki-background: var(--color-ink);
+  --shiki-foreground: var(--color-paper);
+  --shiki-token-comment: color-mix(in srgb, var(--color-paper) 50%, transparent);
+  --shiki-token-keyword: color-mix(in srgb, var(--color-scarlet) 75%, var(--color-paper));
+  --shiki-token-string: var(--color-acid);
+  --shiki-token-string-expression: var(--color-acid);
+  --shiki-token-constant: var(--color-acid);
+  --shiki-token-function: var(--color-acid);
+  --shiki-token-parameter: var(--color-paper);
+  --shiki-token-punctuation: var(--color-paper);
+  --shiki-token-link: var(--color-acid);
+  --shiki-token-inserted: var(--color-acid);
+  --shiki-token-deleted: var(--color-scarlet);
+  --shiki-token-changed: var(--color-acid);
+
   @apply rounded-none border-3 border-ink shadow-hard-4 shadow-ink;
 }
 
