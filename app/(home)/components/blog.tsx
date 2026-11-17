@@ -13,7 +13,7 @@ const ENTRIES = Object.entries(registry).sort(([, a], [, b]) => {
 const POSTS: Entry[] = ENTRIES.slice(0, 3).map(([key, entry], i) => ({
   num: `EP.${String(ENTRIES.length - i).padStart(2, "0")}`,
   title: entry.title ?? entry.path,
-  note: entry.path.split("/")[0]?.replaceAll("-", " ").toUpperCase() ?? "",
+  note: key.split("/")[0]?.replaceAll("-", " ").toUpperCase() ?? "",
   meta: entry.lastModified ? formatYearMonth(entry.lastModified) : "",
   href: `/articles/${key}`,
 }));
