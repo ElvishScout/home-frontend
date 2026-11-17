@@ -38,8 +38,8 @@ const plugins = [
   }),
   createMdxRegistry({
     base: "./articles",
-    pattern: ["./articles/**/*.{md,mdx}"],
-    exclude: ["./articles/**/CLAUDE.md"],
+    pattern: ["./**/*.{md,mdx}"],
+    exclude: ["./**/{CLAUDE,AGENTS}.md"],
   }),
 ];
 

@@ -216,7 +216,7 @@ function findFirstH1(nodes) {
  * @param {string} path 包含扩展名的文件路径
  */
 function keyOf(path) {
-  return path.replace(/\.mdx?$/, "");
+  return path.replace(/\.mdx?$/i, "").replace(/(?<=^|\/)\([^/]*?\)\//g, "");
 }
 
 /**
@@ -245,20 +245,26 @@ async function articleRegistryLoader(_source) {
 
   this.addContextDependency(baseAbs);
 
+  // glob 的 `root` 只决定绝对 pattern 的挂载点，不限制遍历范围（v13 起）；
+  // 把搜索范围限定在文章目录必须用 `cwd`，否则会扫到整个仓库（含 node_modules）。
   /** @type {string[]} */
-  const files = await glob(pattern, { ignore: exclude });
+  const files = await glob(pattern, { cwd: baseAbs, ignore: exclude });
+
+  // glob 返回相对 cwd 的路径（Windows 上是反斜杠），先拼回绝对路径再统一成 posix。
+  const absoluteFiles = files.map((file) => resolve(baseAbs, file));
 
   /** @type {string[]} */
-  const repoPosixList = files.map((file) => _relative(this.rootContext, file).split(sep).join("/"));
+  const repoPosixList = absoluteFiles.map((file) =>
+    _relative(this.rootContext, file).split(sep).join("/"),
+  );
   /** @type {string[]} */
-  const filePosixList = files.map((file) => _relative(baseAbs, file).split(sep).join("/"));
+  const filePosixList = absoluteFiles.map((file) => _relative(baseAbs, file).split(sep).join("/"));
 
   if (mode === "components") {
     // 详情页不能写动态 import（Turbopack 会拒绝含变量的 specifier，import.meta.glob
     // 跨目录引用服务端组件也有已知 bug），所以在构建期把全部文章的 import 静态展开。
     // import 路径相对挂 loader 的 stub 文件（plugins/mdx-registry/*.stub.ts）解析。
-    for (const file of files) {
-      const absoluteFile = resolve(this.rootContext, file);
+    for (const absoluteFile of absoluteFiles) {
       this.addContextDependency(dirname(absoluteFile));
     }
     const entries = filePosixList.map(
@@ -273,8 +279,7 @@ async function articleRegistryLoader(_source) {
     // fs 读不到 articles/，所以 /articles/source 路由从这里取数。
     /** @type {Record<string, string>} */
     const sources = {};
-    for (const [i, file] of files.entries()) {
-      const absoluteFile = resolve(this.rootContext, file);
+    for (const [i, absoluteFile] of absoluteFiles.entries()) {
       this.addDependency(absoluteFile);
       this.addContextDependency(dirname(absoluteFile));
       sources[keyOf(filePosixList[i])] = readFileSync(absoluteFile, "utf8");
@@ -287,8 +292,7 @@ async function articleRegistryLoader(_source) {
   /** @type {Record<string, ArticleRegistryEntry>} */
   const entries = {};
 
-  for (const [i, file] of files.entries()) {
-    const absoluteFile = resolve(this.rootContext, file);
+  for (const [i, absoluteFile] of absoluteFiles.entries()) {
     this.addDependency(absoluteFile);
     this.addContextDependency(dirname(absoluteFile));
 
