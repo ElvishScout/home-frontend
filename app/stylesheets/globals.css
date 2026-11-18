@@ -11,7 +11,7 @@
 }
 
 html {
-  @apply overscroll-none;
+  @apply overscroll-none max-md:text-[15px];
 }
 
 /* ---------- 长文排版（设计规范 · 子页面 §3：只覆盖颜色、边框与标题字重） ---------- */

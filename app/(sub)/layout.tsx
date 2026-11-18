@@ -10,7 +10,7 @@ export default function SubLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-svh flex-col">
       <header className="bg-ink text-paper">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 max-md:px-4">
           <Link href="/" className="flex items-center gap-2 font-disp text-lg tracking-wider">
             <span aria-hidden className="inline-block animate-spin-slow text-base">
               ✦
@@ -24,7 +24,9 @@ export default function SubLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-16 max-md:py-10">{children}</main>
+      <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-16 max-md:px-4 max-md:py-10">
+        {children}
+      </main>
 
       <footer className="bg-ink text-paper">
         <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-6 py-5">
