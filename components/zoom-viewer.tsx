@@ -40,9 +40,15 @@ function measureChrome(root: HTMLElement) {
   for (let el: Element | null = media; el && el !== root; el = el.parentElement) {
     const style = getComputedStyle(el);
     width +=
-      px(style.paddingLeft) + px(style.paddingRight) + px(style.borderLeftWidth) + px(style.borderRightWidth);
+      px(style.paddingLeft) +
+      px(style.paddingRight) +
+      px(style.borderLeftWidth) +
+      px(style.borderRightWidth);
     height +=
-      px(style.paddingTop) + px(style.paddingBottom) + px(style.borderTopWidth) + px(style.borderBottomWidth);
+      px(style.paddingTop) +
+      px(style.paddingBottom) +
+      px(style.borderTopWidth) +
+      px(style.borderBottomWidth);
   }
   return { width, height };
 }

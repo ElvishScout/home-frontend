@@ -25,18 +25,18 @@ $$
 以 $P=4$ 为例：
 
 | rank | 持有的 chunk |
-| :--- | :--- |
-| 0 | 0, 7 |
-| 1 | 1, 6 |
-| 2 | 2, 5 |
-| 3 | 3, 4 |
+| :--- | :----------- |
+| 0    | 0, 7         |
+| 1    | 1, 6         |
+| 2    | 2, 5         |
+| 3    | 3, 4         |
 
 rank 0 的 chunk 0 很轻、chunk 7 很重；rank 3 的 chunk 3 和 4 都不轻不重。总因果计算量大致均衡。
 
 ```mermaid
 flowchart TB
     subgraph r0["rank 0"]
-        a0["chunk 0（轻）"] 
+        a0["chunk 0（轻）"]
         a7["chunk 7（重）"]
     end
     subgraph r1["rank 1"]
@@ -67,11 +67,11 @@ flowchart TB
 
 压缩混合注意力的三条支路，在 CP 下各自需要不同的跨 rank 数据：
 
-| 支路 | 需要什么 | 通信方式 | 通信量 |
-| :--- | :--- | :--- | :--- |
-| 局部窗口 | 前一个 chunk 的最后 128 个原始 KV | 邻居 P2P | $O(w \cdot d)$ |
-| 粗压缩 | 全局压缩 KV | all-gather | $O((n/128) \cdot d)$ |
-| 细压缩 | 前驱 chunk 的边界 halo + 全局压缩 KV | P2P + all-gather | $O(r \cdot d + (n/4) \cdot d)$ |
+| 支路     | 需要什么                             | 通信方式         | 通信量                         |
+| :------- | :----------------------------------- | :--------------- | :----------------------------- |
+| 局部窗口 | 前一个 chunk 的最后 128 个原始 KV    | 邻居 P2P         | $O(w \cdot d)$                 |
+| 粗压缩   | 全局压缩 KV                          | all-gather       | $O((n/128) \cdot d)$           |
+| 细压缩   | 前驱 chunk 的边界 halo + 全局压缩 KV | P2P + all-gather | $O(r \cdot d + (n/4) \cdot d)$ |
 
 局部窗口是 128，当前 chunk 只需要前一个 chunk 的最后 128 个 token 的原始 KV，和邻居做一次 P2P 即可。
 
